@@ -1,0 +1,130 @@
+/* _content/MyBlog/Pages/Shared/_Layout.cshtml.rz.scp.css */
+
+
+
+
+.user-mention[b-5tpmjily7p] {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.reply-indicator[b-5tpmjily7p] {
+    font-size: 0.9rem;
+}
+
+.reply-arrow[b-5tpmjily7p] {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.comment-thread[b-5tpmjily7p] {
+    border-left: 3px solid #f0f0f0;
+    padding-left: 15px;
+}
+
+.replies-container[b-5tpmjily7p], .nested-replies[b-5tpmjily7p] {
+    border-left: 2px solid #e9ecef;
+    padding-left: 15px;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.reply-item[b-5tpmjily7p] {
+    position: relative;
+}
+
+/* Стиль для кнопки показати/приховати відповіді */
+.toggle-replies-btn[b-5tpmjily7p] {
+    color: #6c757d;
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.toggle-replies-btn:hover[b-5tpmjily7p] {
+    color: #007bff;
+    text-decoration: none;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 4px;
+}
+
+.replies-count[b-5tpmjily7p] {
+    margin-top: 0.5rem;
+}
+
+/* Вкладені відповіді мають обмеження на максимальну глибину вкладеності (візуально) */
+.nested-replies[b-5tpmjily7p] {
+    padding-left: 15px;
+    margin-left: 15px;
+    border-left: 1px solid #e9ecef;
+}
+
+/* Обмежуємо глибину вкладеності для візуального відображення */
+.nested-replies .nested-replies .nested-replies[b-5tpmjily7p] {
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+/* Ще більше обмежуємо глибину для подальших рівнів */
+.nested-replies .nested-replies .nested-replies .nested-replies[b-5tpmjily7p] {
+    margin-left: 5px;
+    padding-left: 5px;
+}
+
+/* Для ще глибших рівнів зовсім не збільшуємо зсув */
+.nested-replies .nested-replies .nested-replies .nested-replies .nested-replies[b-5tpmjily7p] {
+    margin-left: 0;
+    padding-left: 5px;
+}
+
+/* Стилі для підсвічування коментарів */
+.highlight-comment[b-5tpmjily7p] {
+    background-color: rgba(255, 248, 189, 0.8) !important;
+    transition: background-color 0.5s ease;
+    /* Додамо виділення межами для кращої видимості */
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.8) !important;
+    /* Важливо: не застосовуємо це до дочірніх елементів */
+    z-index: 1;
+
+}
+
+
+
+.comments-scrollable[b-5tpmjily7p] {
+    max-height: 500px; /* Фіксована висота контейнера коментарів */
+    overflow-y: auto; /* Додає вертикальну прокрутку */
+    padding-right: 10px; /* Невеликий відступ для скролбару */
+    border: 1px solid #e9ecef; /* Тонка рамка для виділення компонента */
+    border-radius: 8px; /* Закруглені кути */
+    background-color: #f8f9fa; /* Легкий фоновий колір для відокремлення */
+    padding: 15px; /* Внутрішній відступ */
+}
+
+/* Стилізація скролбару для різних браузерів */
+.comments-scrollable[b-5tpmjily7p]::-webkit-scrollbar {
+    width: 8px;
+}
+
+.comments-scrollable[b-5tpmjily7p]::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.comments-scrollable[b-5tpmjily7p]::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.comments-scrollable[b-5tpmjily7p]::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Стилі для коментарів всередині компонента */
+.comments-scrollable .card[b-5tpmjily7p] {
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.comments-scrollable .card:last-child[b-5tpmjily7p] {
+    margin-bottom: 0;
+}

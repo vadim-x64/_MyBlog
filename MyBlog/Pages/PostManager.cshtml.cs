@@ -1,0 +1,58 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using MyBlog.Models;
+using MyBlog.Services;
+
+namespace MyBlog.Pages;
+
+[Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOnly")]
+public class PostManagerModel : PageModel
+{
+    private readonly AdminService _adminService;
+    private readonly UserService _userService;
+
+    public PostManagerModel(AdminService adminService, UserService userService)
+    {
+        _adminService = adminService;
+        _userService = userService;
+    }
+
+    public List<Post> AllPosts { get; private set; } = new();
+    
+    [TempData]
+    public string StatusMessage { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        if (!isAdmin)
+        {
+            return RedirectToPage("/AccessDenied");
+        }
+
+        AllPosts = await _adminService.GetAllPostsForModerationAsync();
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostDeletePostAsync(Guid postId)
+    {
+        var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        if (!isAdmin)
+        {
+            return RedirectToPage("/AccessDenied");
+        }
+
+        var success = await _adminService.DeletePostByAdminAsync(postId);
+        
+        if (success)
+        {
+            StatusMessage = "Пост успішно видалено";
+        }
+        else
+        {
+            StatusMessage = "Помилка при видаленні поста";
+        }
+        
+        return RedirectToPage();
+    }
+}

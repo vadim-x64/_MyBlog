@@ -1,0 +1,20 @@
+﻿@page
+@model MyBlog.Pages.AccessDeniedModel
+@{
+    ViewData["Title"] = "Доступ заборонено";
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4 text-danger">Доступ заборонено</h1>
+    
+    @if (Model.Blocked)
+    {
+        <p class="lead">Ваш обліковий запис заблоковано адміністратором.</p>
+    }
+    else
+    {
+        <p class="lead">У вас немає прав для доступу до цієї сторінки.</p>
+    }
+    
+    <a href="/" class="btn btn-primary mt-3">Повернутися на головну</a>
+</div>

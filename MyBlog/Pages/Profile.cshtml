@@ -1,0 +1,177 @@
+﻿@page
+@model MyBlog.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Профіль";
+    var user = Model.CurrentUser!;
+}
+<link rel="stylesheet" href="~/css/profile.css">
+<h2>Профіль користувача</h2>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+<div class="row">
+    <div class="col-md-4">
+        @if (user.Avatar != null)
+        {
+            <div class="avatar-container">
+                <img src="data:image/png;base64,@Convert.ToBase64String(user.Avatar)" class="avatar-image" alt="..."
+                     oncontextmenu="return false;" draggable="false"/>
+                <form method="post" enctype="multipart/form-data" asp-page-handler="UploadAvatar">
+                    <label for="avatarFile" class="avatar-overlay avatar-overlay-change">
+                    </label>
+                    <input type="file" id="avatarFile" name="Avatar" class="avatar-input" onchange="this.form.submit()"
+                           accept="image/*"/>
+                </form>
+            </div>
+            <form method="post" asp-page-handler="DeleteAvatar">
+                <button type="submit" class="btn btn-outline-danger del">Видалити аватар</button>
+            </form>
+        }
+        else
+        {
+            <div class="avatar-container">
+                <div class="no-avatar" oncontextmenu="return false;">
+                    <span>@user.NickName[0]</span>
+                </div>
+                <form method="post" enctype="multipart/form-data" asp-page-handler="UploadAvatar">
+                    <label for="avatarFile" class="avatar-overlay avatar-overlay-add"></label>
+                    <input type="file" id="avatarFile" name="Avatar" class="avatar-input" onchange="this.form.submit()"
+                           accept="image/*"/>
+                </form>
+            </div>
+        }
+        <div class="mt-4">
+            @if (user.Role == 2)
+            {
+                <a href="/UserManager" class="btn btn-outline-primary">Керувати користувачами</a>
+                <a href="/PostManager" class="btn btn-outline-primary">Керувати постами</a>
+                <a href="/CommentManager" class="btn btn-outline-primary">Керувати коментами</a>
+            }
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#logoutModal">Вийти з акаунту</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Видалити акаунт</button>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <form method="post">
+            <div class="form-group">
+                <label>Прізвище</label>
+                <input asp-for="UpdateModel.Surname" class="form-control" disabled/>
+                <span asp-validation-for="UpdateModel.Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Ім'я</label>
+                <input asp-for="UpdateModel.Name" class="form-control" disabled/>
+                <span asp-validation-for="UpdateModel.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>По-батькові</label>
+                <input asp-for="UpdateModel.LastName" class="form-control" disabled/>
+                <span asp-validation-for="UpdateModel.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Нікнейм</label>
+                <input asp-for="UpdateModel.NickName" class="form-control" disabled/>
+                <span asp-validation-for="UpdateModel.NickName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Дата народження</label>
+                <input asp-for="UpdateModel.BirthDate" type="date" class="form-control" disabled max="@DateTime.Today.ToString("yyyy-MM-dd")"/>
+                <span asp-validation-for="UpdateModel.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Телефон</label>
+                <input asp-for="UpdateModel.PhoneNumber" class="form-control" disabled/>
+                <span asp-validation-for="UpdateModel.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input asp-for="UpdateModel.Email" class="form-control" disabled/>
+                <span asp-validation-for="UpdateModel.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Про себе</label>
+                <textarea asp-for="UpdateModel.About" class="form-control" id="aboutField" disabled rows="3" maxlength="150" placeholder="Розкажіть щось про себе..."></textarea>
+                <div class="d-flex justify-content-between">
+                    <small id="charCount">0/150</small>
+                </div>
+                <small class="text-danger d-none" id="pasteWarning">Вставка тексту заборонена! Будь ласка, введіть текст вручну.</small>
+                <span asp-validation-for="UpdateModel.About" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Новий пароль</label>
+                <div class="input-group">
+                    <input asp-for="UpdateModel.NewPassword" type="password" class="form-control" id="newPasswordField" disabled/>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="showPasswordCheckbox" disabled>
+                    <label class="form-check-label" for="showPasswordCheckbox">Показати пароль</label>
+                </div>
+                <span asp-validation-for="UpdateModel.NewPassword" class="text-danger"></span>
+            </div>
+            <div class="updating">
+                <button type="button" id="editBtn" class="btn btn-outline-secondary">Редагувати</button>
+                <button type="submit" id="updateBtn" class="btn btn-outline-success" disabled>Оновити</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logoutModalLabel">Підтвердження виходу</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+            </div>
+            <div class="modal-body">Ви дійсно бажаєте вийти з акаунту?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                <a href="/Logout" class="btn btn-warning">Вийти</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAccountModalLabel">Підтвердження видалення акаунту</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-danger">Увага! Ця дія є незворотною!</p>
+                <p>Після видалення акаунту всі ваші дані буде видалено з системи і відновлення буде неможливим.</p>
+                <p>Для підтвердження видалення акаунту, будь ласка, введіть свій пароль:</p>
+                <form id="deleteAccountForm" method="post" asp-page-handler="DeleteAccount">
+                    <div class="form-group"> 
+                        <label for="confirmPassword" class="form-label" id="modal_pass">Пароль</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="ConfirmPassword" required/>
+                        <div class="invalid-feedback" id="passwordErrorMessage"></div>
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" id="confirmDeleteCheckbox" required/>
+                            <label class="form-check-label" for="confirmDeleteCheckbox">Я розумію, що ця дія є незворотною</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                <button type="submit" form="deleteAccountForm" class="btn btn-danger">Видалити акаунт</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/profile.js"></script>
+}

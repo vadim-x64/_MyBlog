@@ -1,0 +1,174 @@
+﻿@page "{id:guid}"
+@model MyBlog.Pages.EditModel
+@{
+ViewData["Title"] = "Редагування поста";
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-12">
+            <a asp-page="/Details" asp-route-id="@Model.PostInput.Id" class="btn btn-outline-secondary">&larr; Назад до поста</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Редагування поста</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" asp-for="PostInput.Id" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="PostInput.Title" class="form-label">Заголовок</label>
+                            <input asp-for="PostInput.Title" class="form-control" />
+                            <span asp-validation-for="PostInput.Title" class="text-danger"></span>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h5>Фото для поста</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" asp-for="PostInput.UseLocalPhoto" id="useLocalPhoto" value="true" />
+                                            <label class="form-check-label" for="useLocalPhoto">Використовувати локальне фото</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" asp-for="PostInput.UseLocalPhoto" id="useRemotePhoto" value="false" />
+                                            <label class="form-check-label" for="useRemotePhoto">Використовувати віддалене фото (URL)</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="local-photo-section">
+                                    @if (Model.HasLocalPhoto)
+                                    {
+                                    <div class="mb-3">
+                                        <div class="card">
+                                            <div class="card-header">Поточне локальне фото</div>
+                                            <div class="card-body text-center">
+                                                <img src="data:image/png;base64,@Model.LocalPhotoBase64" class="img-fluid mb-2" style="max-height: 200px;" alt="Поточне фото" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+
+                                    <div class="mb-3">
+                                        <label asp-for="Photo" class="form-label">@(Model.HasLocalPhoto ? "Замінити локальне фото" : "Завантажити локальне фото")</label>
+                                        <input asp-for="Photo" type="file" class="form-control" accept="image/*" />
+                                        <span asp-validation-for="Photo" class="text-danger"></span>
+                                        <small class="text-muted">Тільки файли зображень (jpg, png, gif, bmp, webp)</small>
+                                    </div>
+                                </div>
+
+                                <div class="remote-photo-section">
+                                    <div class="mb-3">
+                                        <label asp-for="PostInput.RemotePhotoUrl" class="form-label">URL фото</label>
+                                        <input asp-for="PostInput.RemotePhotoUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                                        <span asp-validation-for="PostInput.RemotePhotoUrl" class="text-danger"></span>
+                                        <small class="text-muted">Введіть URL-адресу зображення</small>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(Model.PostInput.RemotePhotoUrl))
+                                    {
+                                    <div class="card mb-3">
+                                        <div class="card-header">Поточне віддалене фото (URL)</div>
+                                        <div class="card-body text-center">
+                                            <img src="@Model.PostInput.RemotePhotoUrl" class="img-fluid mb-2" style="max-height: 200px;" alt="Поточне фото (URL)"
+                                                 onerror="this.onerror=null;this.src='';this.alt='Помилка завантаження зображення';this.style.display='none';document.getElementById('imageError').style.display='block';" />
+                                            <div id="imageError" style="display: none;" class="alert alert-warning">
+                                                Неможливо завантажити зображення з вказаного URL. Буде використано зображення за замовчуванням.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+
+                                <div class="text-muted small">
+                                    <p>Примітка: Якщо ви не виберете фото або URL, або завантажите файл, який не є зображенням, буде використано стандартне зображення.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="PostInput.Content" class="form-label">Зміст</label>
+                            <textarea asp-for="PostInput.Content" class="form-control" rows="10" maxlength="5000"></textarea>
+                            <small class="text-muted"><span id="contentCounter">0</span>/5000</small>
+                            <span asp-validation-for="PostInput.Content" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Оновити пост</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    $(document).ready(function() {
+        // Початкове значення лічильників
+        $('#contentCounter').text($('#PostInput_Content').val().length);
+
+        // Встановлюємо обробники подій для оновлення лічильників
+        $('#PostInput_Content').on('input', function() {
+            $('#contentCounter').text($(this).val().length);
+        });
+        
+        // Переключення між секціями фото відповідно до вибраного типу
+        $('input[name="PostInput.UseLocalPhoto"]').change(function() {
+            if ($(this).val() === 'true') {
+                $('.local-photo-section').show();
+                $('.remote-photo-section').hide();
+            } else {
+                $('.local-photo-section').hide();
+                $('.remote-photo-section').show();
+            }
+        });
+        
+        // Перевірка формату файлу при завантаженні
+        $('#Photo').change(function() {
+            var fileInput = this;
+            var validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp', 'image/svg+xml', 'image/tiff'];
+            
+            if (fileInput.files && fileInput.files[0]) {
+                var fileType = fileInput.files[0].type;
+                
+                // Перевірка на MIME-тип
+                if (validImageTypes.indexOf(fileType) === -1) {
+                    alert('Будь ласка, виберіть файл зображення (jpg, png, gif, bmp, webp)');
+                    $(this).val(''); // Очищаємо поле вводу файлу
+                }
+            }
+        });
+        
+        // Перевірка URL зображення
+        $('#PostInput_RemotePhotoUrl').on('blur', function() {
+            var url = $(this).val();
+            if (url && !url.match(/\.(jpeg|jpg|gif|png|bmp|webp|svg)$/i)) {
+                // Додаємо попередження, якщо URL не містить розширення зображення
+                if(!$('#urlWarning').length) {
+                    $(this).after('<div id="urlWarning" class="text-warning small mt-1">URL може не вказувати на зображення. Якщо це так, буде використано зображення за замовчуванням.</div>');
+                }
+            } else {
+                $('#urlWarning').remove();
+            }
+        });
+
+        // Ініціалізація відображення секцій
+        $('input[name="PostInput.UseLocalPhoto"]:checked').change();
+    });
+</script>
+}

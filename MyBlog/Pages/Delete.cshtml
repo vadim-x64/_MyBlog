@@ -1,0 +1,51 @@
+﻿@page "{id:guid}"
+@model MyBlog.Pages.DeleteModel
+@{
+    ViewData["Title"] = "Видалення поста";
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-12">
+            <a asp-page="/MyPosts" asp-route-id="@Model.Post?.Id" class="btn btn-outline-secondary">&larr; Назад до поста</a>
+        </div>
+    </div>
+    
+    @if (Model.Post == null)
+    {
+        <div class="alert alert-danger">
+            Пост не знайдено або ви не маєте прав для його видалення.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h2 class="text-center">Підтвердження видалення</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            <strong>Увага!</strong> Ви впевнені, що хочете видалити цей пост? Ця дія не може бути скасована.
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h3>@Model.Post.Title</h3>
+                            <p>@(Model.Post.Content.Length > 200 ? Model.Post.Content.Substring(0, 200) + "..." : Model.Post.Content)</p>
+                            <small class="text-muted">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        </div>
+                        
+                        <form method="post">
+                            <input type="hidden" asp-for="Post.Id" />
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-danger me-2">Видалити</button>
+                                <a asp-page="/MyPosts" asp-route-id="@Model.Post.Id" class="btn btn-outline-secondary">Скасувати</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

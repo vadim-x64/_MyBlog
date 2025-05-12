@@ -1,0 +1,130 @@
+﻿@page
+@model MyBlog.Pages.PostManagerModel
+@{
+    ViewData["Title"] = "Керування постами";
+}
+
+<h2>Керування постами</h2>
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @Model.StatusMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
+    </div>
+}
+
+<div class="table-responsive mt-4">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Пост</th>
+                <th>Автор</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var post in Model.AllPosts)
+            {
+                <tr>
+                    
+                    <td>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewPostModal@(post.Id)">@post.Title</a>
+                    </td>
+                    <td>@post.Author.NickName</td>
+                    <td>
+                        <a href="/Details/@post.Id" class="btn btn-info btn-sm me-2">
+                            Переглянути на сайті
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePostModal@(post.Id)">
+                            Видалити
+                        </button>
+                        <div class="modal fade" id="deletePostModal@(post.Id)" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Підтвердження видалення поста</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Ви дійсно хочете видалити пост "<strong>@post.Title</strong>"?</p>
+                                        <p class="text-danger">Ця дія є незворотною!</p>
+                                        <p>Всі коментарі до цього поста також будуть видалені.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                                        <form method="post" asp-page-handler="DeletePost">
+                                            <input type="hidden" name="postId" value="@post.Id"/>
+                                            <button type="submit" class="btn btn-danger">Видалити</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal fade" id="viewPostModal@(post.Id)" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">@post.Title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <div class="text-muted">
+                                                Автор: <strong>@post.Author.NickName</strong> |
+                                                Створено: <strong>@post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong> |
+                                                Оновлено: <strong>@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</strong>
+                                            </div>
+                                        </div>
+
+                                        @if (post.UseLocalPhoto && post.LocalPhoto != null)
+                                        {
+                                            <div class="text-center mb-3">
+                                                <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
+                                                     style="max-width: 100%; height: auto;" alt="Фото поста"/>
+                                            </div>
+                                        }
+                                        else if (!string.IsNullOrEmpty(post.RemotePhotoUrl))
+                                        {
+                                            <div class="text-center mb-3">
+                                                <img src="@post.RemotePhotoUrl" style="max-width: 100%; height: auto;" alt="Фото поста"/>
+                                            </div>
+                                        }
+
+                                        <div class="post-content" style="white-space: pre-line;">
+                                            @Html.Raw(post.Content)
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.AllPosts.Any())
+{
+    <div class="alert alert-info mt-3">
+        Немає постів у системі.
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+}

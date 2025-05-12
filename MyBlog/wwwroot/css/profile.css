@@ -1,0 +1,273 @@
+﻿h2 {
+    font-size: 60px;
+    color: #333;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.alert {
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+    margin: 20px auto;
+    border-radius: 0;
+    border: none;
+}
+
+.avatar-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: auto;
+}
+
+.avatar-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.no-avatar {
+    width: 200px;
+    height: 200px;
+    background-color: #666;
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+
+.no-avatar span {
+    font-size: 60px;
+    color: #FFF;
+}
+
+.avatar-overlay {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 1);
+    opacity: 0;
+    transition: opacity 0.3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.avatar-overlay:hover {
+    opacity: 1;
+}
+
+.avatar-overlay-add::before {
+    content: "+";
+    color: #FFF;
+    font-size: 60px;
+}
+
+.avatar-overlay-change::before {
+    content: "↺";
+    color: white;
+    font-size: 60px;
+}
+
+.avatar-input {
+    display: none;
+}
+
+.btn.del,
+.mt-4 .btn-outline-secondary,
+.mt-4 .btn-outline-danger,
+.mt-4 .btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 0;
+}
+
+.mt-4 .btn-outline-secondary,
+.mt-4 .btn-outline-danger,
+.mt-4 .btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-success {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.form-control {
+    border-radius: 0;
+    border: 1px solid #CCC;
+    font-size: 18px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group input:not([type="checkbox"]) {
+    padding: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 0;
+}
+
+.form-group label, #charCount, .form-check label  {
+    font-size: 16px;
+    color: #666;
+}
+
+.text-danger {
+    font-size: 16px;
+    color: #DC3545;
+    display: block;
+}
+
+.updating {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    gap: 10px;
+}
+
+.modal-content {
+    border-radius: 0;
+    border: 1px solid #CCC;
+}
+
+.modal-header {
+    border-bottom: 1px solid #CCC;
+    background-color: #FFF;
+    padding: 15px 20px;
+}
+
+.modal-title {
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.modal-body .text-danger {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-footer {
+    border-top: 1px solid #CCC;
+}
+
+.modal-footer .btn {
+    border-radius: 0;
+}
+
+.btn-close {
+    background-size: 16px;
+}
+
+#modal_pass, #confirmPassword {
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 36px;
+        margin: 25px auto;
+    }
+
+    .alert {
+        font-size: 16px;
+        margin: 15px auto;
+    }
+
+    .avatar-container,
+    .avatar-image,
+    .no-avatar,
+    .avatar-overlay {
+        width: 150px;
+        height: 150px;
+    }
+
+    .no-avatar span {
+        font-size: 48px;
+    }
+
+    .avatar-overlay-add::before,
+    .avatar-overlay-change::before {
+        font-size: 48px;
+    }
+
+    .mt-4 .btn-outline-secondary,
+    .mt-4 .btn-outline-danger,
+    .mt-4 .btn-outline-primary,
+    .btn-outline-secondary,
+    .btn-outline-success {
+        font-size: 14px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 30px;
+    }
+
+    .form-group label {
+        font-size: 16px;
+    }
+
+    .col-md-4,
+    .col-md-8 {
+        width: 100%;
+    }
+
+    .col-md-4 {
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .updating {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .updating button {
+        width: 100%;
+        margin: auto;
+    }
+
+    .text-danger {
+        font-size: 14px;
+    }
+}

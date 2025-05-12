@@ -1,0 +1,110 @@
+﻿@page "{id:guid}"
+@model MyBlog.Pages.DetailsModel
+@{
+    ViewData["Title"] = Model.Post?.Title ?? "Деталі поста";
+}
+
+@if (Model.Post == null)
+{
+    <div class="alert alert-danger">
+        Пост не знайдено.
+    </div>
+    return;
+}
+
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-12">
+            <a asp-page="/Index" class="btn btn-outline-secondary">&larr; Назад до списку</a>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        @if (Model.Post.UseLocalPhoto && Model.Post.LocalPhoto != null)
+        {
+            <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.LocalPhoto)" class="card-img-top"
+                 style="max-height: 400px; object-fit: contain;" alt="@Model.Post.Title">
+        }
+        else if (!string.IsNullOrEmpty(Model.Post.RemotePhotoUrl))
+        {
+            <img src="@Model.Post.RemotePhotoUrl" class="card-img-top" style="max-height: 400px; object-fit: contain;"
+                 alt="@Model.Post.Title"
+                 onerror="this.onerror=null;this.style.display='none';document.getElementById('imageError').style.display='block';">
+            <div id="imageError" style="display: none;" class="alert alert-warning m-3">
+                Неможливо завантажити зображення з вказаного URL.
+            </div>
+        }
+
+        <div class="card-body">
+            <h1 class="card-title">@Model.Post.Title</h1>
+
+            <div class="d-flex align-items-center mb-3">
+                @if (Model.Post.Author.Avatar != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.Author.Avatar)"
+                         class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;"
+                         alt="@Model.Post.Author.NickName">
+                }
+                else
+                {
+                    <div
+                        class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
+                        style="width: 40px; height: 40px;">
+                        <span
+                            style="font-size: 20px;">@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
+                    </div>
+                }
+                <div>
+                    <div>@Model.Post.Author.NickName</div>
+                    <small class="text-muted">Створено: @Model.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                    @if (Model.Post.CreatedAt != Model.Post.UpdatedAt)
+                    {
+                        <small
+                            class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                    }
+                </div>
+            </div>
+
+            <div class="card-text mt-4">
+                @Html.Raw(Model.Post.Content.Replace("\n", "<br>"))
+            </div>
+
+            <hr class="my-4">
+            <div class="comments-section">
+                <h4 class="mb-4">Коментарі</h4>
+
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form method="post" class="mb-4">
+                        <div class="form-group">
+                            <textarea asp-for="CommentContent" class="form-control" rows="3" placeholder="Залиште ваш коментар..." maxlength="2000"></textarea>
+                            <span asp-validation-for="CommentContent" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Додати коментар</button>
+                    </form>
+                }
+                else
+                {
+                    <div class="alert alert-info mb-4">
+                        <a asp-page="/Login" asp-route-returnUrl="@($"/Details/{Model.Post.Id}")">Увійдіть</a> або
+                        <a asp-page="/Register" asp-route-returnUrl="@($"/Details/{Model.Post.Id}")">зареєструйтесь</a>,
+                        щоб залишити коментар.
+                    </div>
+                }
+
+                <div id="comments-container" class="comments-scrollable">
+                    @if (Model.Comments.Count == 0)
+                    {
+                        <div class="text-center py-4">
+                            <p class="text-muted">Ще немає коментарів. Будьте першим!</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <partial name="_CommentsList" model="Model.Comments" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

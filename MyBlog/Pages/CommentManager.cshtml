@@ -1,0 +1,204 @@
+﻿@page
+@model MyBlog.Pages.CommentManagerModel
+@{
+    ViewData["Title"] = "Керування коментарями";
+}
+
+<h2>Керування коментарями і відповідями</h2>
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @Model.StatusMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
+    </div>
+}
+
+<div class="table-responsive mt-4">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Зміст</th>
+                <th>Пост</th>
+                <th>Автор</th>
+                <th>Відповідь на</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in Model.AllComments)
+            {
+                <tr>
+                    <td>
+                        <div style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.Id)">@comment.Content</a>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewPostModal@(comment.PostId)">@comment.Post.Title</a>
+                    </td>
+                    <td>@comment.Author.NickName</td>
+                    <td>
+                        @if (comment.ParentComment != null)
+                        {
+                            <div style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.ParentCommentId)">
+                                    @comment.ParentComment.Author.NickName: @comment.ParentComment.Content
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <span>-</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/Details/@comment.Post.Id" class="btn btn-outline-info btn-sm ms-1"
+                           data-bs-toggle="tooltip" title="Відкрити пост на сайті">Перейти
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm" 
+                               data-bs-toggle="modal" data-bs-target="#deleteCommentModal@(comment.Id)">
+                            Видалити
+                        </button>
+                        
+                        <!-- Модальне вікно підтвердження видалення -->
+                        <div class="modal fade" id="deleteCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Підтвердження видалення коментаря</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Ви дійсно хочете видалити @(comment.ParentComment != null ? "відповідь" : "коментар")?</p>
+                                        <p class="text-secondary"><em>@comment.Content</em></p>
+                                        <p class="text-danger">Ця дія є незворотною!</p>
+                                        @if (comment.ParentComment == null)
+                                        {
+                                            <p>Всі відповіді на цей коментар також будуть видалені.</p>
+                                        }
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                                        <form method="post" asp-page-handler="DeleteComment">
+                                            <input type="hidden" name="commentId" value="@comment.Id" />
+                                            <button type="submit" class="btn btn-danger">Видалити</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Модальне вікно перегляду коментаря -->
+                        <div class="modal fade" id="viewCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Коментар від @comment.Author.NickName</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <div class="text-muted">
+                                                Створено: <strong>@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong> | 
+                                                Пост: <strong>@comment.Post.Title</strong>
+                                            </div>
+                                        </div>
+                                        
+                                        @if (comment.ParentComment != null)
+                                        {
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    У відповідь на коментар від @comment.ParentComment.Author.NickName
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text">@comment.ParentComment.Content</p>
+                                                    <p class="card-text"><small class="text-muted">@comment.ParentComment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small></p>
+                                                </div>
+                                            </div>
+                                        }
+                                        
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="card-text">@comment.Content</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.AllComments.Any())
+{
+    <div class="alert alert-info mt-3">
+        Немає коментарів у системі.
+    </div>
+}
+
+<!-- Модальні вікна для перегляду постів -->
+@foreach (var comment in Model.AllComments.GroupBy(c => c.PostId).Select(g => g.First()))
+{
+    <div class="modal fade" id="viewPostModal@(comment.PostId)" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@comment.Post.Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="text-muted">
+                            Автор: <strong>@comment.Post.Author.NickName</strong> | 
+                            Створено: <strong>@comment.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong> | 
+                            Оновлено: <strong>@comment.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</strong>
+                        </div>
+                    </div>
+                    
+                    @if (comment.Post.UseLocalPhoto && comment.Post.LocalPhoto != null)
+                    {
+                        <div class="text-center mb-3">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(comment.Post.LocalPhoto)" 
+                                 style="max-width: 100%; height: auto;" alt="Фото поста" />
+                        </div>
+                    }
+                    else if (!string.IsNullOrEmpty(comment.Post.RemotePhotoUrl))
+                    {
+                        <div class="text-center mb-3">
+                            <img src="@comment.Post.RemotePhotoUrl" style="max-width: 100%; height: auto;" alt="Фото поста" />
+                        </div>
+                    }
+                    
+                    <div class="post-content" style="white-space: pre-line;">
+                        @Html.Raw(comment.Post.Content)
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Ініціалізація tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            });
+        });
+    </script>
+}

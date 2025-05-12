@@ -1,0 +1,71 @@
+﻿@page
+@model MyBlog.Pages.MyPostsModel
+@{
+    ViewData["Title"] = "Мої публікації";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-4 text-center">Ваші публікації</h1>
+        </div>
+    </div>
+
+    @if (!Model.Posts.Any())
+    {
+        <div class="alert alert-info text-center">
+            У вас ще немає жодного поста. <a asp-page="/Create" class="alert-link">Створіть його тут</a>!
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var post in Model.Posts)
+            {
+                <div class="col-md-6 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        @if (post.UseLocalPhoto && post.LocalPhoto != null)
+                        {
+                            <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
+                                 class="card-img-top" alt="@post.Title">
+                        }
+                        else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
+                        {
+                            <img src="@post.RemotePhotoUrl" class="card-img-top"
+                                 alt="@post.Title"
+                                 onerror="this.onerror=null;this.src='';this.alt='Зображення недоступне';this.style.display='none';">
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@post.Title</h5>
+                            <p class="card-text">@(post.Content.Length > 100 ? post.Content.Substring(0, 100) + "..." : post.Content)</p>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="card-dates">
+                                    <small class="text-muted d-block">Створено: @post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                    <small class="text-muted d-block">Оновлено: @post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                </div>
+                                <div class="position-relative">
+                                    <button class="btn btn-sm menu-dots" type="button" onclick="toggleDropdown(this)">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu custom-dropdown">
+                                        <a asp-page="/Details" asp-route-id="@post.Id" class="dropdown-item">
+                                            <i class="fas fa-eye me-2"></i>Переглянути
+                                        </a>
+                                        <a asp-page="/Edit" asp-route-id="@post.Id" class="dropdown-item">
+                                            <i class="fas fa-edit me-2"></i>Редагувати
+                                        </a>
+                                        <a asp-page="/Delete" asp-route-id="@post.Id" class="dropdown-item text-danger">
+                                            <i class="fas fa-trash-alt me-2"></i>Видалити
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

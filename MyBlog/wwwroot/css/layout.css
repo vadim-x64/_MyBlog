@@ -1,0 +1,121 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    width: 100%;
+    height: auto;
+    padding: 0;
+}
+
+.navbar-nav .nav-link {
+    color: #333;
+    font-size: 18px;
+}
+
+.navbar-brand img {
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-nav .nav-link img.rounded-circle {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.navbar-nav .nav-link div.rounded-circle {
+    width: 50px;
+    height: 50px;
+    background-color: #666 !important;
+    color: #FFF;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-nav .btn {
+    border-radius: 0;
+}
+
+.nav-item .btn-secondary,
+.nav-item .btn-outline-secondary {
+    font-size: 18px;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+.footer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #FFF;
+    color: #333;
+    font-size: 18px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-nav {
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-link {
+        color: #333;
+        font-size: 16px;
+        padding: 0;
+    }
+
+    .navbar-brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav .nav-link img.rounded-circle {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+    }
+
+    .navbar-nav .nav-link div.rounded-circle {
+        width: 40px;
+        height: 40px;
+        background-color: #666 !important;
+        color: #FFF;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .navbar-nav .btn {
+        border-radius: 0;
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+
+    .footer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: #FFF;
+        color: #333;
+        font-size: 14px;
+        padding: 15px;
+        margin-top: 10px;
+    }
+}
