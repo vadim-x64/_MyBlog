@@ -4,11 +4,296 @@
     ViewData["Title"] = "Головна сторінка";
 }
 
+<style>
+    .alert {
+        font-size: 18px;
+        color: #333;
+        text-align: left;
+        margin: 20px auto;
+        border-radius: 0;
+        border: none;
+    }
+    
+    .display-4 {
+        font-size: 60px;
+        color: #333;
+        margin: 50px auto;
+        text-align: center;
+    }
+
+    .welcome-text, .rules-notice {
+        border-radius: 0;
+        font-size: 24px;
+        color: #666;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .rules-notice p {
+        font-size: 18px;
+        border: 1px solid #CCC;
+        padding: 20px;
+        background-color: #F5F5F5FF;
+        color: #333;
+    }
+
+    .view-toggle {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 50px 0 20px 0;
+        gap: 20px;
+    }
+
+    .view-toggle button {
+        padding: 0;
+        border: none;
+    }
+
+    .view-icon {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .card {
+        border: 1px solid #CCC;
+        border-radius: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 0;
+    }
+
+    .card-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-text-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin: 0 0 10px 0;
+    }
+
+    .card-text {
+        font-size: 18px;
+        color: #666;
+        margin: 0;
+        flex-grow: 1;
+    }
+
+    .card-horizontal {
+        flex-direction: row;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-horizontal .card-content {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .card-horizontal .card-img-top {
+        max-width: 50%;
+    }
+
+    .card-text-wrapper {
+        flex-grow: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .card-horizontal .card-text-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        background-color: transparent;
+        border-top: 1px solid #CCC;
+        margin-top: auto;
+    }
+
+    .card-horizontal .card-footer {
+        padding: 10px;
+    }
+
+    .author-info {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+    }
+
+    .author-avatar {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .author-placeholder {
+        width: 50px;
+        height: 50px;
+        background-color: #666;
+        color: #FFF;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+
+    .author-name {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+        margin: 0;
+    }
+
+    .author-date {
+        color: #666;
+        font-size: 16px;
+        margin: 5px 0 0 0;
+    }
+
+    .load-more-btn {
+        display: flex;
+        justify-content: center;
+        margin: 20px auto;
+    }
+
+    .load-more-btn .btn-outline-secondary {
+        border-radius: 0;
+        font-size: 18px;
+    }
+
+    @@media (max-width: 768px) {
+        .display-4 {
+            font-size: 36px;
+            margin: 20px auto;
+        }
+
+        .welcome-text, .rules-notice {
+            font-size: 18px;
+        }
+
+        .rules-notice p {
+            font-size: 16px;
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 20px;
+        }
+
+        .card-text {
+            font-size: 16px;
+        }
+
+        .author-name {
+            font-size: 14px;
+        }
+
+        .author-date {
+            font-size: 14px;
+        }
+
+        .author-avatar, .author-placeholder {
+            width: 40px;
+            height: 40px;
+        }
+
+        .author-placeholder {
+            font-size: 18px;
+        }
+
+        .card-img-top {
+            height: 200px;
+        }
+
+        .load-more-btn .btn-outline-secondary {
+            font-size: 16px;
+        }
+        
+        .view-toggle {
+            display: none;
+        }
+    }
+</style>
+
 <div class="container">
-    <div class="row mb-4">
+    <div class="row">
         <div class="col-12">
-            <h1 class="display-4 text-center">Блог</h1>
+            <h1 class="display-4 text-center">Вітаємо на сторінці!</h1>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="welcome-text">
+                <p>Цей блог створений саме для вас! Тут ви можете вільно ділитися своїми думками, враженнями та
+                    емоціями. Мали цікавий день? Розкажіть про нього! Хочете поділитися корисною порадою чи просто
+                    висловити свій настрій? Це ідеальне місце для цього. Наша спільнота завжди рада новим історіям та
+                    відкрита для конструктивних коментарів. Не соромтеся висловлювати себе та знаходити однодумців серед
+                    наших читачів. Приєднуйтесь до нас і робіть цей блог ще яскравішим своїми унікальними дописами!</p>
+                <div class="rules-notice">
+                    <p><strong>Примітка:</strong> Будь ласка, дотримуйтесь правил спільноти. Забороняється використання
+                        нецензурної лексики, спам та інший контент, що порушує етичні норми. Адміністрація блогу
+                        здійснює модерацію всіх коментарів та дописів і залишає за собою право видаляти невідповідний
+                        контент без попередження. У випадку систематичних порушень правил облікові записи користувачів
+                        можуть бути заблоковані або видалені.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="view-toggle">
+        <button class="btn btn-sm me-2" onclick="setLayout('grid')">
+            <img
+                src="https://cdn-icons-png.freepik.com/256/18550/18550916.png?uid=R77081381&ga=GA1.1.1431085202.1736767274&semt=ais_hybrid"
+                alt="Grid View" class="view-icon">
+        </button>
+        <button class="btn btn-sm" onclick="setLayout('list')">
+            <img
+                src="https://cdn-icons-png.freepik.com/256/1501/1501555.png?uid=R77081381&ga=GA1.1.1431085202.1736767274&semt=ais_hybrid"
+                alt="List View" class="view-icon">
+        </button>
     </div>
 
     @if (!Model.Posts.Any())
@@ -19,51 +304,47 @@
     }
     else
     {
-        <div class="row">
+        <div class="row" id="posts-container">
             @foreach (var post in Model.Posts)
             {
-                <div class="col-md-6 col-lg-4 mb-4">
+                <div class="col-md-6 col-lg-4 mb-4 post-card post-item" style="display: none">
                     <a href="/Details/@post.Id" class="text-decoration-none text-dark">
                         <div class="card h-100">
-                            @if (post.UseLocalPhoto && post.LocalPhoto != null)
-                            {
-                                <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
-                                     class="card-img-top" style="height: 200px; object-fit: cover;" alt="@post.Title">
-                            }
-                            else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
-                            {
-                                <img src="@post.RemotePhotoUrl" class="card-img-top"
-                                     style="height: 200px; object-fit: cover;" alt="@post.Title"
-                                     onerror="this.onerror=null;this.src='';this.alt='Зображення недоступне';this.style.display='none';">
-                            }
-                            <div class="card-body">
-                                <h5 class="card-title">@post.Title</h5>
-                                <p class="card-text">@(post.Content.Length > 100 ? post.Content.Substring(0, 100) + "..." : post.Content)</p>
-                            </div>
-                            <div class="card-footer bg-white">
-                                <div class="d-flex align-items-center">
-                                    @if (post.Author.Avatar != null)
-                                    {
-                                        <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
-                                             class="rounded-circle me-2"
-                                             style="width: 30px; height: 30px; object-fit: cover;"
-                                             alt="@post.Author.NickName">
-                                    }
-                                    else
-                                    {
-                                        <div
-                                            class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
-                                            style="width: 30px; height: 30px;">
-                                            <span
-                                                style="font-size: 16px;">@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
-                                        </div>
-                                    }
+                            <div class="card-content">
+                                @if (post.UseLocalPhoto && post.LocalPhoto != null)
+                                {
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
+                                         class="card-img-top" alt="@post.Title">
+                                }
+                                else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
+                                {
+                                    <img src="@post.RemotePhotoUrl" class="card-img-top"
+                                         alt="@post.Title"
+                                         onerror="this.onerror=null;this.src='';this.alt='...';this.style.display='none';">
+                                }
+                                <div class="card-text-wrapper">
                                     <div>
-                                        <small class="text-muted">@post.Author.NickName</small>
-                                        <br>
-                                        <small
-                                            class="text-muted">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                        <h5 class="card-title">@post.Title</h5>
+                                        <p class="card-text">@(post.Content.Length > 100 ? post.Content.Substring(0, 100) + "..." : post.Content)</p>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                @if (post.Author.Avatar != null)
+                                {
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
+                                         class="author-avatar"
+                                         alt="@post.Author.NickName">
+                                }
+                                else
+                                {
+                                    <div class="author-placeholder">
+                                        <span>@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
+                                    </div>
+                                }
+                                <div class="author-info">
+                                    <p class="author-name">@post.Author.NickName</p>
+                                    <p class="author-date">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</p>
                                 </div>
                             </div>
                         </div>
@@ -71,5 +352,64 @@
                 </div>
             }
         </div>
+
+        <div class="load-more-btn">
+            <button id="load-more-button" class="btn btn-outline-secondary" onclick="loadMorePosts()">Завантажити ще
+            </button>
+        </div>
     }
 </div>
+
+<script>
+    const postsPerPage = 9;
+    let currentPage = 0;
+    let currentLayout = 'grid';
+    let allPosts = [];
+
+    document.addEventListener('DOMContentLoaded', function () {
+        allPosts = document.querySelectorAll('.post-item');
+        loadMorePosts();
+    });
+
+    function loadMorePosts() {
+        const totalPosts = allPosts.length;
+        const startIndex = currentPage * postsPerPage;
+        const endIndex = Math.min(startIndex + postsPerPage, totalPosts);
+
+        for (let i = startIndex; i < endIndex; i++) {
+            allPosts[i].style.display = 'block';
+        }
+
+        currentPage++;
+
+        if (endIndex >= totalPosts) {
+            document.getElementById('load-more-button').disabled = true;
+            document.getElementById('load-more-button').textContent = 'Всі пости завантажено';
+        }
+
+        updateLayout();
+    }
+
+    function setLayout(view) {
+        currentLayout = view;
+        updateLayout();
+    }
+
+    function updateLayout() {
+        const visibleCards = document.querySelectorAll('.post-item[style="display: block;"]');
+
+        visibleCards.forEach(card => {
+            const cardInner = card.querySelector('.card');
+
+            if (currentLayout === 'list') {
+                card.classList.remove('col-md-6', 'col-lg-4');
+                card.classList.add('col-12');
+                cardInner.classList.add('card-horizontal');
+            } else {
+                card.classList.remove('col-12');
+                card.classList.add('col-md-6', 'col-lg-4');
+                cardInner.classList.remove('card-horizontal');
+            }
+        });
+    }
+</script>

@@ -62,6 +62,45 @@ header {
     margin-top: 10px;
 }
 
+.back-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 999;
+    padding: 0;
+    opacity: 1;
+}
+
+.back-to-top-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.back-to-top-btn.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
 @media screen and (max-width: 768px) {
     .navbar-nav {
         margin-top: 10px;
@@ -117,5 +156,12 @@ header {
         font-size: 14px;
         padding: 15px;
         margin-top: 10px;
+    }
+
+    .back-to-top-btn {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
     }
 }

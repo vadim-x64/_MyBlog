@@ -67,6 +67,9 @@
 <div class="container">
     <main role="main">
         @RenderBody()
+        <button id="backToTopBtn" class="back-to-top-btn" title="Повернутися вгору">
+            <img src="https://cdn-icons-png.flaticon.com/128/10024/10024744.png" alt="Вгору" width="50" height="50">
+        </button>
     </main>
 </div>
 <footer class="border-top footer">
@@ -76,7 +79,7 @@
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/layout.js" asp-append-version="true"></script>
 <script src="~/js/comments.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

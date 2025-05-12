@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\MyBlog.bundle.scp.css",
-      "PackagePath": "staticwebassets\\MyBlog.jl32t1qdxa.bundle.scp.css"
+      "PackagePath": "staticwebassets\\MyBlog.dg264kxvhn.bundle.scp.css"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\layout.css",
@@ -21,12 +21,12 @@
       "PackagePath": "staticwebassets\\js\\comments.js"
     },
     {
-      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\profile.js",
-      "PackagePath": "staticwebassets\\js\\profile.js"
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\layout.js",
+      "PackagePath": "staticwebassets\\js\\layout.js"
     },
     {
-      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\site.js",
-      "PackagePath": "staticwebassets\\js\\site.js"
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\profile.js",
+      "PackagePath": "staticwebassets\\js\\profile.js"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\lib\\bootstrap\\LICENSE",
