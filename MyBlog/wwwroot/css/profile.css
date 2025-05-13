@@ -15,7 +15,6 @@
     text-align: left;
     margin: 20px auto;
     border-radius: 0;
-    border: none;
 }
 
 .avatar-container {
@@ -138,7 +137,7 @@ input[type="checkbox"] {
 }
 
 .text-danger {
-    font-size: 16px;
+    font-size: 14px;
     color: #DC3545;
     display: block;
 }

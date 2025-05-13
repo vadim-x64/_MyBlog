@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\profile.css"
     },
     {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\register.css",
+      "PackagePath": "staticwebassets\\css\\register.css"
+    },
+    {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -35,6 +39,10 @@
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\profile.js",
       "PackagePath": "staticwebassets\\js\\profile.js"
+    },
+    {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\register.js",
+      "PackagePath": "staticwebassets\\js\\register.js"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\lib\\bootstrap\\LICENSE",

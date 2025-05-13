@@ -43,6 +43,18 @@ public class RegisterModel : PageModel
             return Page();
         }
 
+        if (RegisterForm.Avatar != null)
+        {
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".jfif" };
+            string fileExtension = Path.GetExtension(RegisterForm.Avatar.FileName).ToLowerInvariant();
+
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                ErrorMessage = $"Дозволені формати зображень: {string.Join(", ", allowedExtensions)}";
+                return Page();
+            }
+        }
+        
         string nickname = RegisterForm.NickName;
         if (string.IsNullOrWhiteSpace(nickname))
         {
@@ -74,6 +86,7 @@ public class RegisterModel : PageModel
             var (success, errorMessage) = await _userService.SaveAvatarAsync(user, RegisterForm.Avatar);
             if (!success)
             {
+                await _userService.DeleteUserAccountAsync(user.Id);
                 ErrorMessage = errorMessage;
                 return Page();
             }
