@@ -4,258 +4,7 @@
     ViewData["Title"] = "Головна сторінка";
 }
 
-<style>
-    .alert {
-        font-size: 18px;
-        color: #333;
-        text-align: left;
-        margin: 20px auto;
-        border-radius: 0;
-        border: none;
-    }
-    
-    .display-4 {
-        font-size: 60px;
-        color: #333;
-        margin: 50px auto;
-        text-align: center;
-    }
-
-    .welcome-text, .rules-notice {
-        border-radius: 0;
-        font-size: 24px;
-        color: #666;
-        line-height: 1.5;
-        text-align: justify;
-    }
-
-    .rules-notice p {
-        font-size: 18px;
-        border: 1px solid #CCC;
-        padding: 20px;
-        background-color: #F5F5F5FF;
-        color: #333;
-    }
-
-    .view-toggle {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin: 50px 0 20px 0;
-        gap: 20px;
-    }
-
-    .view-toggle button {
-        padding: 0;
-        border: none;
-    }
-
-    .view-icon {
-        width: 30px;
-        height: 30px;
-        display: inline-block;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-
-    .card {
-        border: 1px solid #CCC;
-        border-radius: 0;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .card-img-top {
-        width: 100%;
-        height: 300px;
-        object-fit: cover;
-        object-position: center;
-        border-radius: 0;
-    }
-
-    .card-content {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .card-text-wrapper {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .card-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        margin: 0 0 10px 0;
-    }
-
-    .card-text {
-        font-size: 18px;
-        color: #666;
-        margin: 0;
-        flex-grow: 1;
-    }
-
-    .card-horizontal {
-        flex-direction: row;
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-
-    .card-content {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .card-horizontal .card-content {
-        flex-direction: row;
-        align-items: stretch;
-    }
-
-    .card-horizontal .card-img-top {
-        max-width: 50%;
-    }
-
-    .card-text-wrapper {
-        flex-grow: 1;
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    .card-horizontal .card-text-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    .card-footer {
-        display: flex;
-        align-items: center;
-        padding: 10px;
-        background-color: transparent;
-        border-top: 1px solid #CCC;
-        margin-top: auto;
-    }
-
-    .card-horizontal .card-footer {
-        padding: 10px;
-    }
-
-    .author-info {
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px;
-    }
-
-    .author-avatar {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        border-radius: 50%;
-    }
-
-    .author-placeholder {
-        width: 50px;
-        height: 50px;
-        background-color: #666;
-        color: #FFF;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-    }
-
-    .author-name {
-        font-weight: bold;
-        font-size: 16px;
-        color: #333;
-        margin: 0;
-    }
-
-    .author-date {
-        color: #666;
-        font-size: 16px;
-        margin: 5px 0 0 0;
-    }
-
-    .load-more-btn {
-        display: flex;
-        justify-content: center;
-        margin: 20px auto;
-    }
-
-    .load-more-btn .btn-outline-secondary {
-        border-radius: 0;
-        font-size: 18px;
-    }
-
-    @@media (max-width: 768px) {
-        .display-4 {
-            font-size: 36px;
-            margin: 20px auto;
-        }
-
-        .welcome-text, .rules-notice {
-            font-size: 18px;
-        }
-
-        .rules-notice p {
-            font-size: 16px;
-            padding: 15px;
-        }
-
-        .card-title {
-            font-size: 20px;
-        }
-
-        .card-text {
-            font-size: 16px;
-        }
-
-        .author-name {
-            font-size: 14px;
-        }
-
-        .author-date {
-            font-size: 14px;
-        }
-
-        .author-avatar, .author-placeholder {
-            width: 40px;
-            height: 40px;
-        }
-
-        .author-placeholder {
-            font-size: 18px;
-        }
-
-        .card-img-top {
-            height: 200px;
-        }
-
-        .load-more-btn .btn-outline-secondary {
-            font-size: 16px;
-        }
-        
-        .view-toggle {
-            display: none;
-        }
-    }
-</style>
+<link rel="stylesheet" href="~/css/index.css">
 
 <div class="container">
     <div class="row">
@@ -284,16 +33,19 @@
     </div>
 
     <div class="view-toggle">
-        <button class="btn btn-sm me-2" onclick="setLayout('grid')">
-            <img
-                src="https://cdn-icons-png.freepik.com/256/18550/18550916.png?uid=R77081381&ga=GA1.1.1431085202.1736767274&semt=ais_hybrid"
-                alt="Grid View" class="view-icon">
-        </button>
-        <button class="btn btn-sm" onclick="setLayout('list')">
-            <img
-                src="https://cdn-icons-png.freepik.com/256/1501/1501555.png?uid=R77081381&ga=GA1.1.1431085202.1736767274&semt=ais_hybrid"
-                alt="List View" class="view-icon">
-        </button>
+        <div class="view-buttons-container">
+            <div class="view-divider"></div>
+            <button class="btn btn-sm" onclick="setLayout('grid')">
+                <img
+                    src="https://cdn-icons-png.freepik.com/256/18550/18550957.png?uid=R77081381&ga=GA1.1.1431085202.1736767274&semt=ais_hybrid"
+                    alt="Grid View" class="view-icon">
+            </button>
+            <button class="btn btn-sm" onclick="setLayout('list')">
+                <img
+                    src="https://cdn-icons-png.freepik.com/256/5404/5404118.png?uid=R77081381&ga=GA1.1.1431085202.1736767274"
+                    alt="List View" class="view-icon">
+            </button>
+        </div>
     </div>
 
     @if (!Model.Posts.Any())
@@ -313,8 +65,7 @@
                             <div class="card-content">
                                 @if (post.UseLocalPhoto && post.LocalPhoto != null)
                                 {
-                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
-                                         class="card-img-top" alt="@post.Title">
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)" class="card-img-top" alt="@post.Title">
                                 }
                                 else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
                                 {
@@ -360,56 +111,6 @@
     }
 </div>
 
-<script>
-    const postsPerPage = 9;
-    let currentPage = 0;
-    let currentLayout = 'grid';
-    let allPosts = [];
-
-    document.addEventListener('DOMContentLoaded', function () {
-        allPosts = document.querySelectorAll('.post-item');
-        loadMorePosts();
-    });
-
-    function loadMorePosts() {
-        const totalPosts = allPosts.length;
-        const startIndex = currentPage * postsPerPage;
-        const endIndex = Math.min(startIndex + postsPerPage, totalPosts);
-
-        for (let i = startIndex; i < endIndex; i++) {
-            allPosts[i].style.display = 'block';
-        }
-
-        currentPage++;
-
-        if (endIndex >= totalPosts) {
-            document.getElementById('load-more-button').disabled = true;
-            document.getElementById('load-more-button').textContent = 'Всі пости завантажено';
-        }
-
-        updateLayout();
-    }
-
-    function setLayout(view) {
-        currentLayout = view;
-        updateLayout();
-    }
-
-    function updateLayout() {
-        const visibleCards = document.querySelectorAll('.post-item[style="display: block;"]');
-
-        visibleCards.forEach(card => {
-            const cardInner = card.querySelector('.card');
-
-            if (currentLayout === 'list') {
-                card.classList.remove('col-md-6', 'col-lg-4');
-                card.classList.add('col-12');
-                cardInner.classList.add('card-horizontal');
-            } else {
-                card.classList.remove('col-12');
-                card.classList.add('col-md-6', 'col-lg-4');
-                cardInner.classList.remove('card-horizontal');
-            }
-        });
-    }
-</script>
+@section Scripts {
+    <script src="~/js/index.js"></script>
+}
