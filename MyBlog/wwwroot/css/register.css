@@ -51,6 +51,7 @@ form {
     cursor: pointer;
     border-radius: 0;
     text-align: center;
+    padding: 10px 20px;
 }
 
 .alert {

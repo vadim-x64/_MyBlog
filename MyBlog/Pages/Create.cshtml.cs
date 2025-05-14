@@ -11,7 +11,10 @@ namespace MyBlog.Pages;
 public class CreateModel : PageModel
 {
     private readonly PostService _postService;
-    private readonly string[] _allowedImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".svg", ".tiff", ".tif" };
+    private readonly string[] _allowedImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".jfif" };
+    private readonly string[] _allowedMimeTypes = { 
+        "image/jpeg", "image/jpg", "image/png", "image/gif", "image/bmp", "image/jfif" 
+    };
 
     [BindProperty]
     public PostInputModel PostInput { get; set; } = new();
@@ -39,19 +42,14 @@ public class CreateModel : PageModel
             var extension = Path.GetExtension(Photo.FileName).ToLowerInvariant();
             if (!_allowedImageExtensions.Contains(extension))
             {
-                ModelState.AddModelError("Photo", "Файл має бути зображенням (jpg, png, gif, bmp, webp)");
+                ModelState.AddModelError("Photo", $"Файл має бути зображенням одного з форматів: {string.Join(", ", _allowedImageExtensions)}");
                 return Page();
             }
             
             // Перевірка MIME-типу
-            var allowedMimeTypes = new[] {
-                "image/jpeg", "image/png", "image/gif", "image/bmp", 
-                "image/webp", "image/svg+xml", "image/tiff"
-            };
-            
-            if (!allowedMimeTypes.Contains(Photo.ContentType))
+            if (!_allowedMimeTypes.Contains(Photo.ContentType.ToLowerInvariant()))
             {
-                ModelState.AddModelError("Photo", "Завантажений файл не є зображенням");
+                ModelState.AddModelError("Photo", $"Завантажений файл не є зображенням дозволеного формату. Дозволено: {string.Join(", ", _allowedImageExtensions)}");
                 return Page();
             }
         }

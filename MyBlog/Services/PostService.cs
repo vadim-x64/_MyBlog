@@ -199,28 +199,33 @@ public class PostService
     // Метод для визначення типу файлу за заголовком
     private string GetFileTypeFromHeader(byte[] header)
     {
-        // JPEG: FF D8 FF
+        if (header == null || header.Length < 12)
+            return "application/octet-stream";
+
+        // JPEG/JFIF: FF D8 FF
         if (header[0] == 0xFF && header[1] == 0xD8 && header[2] == 0xFF)
-            return "image/jpeg";
+        {
+            // JFIF: FF D8 FF E0 ?? ?? 4A 46 49 46 00
+            if (header.Length > 10 && header[3] == 0xE0 && 
+                header[6] == 0x4A && header[7] == 0x46 && header[8] == 0x49 && header[9] == 0x46 && header[10] == 0x00)
+                return "image/jfif";
             
+            return "image/jpeg"; // Звичайний JPEG
+        }
+        
         // PNG: 89 50 4E 47 0D 0A 1A 0A
         if (header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 
             && header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A)
             return "image/png";
-            
+        
         // GIF: 47 49 46 38
         if (header[0] == 0x47 && header[1] == 0x49 && header[2] == 0x46 && header[3] == 0x38)
             return "image/gif";
-            
+        
         // BMP: 42 4D
         if (header[0] == 0x42 && header[1] == 0x4D)
             return "image/bmp";
-            
-        // WEBP: 52 49 46 46 ?? ?? ?? ?? 57 45 42 50
-        if (header[0] == 0x52 && header[1] == 0x49 && header[2] == 0x46 && header[3] == 0x46 
-            && header[8] == 0x57 && header[9] == 0x45 && header[10] == 0x42 && header[11] == 0x50)
-            return "image/webp";
-            
+        
         return "application/octet-stream"; // За замовчуванням - невідомий тип
     }
     

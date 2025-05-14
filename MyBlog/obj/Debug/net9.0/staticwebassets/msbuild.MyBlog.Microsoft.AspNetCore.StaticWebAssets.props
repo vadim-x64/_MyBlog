@@ -1,5 +1,23 @@
 ﻿<Project>
   <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\create.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyBlog</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyBlog</BasePath>
+      <RelativePath>css/create.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>48cje8g5yt</Fingerprint>
+      <Integrity>XA0Ia1Xi0oCIrlQ6IqH1Nn3GGHZIKLvUU/uzYyKEX1E=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\create.css'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\index.css'))">
       <SourceType>Package</SourceType>
       <SourceId>MyBlog</SourceId>
@@ -30,8 +48,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>xbze8k0go5</Fingerprint>
-      <Integrity>o31jqP23zQmJ9mXY5g01Q5WHOS3kgiRqmIqbypkVvz8=</Integrity>
+      <Fingerprint>dafhomzfut</Fingerprint>
+      <Integrity>W3gL/r5nHTqe4OF/8vBxR11NokcKvi0Y/UqWaQnTaMM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\layout.css'))</OriginalItemSpec>
@@ -48,8 +66,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>ttwyzfgc66</Fingerprint>
-      <Integrity>T4ZcgUY+ShaT5tbtJpnsbpSlCjq0BrbUwLnbqXyLapU=</Integrity>
+      <Fingerprint>26qjyf1r9y</Fingerprint>
+      <Integrity>OtnFlaSnOxMKJajq8cNzvwxJizO9MPRQc3/Y2F1dab4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\login.css'))</OriginalItemSpec>
@@ -84,8 +102,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>b90x4w56qi</Fingerprint>
-      <Integrity>cazKx5nJOq/K8y6J3tAYOtLa+Ez09cvggIdZLzPx6eM=</Integrity>
+      <Fingerprint>9rvw79t6qg</Fingerprint>
+      <Integrity>xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\register.css'))</OriginalItemSpec>
@@ -125,6 +143,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\comments.js'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\create.js'))">
+      <SourceType>Package</SourceType>
+      <SourceId>MyBlog</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MyBlog</BasePath>
+      <RelativePath>js/create.js</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>0achjc0yrf</Fingerprint>
+      <Integrity>aHsOpDn71F0sb/E5NuVafoI2/S+2F5bVFD7yuslsjbU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\create.js'))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\index.js'))">
       <SourceType>Package</SourceType>

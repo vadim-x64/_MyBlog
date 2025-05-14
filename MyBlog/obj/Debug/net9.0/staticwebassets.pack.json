@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\MyBlog.dg264kxvhn.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\create.css",
+      "PackagePath": "staticwebassets\\css\\create.css"
+    },
+    {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css",
       "PackagePath": "staticwebassets\\css\\index.css"
     },
@@ -31,6 +35,10 @@
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\comments.js",
       "PackagePath": "staticwebassets\\js\\comments.js"
+    },
+    {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\create.js",
+      "PackagePath": "staticwebassets\\js\\create.js"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\index.js",

@@ -1,0 +1,121 @@
+﻿.row_create {
+    margin: 20px auto
+}
+
+.col-12 {
+    padding: 0;
+}
+
+.card  {
+    border-radius: 0;
+}
+
+.card.img {
+    margin-bottom: 10px;
+}
+
+.card-header {
+    background-color: #F5F5F5FF;
+    padding: 10px 20px;
+    border-radius: 0;
+}
+
+h2 {
+    font-size: 36px;
+    color: #333;
+    padding: 0;
+    margin: 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body .row .col-12.img {
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.mb-3 label {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+.form-control {
+    font-size: 18px;
+    color: #333;
+    padding: 10px;
+    border-radius: 0;
+}
+
+h5 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.form-check {
+    margin: 0;
+}
+
+.text-muted {
+    font-size: 16px;
+    color: #666;
+}
+
+.text-muted.small p {
+    font-size: 14px;
+    color: #DC3545;
+    margin: 0;
+    padding: 0;
+}
+
+.text-danger {
+    font-size: 16px;
+    color: #DC3545;
+    margin: 0;
+    padding: 0;
+}
+
+.image-preview {
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.preview-container {
+    margin-top: 10px;
+}
+
+.text-center button {
+    width: 100%;
+    border-radius: 0;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+    }
+
+    .form-control, h5 {
+        font-size: 16px;
+    }
+
+    .card-body .row .col-12.img {
+        display: block;
+        justify-content: left;
+    }
+
+    .text-muted, .text-danger {
+        font-size: 14px;
+    }
+
+    .text-center button {
+        font-size: 14px;
+    }
+}
