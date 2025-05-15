@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r0FST6zIuUQI+WhJwCpYmZ42pu9ntOicFaHkhjqayh4=",
+  "Hash": "X/0EE28vLugOFknkfNJ1JM18NFKUpOLgmtzwP/p0jww=",
   "Source": "MyBlog",
   "BasePath": "_content/MyBlog",
   "Mode": "Default",
@@ -479,6 +479,27 @@
       "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
+      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\91yk34gg9v-kmgyf0u6rx.gz",
+      "SourceId": "MyBlog",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyBlog",
+      "RelativePath": "js/myposts#[.{fingerprint=kmgyf0u6rx}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\myposts.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "gc1nltibgn",
+      "Integrity": "cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\myposts.js"
+    },
+    {
       "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\9bjw1xoa0t-j5mq2jizvt.gz",
       "SourceId": "MyBlog",
       "SourceType": "Discovered",
@@ -731,12 +752,12 @@
       "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-l7bwd6i6rv.gz",
+      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-bfhynk6vme.gz",
       "SourceId": "MyBlog",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MyBlog",
-      "RelativePath": "css/index#[.{fingerprint=l7bwd6i6rv}]?.css.gz",
+      "RelativePath": "css/index#[.{fingerprint=bfhynk6vme}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -745,19 +766,19 @@
       "RelatedAsset": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "c598mpa0gq",
-      "Integrity": "sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4=",
+      "Fingerprint": "fxvjp9tixp",
+      "Integrity": "nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css"
     },
     {
-      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-9rvw79t6qg.gz",
+      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-kx1xk7bezz.gz",
       "SourceId": "MyBlog",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/MyBlog",
-      "RelativePath": "css/register#[.{fingerprint=9rvw79t6qg}]?.css.gz",
+      "RelativePath": "css/register#[.{fingerprint=kx1xk7bezz}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -766,8 +787,8 @@
       "RelatedAsset": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\register.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "vf9j7hks6z",
-      "Integrity": "i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4=",
+      "Fingerprint": "2gaf1a4dpj",
+      "Integrity": "omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\register.css"
@@ -792,6 +813,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\hxfwxjp5yj-4yuy849bbu.gz",
+      "SourceId": "MyBlog",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyBlog",
+      "RelativePath": "css/myposts#[.{fingerprint=4yuy849bbu}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "euojcaajs2",
+      "Integrity": "eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css"
     },
     {
       "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\i15on9sazo-zub09dkrxp.gz",
@@ -1669,8 +1711,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "l7bwd6i6rv",
-      "Integrity": "waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E=",
+      "Fingerprint": "bfhynk6vme",
+      "Integrity": "SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\index.css"
@@ -1718,6 +1760,27 @@
       "OriginalItemSpec": "wwwroot\\css\\login.css"
     },
     {
+      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css",
+      "SourceId": "MyBlog",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\",
+      "BasePath": "_content/MyBlog",
+      "RelativePath": "css/myposts#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4yuy849bbu",
+      "Integrity": "1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\myposts.css"
+    },
+    {
       "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\profile.css",
       "SourceId": "MyBlog",
       "SourceType": "Discovered",
@@ -1753,8 +1816,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9rvw79t6qg",
-      "Integrity": "xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg=",
+      "Fingerprint": "kx1xk7bezz",
+      "Integrity": "CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\register.css"
@@ -1884,6 +1947,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\login.js"
+    },
+    {
+      "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\myposts.js",
+      "SourceId": "MyBlog",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\",
+      "BasePath": "_content/MyBlog",
+      "RelativePath": "js/myposts#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kmgyf0u6rx",
+      "Integrity": "VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\myposts.js"
     },
     {
       "Identity": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\profile.js",
@@ -3488,13 +3572,13 @@
       ]
     },
     {
-      "Route": "css/index.css",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-l7bwd6i6rv.gz",
+      "Route": "css/index.bfhynk6vme.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-bfhynk6vme.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000975609756"
+          "Quality": "0.000979431929"
         }
       ],
       "ResponseHeaders": [
@@ -3504,19 +3588,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1024"
+          "Value": "1020"
         },
         {
           "Name": "ETag",
-          "Value": "\"sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4=\""
+          "Value": "\"nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 15:40:08 GMT"
+          "Value": "Thu, 15 May 2025 14:09:37 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -3532,18 +3616,26 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E=\""
+          "Value": "W/\"SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro=\""
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "bfhynk6vme"
+        },
+        {
+          "Name": "label",
+          "Value": "css/index.css"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E="
+          "Value": "sha256-SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro="
         }
       ]
     },
     {
-      "Route": "css/index.css",
+      "Route": "css/index.bfhynk6vme.css",
       "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -3553,7 +3645,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4618"
+          "Value": "4617"
         },
         {
           "Name": "Content-Type",
@@ -3561,121 +3653,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E=\""
+          "Value": "\"SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 15:40:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E="
-        }
-      ]
-    },
-    {
-      "Route": "css/index.css.gz",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-l7bwd6i6rv.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1024"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 15:40:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4="
-        }
-      ]
-    },
-    {
-      "Route": "css/index.l7bwd6i6rv.css",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-l7bwd6i6rv.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000975609756"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1024"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 15:40:08 GMT"
+          "Value": "Thu, 15 May 2025 14:09:37 GMT"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "l7bwd6i6rv"
+          "Value": "bfhynk6vme"
         },
         {
           "Name": "label",
@@ -3683,13 +3675,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E="
+          "Value": "sha256-SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro="
         }
       ]
     },
     {
-      "Route": "css/index.l7bwd6i6rv.css",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css",
+      "Route": "css/index.bfhynk6vme.css.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-bfhynk6vme.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3698,7 +3690,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4618"
+          "Value": "1020"
         },
         {
           "Name": "Content-Type",
@@ -3706,56 +3698,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E=\""
+          "Value": "\"nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 15:40:08 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "l7bwd6i6rv"
-        },
-        {
-          "Name": "label",
-          "Value": "css/index.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-waWPMPhI7OU3wiRQ1auEZICETG8pjUphYWSrZP8g44E="
-        }
-      ]
-    },
-    {
-      "Route": "css/index.l7bwd6i6rv.css.gz",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-l7bwd6i6rv.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1024"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 13 May 2025 15:40:08 GMT"
+          "Value": "Thu, 15 May 2025 14:09:37 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3773,7 +3720,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "l7bwd6i6rv"
+          "Value": "bfhynk6vme"
         },
         {
           "Name": "label",
@@ -3781,7 +3728,144 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-sKXtL8NrCwaSv62mux7f+J1PEJCSWBl88qbCxfHNUg4="
+          "Value": "sha256-nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8="
+        }
+      ]
+    },
+    {
+      "Route": "css/index.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-bfhynk6vme.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000979431929"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1020"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 14:09:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro="
+        }
+      ]
+    },
+    {
+      "Route": "css/index.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4617"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 14:09:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SQzjssTwKImibsUm221VPIuxv+Z9Bz+uPAexFVjRWro="
+        }
+      ]
+    },
+    {
+      "Route": "css/index.css.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gayfxhuk1x-bfhynk6vme.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1020"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 14:09:37 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nQrnMVqhGIGhFN/bIskTFNXBX8wuFIN8ffYb9LhSdU8="
         }
       ]
     },
@@ -4382,6 +4466,304 @@
       ]
     },
     {
+      "Route": "css/myposts.4yuy849bbu.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\hxfwxjp5yj-4yuy849bbu.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001748251748"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "571"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4yuy849bbu"
+        },
+        {
+          "Name": "label",
+          "Value": "css/myposts.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE="
+        }
+      ]
+    },
+    {
+      "Route": "css/myposts.4yuy849bbu.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1806"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4yuy849bbu"
+        },
+        {
+          "Name": "label",
+          "Value": "css/myposts.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE="
+        }
+      ]
+    },
+    {
+      "Route": "css/myposts.4yuy849bbu.css.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\hxfwxjp5yj-4yuy849bbu.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "571"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4yuy849bbu"
+        },
+        {
+          "Name": "label",
+          "Value": "css/myposts.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y="
+        }
+      ]
+    },
+    {
+      "Route": "css/myposts.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\hxfwxjp5yj-4yuy849bbu.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001748251748"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "571"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE="
+        }
+      ]
+    },
+    {
+      "Route": "css/myposts.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1806"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-1EYobGQP6y+jqt8g/CLCtLJLswA30R9KQe46PvyE2eE="
+        }
+      ]
+    },
+    {
+      "Route": "css/myposts.css.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\hxfwxjp5yj-4yuy849bbu.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "571"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:16 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eqfKri2VDEnDKC8XzcmN9M++AvvXrGxrux3rEv+1++Y="
+        }
+      ]
+    },
+    {
       "Route": "css/profile.750vgl11ty.css",
       "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\vz387mcars-750vgl11ty.gz",
       "Selectors": [
@@ -4680,13 +5062,13 @@
       ]
     },
     {
-      "Route": "css/register.9rvw79t6qg.css",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-9rvw79t6qg.gz",
+      "Route": "css/register.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-kx1xk7bezz.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.001926782274"
+          "Quality": "0.001934235977"
         }
       ],
       "ResponseHeaders": [
@@ -4696,19 +5078,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "518"
+          "Value": "516"
         },
         {
           "Name": "ETag",
-          "Value": "\"i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4=\""
+          "Value": "\"omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 16:12:41 GMT"
+          "Value": "Thu, 15 May 2025 13:42:50 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -4724,26 +5106,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg=\""
+          "Value": "W/\"CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "9rvw79t6qg"
-        },
-        {
-          "Name": "label",
-          "Value": "css/register.css"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg="
+          "Value": "sha256-CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo="
         }
       ]
     },
     {
-      "Route": "css/register.9rvw79t6qg.css",
+      "Route": "css/register.css",
       "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\register.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4753,7 +5127,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1703"
+          "Value": "1708"
         },
         {
           "Name": "Content-Type",
@@ -4761,11 +5135,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg=\""
+          "Value": "\"CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 16:12:41 GMT"
+          "Value": "Thu, 15 May 2025 13:42:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo="
+        }
+      ]
+    },
+    {
+      "Route": "css/register.css.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-kx1xk7bezz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "516"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 13:42:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI="
+        }
+      ]
+    },
+    {
+      "Route": "css/register.kx1xk7bezz.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-kx1xk7bezz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001934235977"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "516"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 13:42:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kx1xk7bezz"
+        },
+        {
+          "Name": "label",
+          "Value": "css/register.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo="
+        }
+      ]
+    },
+    {
+      "Route": "css/register.kx1xk7bezz.css",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\register.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1708"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 13:42:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4775,7 +5294,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "9rvw79t6qg"
+          "Value": "kx1xk7bezz"
         },
         {
           "Name": "label",
@@ -4783,13 +5302,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg="
+          "Value": "sha256-CMhOTMMBubMuKGEGtEzcmEDwdgQiz6bX574/ooOUSHo="
         }
       ]
     },
     {
-      "Route": "css/register.9rvw79t6qg.css.gz",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-9rvw79t6qg.gz",
+      "Route": "css/register.kx1xk7bezz.css.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-kx1xk7bezz.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4798,7 +5317,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "518"
+          "Value": "516"
         },
         {
           "Name": "Content-Type",
@@ -4806,11 +5325,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4=\""
+          "Value": "\"omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 16:12:41 GMT"
+          "Value": "Thu, 15 May 2025 13:42:50 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4828,7 +5347,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "9rvw79t6qg"
+          "Value": "kx1xk7bezz"
         },
         {
           "Name": "label",
@@ -4836,144 +5355,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4="
-        }
-      ]
-    },
-    {
-      "Route": "css/register.css",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-9rvw79t6qg.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.001926782274"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "518"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 16:12:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg="
-        }
-      ]
-    },
-    {
-      "Route": "css/register.css",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\register.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1703"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 16:12:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-xeP+EXoQDtc2yafx6O7zch5sDISkSbVEWD0GW9xwlAg="
-        }
-      ]
-    },
-    {
-      "Route": "css/register.css.gz",
-      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\gcgphdady3-9rvw79t6qg.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "518"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 14 May 2025 16:12:41 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-i0G0gmewa7JReIn7YGA9R6k0vAJ1PXfBNANvxgDWzp4="
+          "Value": "sha256-omuZ5evIQEsl2ulTADYPweXyjyluVHcmbc0Wh4kiFHI="
         }
       ]
     },
@@ -6762,6 +7144,304 @@
         {
           "Name": "integrity",
           "Value": "sha256-N7W6DXjhHB7dO9i8EL7G+jMKrL1TWwZwKGRgPMhIdgU="
+        }
+      ]
+    },
+    {
+      "Route": "js/myposts.js",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\91yk34gg9v-kmgyf0u6rx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002083333333"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "479"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4="
+        }
+      ]
+    },
+    {
+      "Route": "js/myposts.js",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\myposts.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1371"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4="
+        }
+      ]
+    },
+    {
+      "Route": "js/myposts.js.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\91yk34gg9v-kmgyf0u6rx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "479"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo="
+        }
+      ]
+    },
+    {
+      "Route": "js/myposts.kmgyf0u6rx.js",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\91yk34gg9v-kmgyf0u6rx.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.002083333333"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "479"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kmgyf0u6rx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/myposts.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4="
+        }
+      ]
+    },
+    {
+      "Route": "js/myposts.kmgyf0u6rx.js",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\myposts.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1371"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kmgyf0u6rx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/myposts.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VKi+ijCS0ai9ggDnqHbVLccsUVBXiWaVGTPg62KS3p4="
+        }
+      ]
+    },
+    {
+      "Route": "js/myposts.kmgyf0u6rx.js.gz",
+      "AssetFile": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\compressed\\91yk34gg9v-kmgyf0u6rx.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "479"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 15 May 2025 15:02:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kmgyf0u6rx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/myposts.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-cPAYrbYU7HLG8qnmeOf7dGbdVaekZ8Cxo+opL3HacKo="
         }
       ]
     },

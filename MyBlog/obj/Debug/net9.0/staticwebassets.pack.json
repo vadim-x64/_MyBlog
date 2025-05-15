@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\css\\login.css"
     },
     {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css",
+      "PackagePath": "staticwebassets\\css\\myposts.css"
+    },
+    {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\profile.css",
       "PackagePath": "staticwebassets\\css\\profile.css"
     },
@@ -51,6 +55,10 @@
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\login.js",
       "PackagePath": "staticwebassets\\js\\login.js"
+    },
+    {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\myposts.js",
+      "PackagePath": "staticwebassets\\js\\myposts.js"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\js\\profile.js",

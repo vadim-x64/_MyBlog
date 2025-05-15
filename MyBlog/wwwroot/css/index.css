@@ -45,7 +45,7 @@
 }
 
 .view-toggle button {
-    padding: 8px 15px;
+    padding: 10px 20px;
     border: none;
     background-color: transparent;
     position: relative;
@@ -65,7 +65,6 @@
 
 .view-toggle button:first-child {
     border-right: 1px solid #CCC;
-
 }
 
 .view-icon {
