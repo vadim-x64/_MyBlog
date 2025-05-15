@@ -1,12 +1,12 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\MyBlog.bundle.scp.css",
-      "PackagePath": "staticwebassets\\MyBlog.dg264kxvhn.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\create.css",
       "PackagePath": "staticwebassets\\css\\create.css"
+    },
+    {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\details.css",
+      "PackagePath": "staticwebassets\\css\\details.css"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\index.css",

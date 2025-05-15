@@ -4,6 +4,8 @@
     ViewData["Title"] = Model.Post?.Title ?? "Деталі поста";
 }
 
+<link rel="stylesheet" href="~/css/details.css">
+
 @if (Model.Post == null)
 {
     <div class="alert alert-danger">
@@ -22,15 +24,13 @@
     <div class="card mb-4">
         @if (Model.Post.UseLocalPhoto && Model.Post.LocalPhoto != null)
         {
-            <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.LocalPhoto)" class="card-img-top"
-                 style="max-height: 400px; object-fit: contain;" alt="@Model.Post.Title">
+            <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.LocalPhoto)" class="card-img-top" alt="@Model.Post.Title">
         }
         else if (!string.IsNullOrEmpty(Model.Post.RemotePhotoUrl))
         {
-            <img src="@Model.Post.RemotePhotoUrl" class="card-img-top" style="max-height: 400px; object-fit: contain;"
-                 alt="@Model.Post.Title"
+            <img src="@Model.Post.RemotePhotoUrl" class="card-img-top" alt="@Model.Post.Title"
                  onerror="this.onerror=null;this.style.display='none';document.getElementById('imageError').style.display='block';">
-            <div id="imageError" style="display: none;" class="alert alert-warning m-3">
+            <div id="imageError" class="alert alert-warning m-3">
                 Неможливо завантажити зображення з вказаного URL.
             </div>
         }
@@ -42,16 +42,12 @@
                 @if (Model.Post.Author.Avatar != null)
                 {
                     <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.Author.Avatar)"
-                         class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;"
-                         alt="@Model.Post.Author.NickName">
+                         class="rounded-circle me-2" alt="@Model.Post.Author.NickName">
                 }
                 else
                 {
-                    <div
-                        class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2"
-                        style="width: 40px; height: 40px;">
-                        <span
-                            style="font-size: 20px;">@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                        <span>@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
                     </div>
                 }
                 <div>
@@ -59,8 +55,7 @@
                     <small class="text-muted">Створено: @Model.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                     @if (Model.Post.CreatedAt != Model.Post.UpdatedAt)
                     {
-                        <small
-                            class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        <small class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                     }
                 </div>
             </div>

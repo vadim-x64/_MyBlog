@@ -7,6 +7,8 @@
     GetReplies = (commentId) => Model.Where(c => c.ParentCommentId == commentId).OrderBy(c => c.CreatedAt).ToList();
 }
 
+<link rel="stylesheet" href="~/css/details.css">
+
 @foreach (var comment in rootComments)
 {
     <div class="comment-thread mb-4" id="comment-@comment.Id">
