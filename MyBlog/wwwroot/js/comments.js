@@ -1,146 +1,223 @@
 ﻿document.addEventListener('DOMContentLoaded', function() {
-    // Обробка натиснення на кнопку "Відповісти"
+    function handleFormSubmit(form, textarea) {
+        const textareaValue = textarea.value.trim();
+        if (textareaValue === '') {
+            return false;
+        }
+        return true;
+    }
+
+    document.querySelectorAll('textarea[name="replyContent"], textarea[name="CommentContent"]').forEach(function(textarea) {
+        const form = textarea.closest('form');
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                if (!handleFormSubmit(form, textarea)) {
+                    event.preventDefault();
+                    textarea.classList.add('is-invalid');
+                    let errorSpan = form.querySelector('.invalid-feedback');
+                    if (!errorSpan) {
+                        errorSpan = document.createElement('span');
+                        errorSpan.classList.add('invalid-feedback', 'd-block');
+                        textarea.parentNode.insertBefore(errorSpan, textarea.nextSibling);
+                    }
+                    errorSpan.textContent = 'Коментар не може бути порожнім.';
+                } else {
+                    textarea.classList.remove('is-invalid');
+                    let errorSpan = form.querySelector('.invalid-feedback');
+                    if (errorSpan) {
+                        errorSpan.remove();
+                    }
+                }
+            });
+        }
+
+        textarea.addEventListener('input', function() {
+            if (this.value.length > 2000) {
+                this.value = this.value.substring(0, 2000);
+            }
+            if (this.value.trim() !== '') {
+                this.classList.remove('is-invalid');
+                let errorSpan = this.closest('form').querySelector('.invalid-feedback');
+                if (errorSpan) {
+                    errorSpan.textContent = '';
+                }
+            }
+        });
+
+        textarea.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                const currentForm = this.closest('form');
+                if (currentForm && handleFormSubmit(currentForm, this)) {
+                    currentForm.submit();
+                } else if (currentForm) {
+                    this.classList.add('is-invalid');
+                    let errorSpan = currentForm.querySelector('.invalid-feedback');
+                    if (!errorSpan) {
+                        errorSpan = document.createElement('span');
+                        errorSpan.classList.add('invalid-feedback', 'd-block');
+                        this.parentNode.insertBefore(errorSpan, this.nextSibling);
+                    }
+                    errorSpan.textContent = 'Коментар не може бути порожнім.';
+                }
+            }
+        });
+    });
+
     document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('reply-button')) {
-            const commentId = event.target.dataset.commentId;
-            const authorName = event.target.dataset.authorName;
+        const replyButton = event.target.closest('.reply-button');
+        if (replyButton) {
+            const commentId = replyButton.dataset.commentId;
+            const authorName = replyButton.dataset.authorName;
             const replyForm = document.getElementById(`reply-form-${commentId}`);
 
             if (replyForm) {
-                // Сховаємо всі форми відповідей
                 document.querySelectorAll('.reply-form').forEach(form => {
-                    form.classList.add('d-none');
+                    if (form.id !== `reply-form-${commentId}`) {
+                        form.classList.add('d-none');
+                        form.querySelector('textarea').value = '';
+                    }
                 });
 
-                // Додаємо @username при відповіді
-                replyForm.querySelector('textarea').value = `@${authorName} `;
-
-                // Покажемо тільки потрібну форму
-                replyForm.classList.remove('d-none');
-                replyForm.querySelector('textarea').focus();
+                replyForm.classList.toggle('d-none');
+                const textarea = replyForm.querySelector('textarea');
+                if (!replyForm.classList.contains('d-none')) {
+                    textarea.value = `@${authorName} `;
+                    textarea.focus();
+                    const len = textarea.value.length;
+                    textarea.setSelectionRange(len, len);
+                } else {
+                    textarea.value = '';
+                }
             }
         }
     });
 
-    // Обробка кнопки "Скасувати"
     document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('cancel-reply')) {
-            const commentId = event.target.dataset.commentId;
+        const cancelReplyButton = event.target.closest('.cancel-reply');
+        if (cancelReplyButton) {
+            const commentId = cancelReplyButton.dataset.commentId;
             const replyForm = document.getElementById(`reply-form-${commentId}`);
 
             if (replyForm) {
                 replyForm.classList.add('d-none');
                 replyForm.querySelector('textarea').value = '';
+                replyForm.querySelector('textarea').classList.remove('is-invalid');
+                let errorSpan = replyForm.querySelector('.invalid-feedback');
+                if (errorSpan) {
+                    errorSpan.remove();
+                }
             }
         }
     });
 
-    // Обробка кліків по посиланнях на батьківські коментарі
-    document.addEventListener('click', function(event) {
-        if (event.target.closest('.reply-indicator a')) {
-            event.preventDefault(); // Запобігаємо стандартній поведінці посилання
+    function highlightAndScroll(targetElement) {
+        if (!targetElement) return;
 
-            const link = event.target.closest('.reply-indicator a');
-            const targetId = link.getAttribute('href');
-            // Знаходимо коментар за його id
+        const commentCard = targetElement.querySelector('.card') || targetElement.closest('.card');
+        if (commentCard) {
+            commentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            document.querySelectorAll('.highlight-comment').forEach(el => {
+                el.classList.remove('highlight-comment');
+                el.style.padding = '';
+            });
+
+            commentCard.classList.add('highlight-comment');
+
+            setTimeout(() => {
+                commentCard.classList.remove('highlight-comment');
+                commentCard.style.padding = '';
+            }, 3000);
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        const replyLink = event.target.closest('.reply-indicator a');
+        if (replyLink) {
+            event.preventDefault();
+            const targetId = replyLink.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (!targetElement) return;
 
-            // Якщо цільовий елемент знаходиться в прихованому блоці відповідей
-            const parentRepliesContainer = targetElement.closest('.replies-container, .nested-replies');
-            if (parentRepliesContainer && parentRepliesContainer.classList.contains('d-none')) {
-                // Показуємо контейнер з відповідями
-                parentRepliesContainer.classList.remove('d-none');
-
-                // Оновлюємо текст кнопки
-                const commentId = parentRepliesContainer.id.replace('replies-', '');
-                const toggleButton = document.querySelector(`.toggle-replies-btn[data-comment-id="${commentId}"]`);
-                if (toggleButton) {
-                    toggleButton.querySelector('.show-text').classList.add('d-none');
-                    toggleButton.querySelector('.hide-text').classList.remove('d-none');
+            let current = targetElement;
+            while(current && current.parentElement && current.parentElement !== document.body) {
+                if (current.parentElement.classList.contains('replies-container') || current.parentElement.classList.contains('nested-replies')) {
+                    if (current.parentElement.classList.contains('d-none')) {
+                        current.parentElement.classList.remove('d-none');
+                        const parentCommentId = current.parentElement.id.replace('replies-', '');
+                        const toggleButton = document.querySelector(`.toggle-replies-btn[data-comment-id="${parentCommentId}"]`);
+                        if (toggleButton) {
+                            toggleButton.querySelector('.show-text').classList.add('d-none');
+                            toggleButton.querySelector('.hide-text').classList.remove('d-none');
+                        }
+                    }
                 }
+                current = current.parentElement;
             }
-
-            // Видаляємо всі попередні підсвічування
-            document.querySelectorAll('.highlight-comment').forEach(el => {
-                el.classList.remove('highlight-comment');
-            });
-
-            // Знаходимо саме тіло коментаря для підсвічування (карточку)
-            const commentCard = targetElement.querySelector('.card');
-            if (commentCard) {
-                // Прокручуємо до коментаря
-                commentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Додаємо тимчасове підсвічування тільки до карточки коментаря
-                commentCard.classList.add('highlight-comment');
-
-                // Видаляємо клас через 3 секунди
-                setTimeout(() => {
-                    commentCard.classList.remove('highlight-comment');
-                }, 3000);
-            }
+            highlightAndScroll(targetElement);
         }
     });
 
-    // Обробка кнопок показати/приховати відповіді
     document.addEventListener('click', function(event) {
-        if (event.target.closest('.toggle-replies-btn')) {
-            const button = event.target.closest('.toggle-replies-btn');
-            const commentId = button.dataset.commentId;
+        const toggleButton = event.target.closest('.toggle-replies-btn');
+        if (toggleButton) {
+            const commentId = toggleButton.dataset.commentId;
             const repliesContainer = document.getElementById(`replies-${commentId}`);
 
             if (repliesContainer) {
-                // Перемикаємо видимість контейнера з відповідями
                 repliesContainer.classList.toggle('d-none');
-
-                // Перемикаємо текст кнопки
-                const showText = button.querySelector('.show-text');
-                const hideText = button.querySelector('.hide-text');
-
+                const showText = toggleButton.querySelector('.show-text');
+                const hideText = toggleButton.querySelector('.hide-text');
                 showText.classList.toggle('d-none');
                 hideText.classList.toggle('d-none');
             }
         }
     });
-});
 
-
-// Додати в JavaScript файл (paste.txt)
-document.addEventListener('DOMContentLoaded', function() {
-    // Додаємо обробник для всіх textarea в коментарях
-    document.querySelectorAll('textarea[name="replyContent"], textarea[name="CommentContent"]').forEach(function(textarea) {
-        textarea.addEventListener('input', function() {
-            if (this.value.length > 2000) {
-                this.value = this.value.substring(0, 2000);
-            }
-        });
+    document.addEventListener('click', function(event) {
+        const deleteBtn = event.target.closest('.delete-comment-btn');
+        if (deleteBtn) {
+            const commentId = deleteBtn.dataset.commentId;
+            document.getElementById('commentIdToDelete').value = commentId;
+        }
     });
-});
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Якщо в URL є параметр scrollToComment, прокручуємо до цього коментаря
     const urlParams = new URLSearchParams(window.location.search);
-    const scrollToComment = urlParams.get('scrollToComment');
+    const scrollToCommentId = urlParams.get('scrollToComment');
 
-    if (scrollToComment) {
-        const commentElement = document.getElementById(`comment-${scrollToComment}`);
+    if (scrollToCommentId) {
+        const commentElement = document.getElementById(`comment-${scrollToCommentId}`);
         if (commentElement) {
             setTimeout(() => {
-                commentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Підсвічуємо коментар
-                const commentCard = commentElement.querySelector('.card');
-                if (commentCard) {
-                    commentCard.classList.add('highlight-comment');
-                    setTimeout(() => {
-                        commentCard.classList.remove('highlight-comment');
-                    }, 3000);
+                let current = commentElement;
+                while(current && current.parentElement && current.parentElement !== document.body) {
+                    if (current.parentElement.classList.contains('replies-container') || current.parentElement.classList.contains('nested-replies')) {
+                        if (current.parentElement.classList.contains('d-none')) {
+                            current.parentElement.classList.remove('d-none');
+                            const parentCommentId = current.parentElement.id.replace('replies-', '');
+                            const toggleButton = document.querySelector(`.toggle-replies-btn[data-comment-id="${parentCommentId}"]`);
+                            if (toggleButton) {
+                                toggleButton.querySelector('.show-text').classList.add('d-none');
+                                toggleButton.querySelector('.hide-text').classList.remove('d-none');
+                            }
+                        }
+                    }
+                    current = current.parentElement;
                 }
-            }, 500); // Невелика затримка для впевненості, що сторінка повністю завантажилась
+                highlightAndScroll(commentElement);
+            }, 300);
         }
+    }
+
+    var deleteModal = document.getElementById('deleteCommentModal');
+    if(deleteModal) {
+        deleteModal.addEventListener('shown.bs.modal', function () {
+            var firstFocusableElement = deleteModal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusableElement) {
+                // No specific focus needed here, default Bootstrap behavior is fine.
+            }
+        });
     }
 });

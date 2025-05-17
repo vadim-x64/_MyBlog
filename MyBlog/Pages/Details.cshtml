@@ -14,12 +14,7 @@
     return;
 }
 
-<div class="container">
-    <div class="row mb-3">
-        <div class="col-12">
-            <a asp-page="/Index" class="btn btn-outline-secondary">&larr; Назад до списку</a>
-        </div>
-    </div>
+<div class="container1">
 
     <div class="card mb-4">
         @if (Model.Post.UseLocalPhoto && Model.Post.LocalPhoto != null)
@@ -30,7 +25,7 @@
         {
             <img src="@Model.Post.RemotePhotoUrl" class="card-img-top" alt="@Model.Post.Title"
                  onerror="this.onerror=null;this.style.display='none';document.getElementById('imageError').style.display='block';">
-            <div id="imageError" class="alert alert-warning m-3">
+            <div id="imageError" class="alert alert-warning m-3" style="display:none;">
                 Неможливо завантажити зображення з вказаного URL.
             </div>
         }
@@ -66,16 +61,15 @@
 
             <hr class="my-4">
             <div class="comments-section">
-                <h4 class="mb-4">Коментарі</h4>
 
                 @if (User.Identity?.IsAuthenticated == true)
                 {
-                    <form method="post" class="mb-4">
+                    <form method="post" class="mb-4" id="mainCommentForm">
                         <div class="form-group">
                             <textarea asp-for="CommentContent" class="form-control" rows="3" placeholder="Залиште ваш коментар..." maxlength="2000"></textarea>
                             <span asp-validation-for="CommentContent" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-2">Додати коментар</button>
+                        <button type="submit" class="btn btn-outline-primary mt-2">Додати коментар</button>
                     </form>
                 }
                 else
@@ -100,6 +94,28 @@
                     }
                 </div>
             </div>
+
+            <div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteCommentModalLabel">Підтвердження видалення</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Ви впевнені, що хочете видалити цей коментар?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                            <form id="deleteCommentForm" method="post" asp-page-handler="DeleteComment">
+                                <input type="hidden" id="commentIdToDelete" name="commentId" value="" />
+                                <button type="submit" class="btn btn-danger">Видалити</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

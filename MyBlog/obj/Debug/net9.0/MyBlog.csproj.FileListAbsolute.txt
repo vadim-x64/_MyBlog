@@ -189,7 +189,6 @@ C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.
 C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\BCrypt.Net-Next.dll
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\3sl8iukfsm-eg637gn7st.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\qra5geg2le-2yagos92gw.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\f9vypev3c6-rpg9px39a8.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\tvtl0rkip6-gwuy86ecve.gz
@@ -204,4 +203,5 @@ C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\gayfxhuk1x-bfhy
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\gcgphdady3-kx1xk7bezz.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\hxfwxjp5yj-4yuy849bbu.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\91yk34gg9v-kmgyf0u6rx.gz
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\eq8goi7zlo-pp4kwphaki.gz
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\3sl8iukfsm-ljeyracqjm.gz
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\eq8goi7zlo-msa63pkjre.gz

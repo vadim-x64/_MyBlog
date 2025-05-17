@@ -2,7 +2,7 @@
 @model List<MyBlog.Models.Comment>
 
 @{
-    var rootComments = Model.Where(c => c.ParentCommentId == null).ToList();
+    var rootComments = Model.Where(c => c.ParentCommentId == null).OrderByDescending(c => c.CreatedAt).ToList();
     Func<Guid, List<MyBlog.Models.Comment>> GetReplies = null;
     GetReplies = (commentId) => Model.Where(c => c.ParentCommentId == commentId).OrderBy(c => c.CreatedAt).ToList();
 }
@@ -17,18 +17,13 @@
                 <div class="d-flex align-items-start">
                     @if (comment.Author.Avatar != null)
                     {
-                        <img src="data:image/png;base64,@Convert.ToBase64String(comment.Author.Avatar)" 
-                             class="rounded-circle me-2" 
-                             style="width: 40px; height: 40px; object-fit: cover;" 
-                             alt="@comment.Author.NickName">
+                        <img src="data:image/png;base64,@Convert.ToBase64String(comment.Author.Avatar)"
+                             class="rounded-circle me-2" alt="@comment.Author.NickName">
                     }
                     else
                     {
-                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2" 
-                             style="width: 40px; height: 40px;">
-                            <span style="font-size: 20px;">
-                                @(!string.IsNullOrEmpty(comment.Author.NickName) ? comment.Author.NickName[0].ToString() : "U")
-                            </span>
+                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                            <span>@(!string.IsNullOrEmpty(comment.Author.NickName) ? comment.Author.NickName[0].ToString() : "U")</span>
                         </div>
                     }
                     <div class="flex-grow-1">
@@ -36,7 +31,7 @@
                             <h6 class="mb-0">@comment.Author.NickName</h6>
                             <small class="text-muted">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                         </div>
-                        
+
                         <p class="my-2">
                             @{
                                 var content = comment.Content;
@@ -45,30 +40,30 @@
                             }
                             @Html.Raw(content)
                         </p>
-                        
-                        <div class="d-flex">
+
+                        <div class="comment-actions">
                             @if (User.Identity?.IsAuthenticated == true)
                             {
-                                <button class="btn btn-sm btn-link p-0 reply-button" 
-                                        data-comment-id="@comment.Id" 
+                                <button class="btn btn-sm btn-link p-0 reply-button me-3"
+                                        data-comment-id="@comment.Id"
                                         data-author-name="@comment.Author.NickName">Відповісти</button>
                             }
                             @if (User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == comment.AuthorId.ToString())
                             {
-                                <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id" class="ms-3">
-                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0" 
-                                            onclick="return confirm('Ви впевнені, що хочете видалити цей коментар?')">
-                                        Видалити
-                                    </button>
-                                </form>
+                                <button type="button" class="btn btn-sm btn-link text-danger p-0 delete-comment-btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteCommentModal"
+                                        data-comment-id="@comment.Id">
+                                    Видалити
+                                </button>
                             }
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="reply-form d-none mt-2 mb-3 ms-4" id="reply-form-@comment.Id">
+
+        <div class="reply-form d-none mt-2 mb-3" id="reply-form-@comment.Id">
             <form method="post" asp-page-handler="AddReply" asp-route-parentCommentId="@comment.Id">
                 <div class="form-group">
                     <textarea name="replyContent" class="form-control" rows="2" placeholder="Ваша відповідь..." maxlength="2000"></textarea>
@@ -79,21 +74,21 @@
                 </div>
             </form>
         </div>
-        
+
         @{
             var replies = GetReplies(comment.Id);
         }
         @if (replies.Any())
         {
-            <div class="replies-count mt-1 mb-2 ms-4">
-                <button class="btn btn-sm btn-link toggle-replies-btn" 
-                        data-comment-id="@comment.Id" 
+            <div class="replies-count mt-1 mb-2">
+                <button class="btn btn-sm btn-link toggle-replies-btn p-0"
+                        data-comment-id="@comment.Id"
                         data-replies-count="@replies.Count">
                     <span class="show-text">Показати відповіді (@replies.Count)</span>
                     <span class="hide-text d-none">Приховати відповіді</span>
                 </button>
             </div>
-            <div class="replies-container ms-4 mt-2 d-none" id="replies-@comment.Id">
+            <div class="replies-container mt-2 d-none" id="replies-@comment.Id">
                 @foreach (var reply in replies)
                 {
                     await DisplayCommentWithReplies(reply, GetReplies);
@@ -113,18 +108,13 @@
                     <div class="d-flex align-items-start">
                         @if (comment.Author.Avatar != null)
                         {
-                            <img src="data:image/png;base64,@Convert.ToBase64String(comment.Author.Avatar)" 
-                                 class="rounded-circle me-2" 
-                                 style="width: 35px; height: 35px; object-fit: cover;" 
-                                 alt="@comment.Author.NickName">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(comment.Author.Avatar)"
+                                 class="rounded-circle me-2" alt="@comment.Author.NickName">
                         }
                         else
                         {
-                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2" 
-                                 style="width: 35px; height: 35px;">
-                                <span style="font-size: 18px;">
-                                    @(!string.IsNullOrEmpty(comment.Author.NickName) ? comment.Author.NickName[0].ToString() : "U")
-                                </span>
+                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                                <span>@(!string.IsNullOrEmpty(comment.Author.NickName) ? comment.Author.NickName[0].ToString() : "U")</span>
                             </div>
                         }
                         <div class="flex-grow-1">
@@ -132,16 +122,16 @@
                                 <h6 class="mb-0">@comment.Author.NickName</h6>
                                 <small class="text-muted">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                             </div>
-                            
+
                             <div class="reply-indicator mt-1 mb-2">
                                 <div class="d-flex align-items-center">
                                     <div class="reply-arrow me-2">↪</div>
-                                    <a href="#comment-@comment.ParentCommentId" class="text-muted">
+                                    <a href="#comment-@comment.ParentCommentId" class="text-muted text-decoration-none">
                                         Відповідь до @comment.ParentComment?.Author.NickName
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <p class="my-2">
                                 @{
                                     var content = comment.Content;
@@ -150,29 +140,29 @@
                                 }
                                 @Html.Raw(content)
                             </p>
-                            
-                            <div class="d-flex">
+
+                            <div class="comment-actions">
                                 @if (User.Identity?.IsAuthenticated == true)
                                 {
-                                    <button class="btn btn-sm btn-link p-0 reply-button" 
-                                            data-comment-id="@comment.Id" 
+                                    <button class="btn btn-sm btn-link p-0 reply-button me-3"
+                                            data-comment-id="@comment.Id"
                                             data-author-name="@comment.Author.NickName">Відповісти</button>
                                 }
                                 @if (User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == comment.AuthorId.ToString())
                                 {
-                                    <form method="post" asp-page-handler="DeleteComment" asp-route-commentId="@comment.Id" class="ms-3">
-                                        <button type="submit" class="btn btn-sm btn-link text-danger p-0" 
-                                                onclick="return confirm('Ви впевнені, що хочете видалити цей коментар?')">
-                                            Видалити
-                                        </button>
-                                    </form>
+                                    <button type="button" class="btn btn-sm btn-link text-danger p-0 delete-comment-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteCommentModal"
+                                            data-comment-id="@comment.Id">
+                                        Видалити
+                                    </button>
                                 }
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="reply-form d-none mt-2 mb-2" id="reply-form-@comment.Id">
                 <form method="post" asp-page-handler="AddReply" asp-route-parentCommentId="@comment.Id">
                     <div class="form-group">
@@ -184,15 +174,15 @@
                     </div>
                 </form>
             </div>
-            
+
             @{
                 var childReplies = getRepliesFunc(comment.Id);
             }
             @if (childReplies.Any())
             {
-                <div class="replies-count mt-1 mb-2 ms-4">
-                    <button class="btn btn-sm btn-link toggle-replies-btn" 
-                            data-comment-id="@comment.Id" 
+                <div class="replies-count mt-1 mb-2">
+                    <button class="btn btn-sm btn-link toggle-replies-btn p-0"
+                            data-comment-id="@comment.Id"
                             data-replies-count="@childReplies.Count">
                         <span class="show-text">Показати відповіді (@childReplies.Count)</span>
                         <span class="hide-text d-none">Приховати відповіді</span>

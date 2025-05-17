@@ -17,13 +17,12 @@ public class CommentService
 
     public async Task<List<Comment>> GetCommentsForPostAsync(Guid postId)
     {
-        // Отримуємо всі коментарі для поста, включаючи дані про вкладеність
         return await _context.Comments
             .Include(c => c.Author)
             .Include(c => c.ParentComment)
                 .ThenInclude(p => p != null ? p.Author : null)
             .Where(c => c.PostId == postId)
-            .OrderByDescending(c => c.CreatedAt) // Сортуємо за часом створення
+            .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
 
@@ -41,7 +40,11 @@ public class CommentService
             return false;
         }
 
-        // Перевірка існування батьківського коментаря, якщо вказано parentCommentId
+        if (string.IsNullOrWhiteSpace(content) || content.Length > 2000)
+        {
+            return false;
+        }
+
         if (parentCommentId != null)
         {
             var parentComment = await _context.Comments.FindAsync(parentCommentId);
@@ -54,7 +57,7 @@ public class CommentService
         var comment = new Comment
         {
             Id = Guid.NewGuid(),
-            Content = content,
+            Content = content.Trim(),
             AuthorId = currentUser.Id,
             PostId = postId,
             ParentCommentId = parentCommentId,
@@ -80,9 +83,7 @@ public class CommentService
             return false;
         }
 
-        // Видалити всі дочірні коментарі (рекурсивно)
         await DeleteChildCommentsAsync(commentId);
-
         _context.Comments.Remove(comment);
         await _context.SaveChangesAsync();
         return true;
