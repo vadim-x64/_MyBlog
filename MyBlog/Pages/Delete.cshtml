@@ -4,13 +4,10 @@
     ViewData["Title"] = "Видалення поста";
 }
 
-<div class="container">
-    <div class="row mb-3">
-        <div class="col-12">
-            <a asp-page="/MyPosts" asp-route-id="@Model.Post?.Id" class="btn btn-outline-secondary">&larr; Назад до поста</a>
-        </div>
-    </div>
-    
+<link rel="stylesheet" href="~/css/delete.css">
+
+<div class="container delete-page">
+
     @if (Model.Post == null)
     {
         <div class="alert alert-danger">
@@ -27,19 +24,13 @@
                     </div>
                     <div class="card-body">
                         <div class="alert alert-warning">
-                            <strong>Увага!</strong> Ви впевнені, що хочете видалити цей пост? Ця дія не може бути скасована.
+                            <strong>Увага!</strong> Ви впевнені, що хочете видалити "@Model.Post.Title"? Ця дія не може бути скасована.
                         </div>
-                        
-                        <div class="mb-4">
-                            <h3>@Model.Post.Title</h3>
-                            <p>@(Model.Post.Content.Length > 200 ? Model.Post.Content.Substring(0, 200) + "..." : Model.Post.Content)</p>
-                            <small class="text-muted">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
-                        </div>
-                        
+
                         <form method="post">
-                            <input type="hidden" asp-for="Post.Id" />
+                            <input type="hidden" asp-for="Post.Id"/>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-danger me-2">Видалити</button>
+                                <button type="submit" class="btn btn-danger me-2 mb-2 mb-md-0">Видалити</button>
                                 <a asp-page="/MyPosts" asp-route-id="@Model.Post.Id" class="btn btn-outline-secondary">Скасувати</a>
                             </div>
                         </form>

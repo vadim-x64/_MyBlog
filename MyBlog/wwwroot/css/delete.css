@@ -1,0 +1,73 @@
+﻿.delete-page .card {
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 100%;
+}
+
+.delete-page .card-header {
+    border-radius: 0;
+    padding: 20px;
+}
+
+.delete-page h2 {
+    font-size: 24px;
+    color: #FFF;
+    margin: 0;
+}
+
+.delete-page .card-body {
+    padding: 20px;
+}
+
+.delete-page .alert {
+    border-radius: 0;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #666;
+}
+
+.delete-page .alert strong {
+    color: #333;
+}
+
+.delete-page .btn {
+    border-radius: 0;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.delete-page .justify-content-center {
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .delete-page .col-md-8.offset-md-2 {
+        padding: 0 10px;
+    }
+
+    .delete-page h2 {
+        font-size: 18px;
+    }
+
+    .delete-page .alert {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .delete-page .btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .delete-page .d-flex {
+        flex-direction: column;
+    }
+
+    .delete-page .me-2 {
+        margin-right: 0;
+    }
+}

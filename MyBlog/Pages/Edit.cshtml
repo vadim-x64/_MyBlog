@@ -4,14 +4,12 @@
 ViewData["Title"] = "Редагування поста";
 }
 
-<div class="container">
-    <div class="row mb-3">
-        <div class="col-12">
-            <a asp-page="/Details" asp-route-id="@Model.PostInput.Id" class="btn btn-outline-secondary">&larr; Назад до поста</a>
-        </div>
-    </div>
+<link rel="stylesheet" href="~/css/create.css">
 
-    <div class="row">
+<div class="container">
+
+
+    <div class="row_create">
         <div class="col-md-8 offset-md-2">
             <div class="card">
                 <div class="card-header">
@@ -29,13 +27,13 @@ ViewData["Title"] = "Редагування поста";
                             <span asp-validation-for="PostInput.Title" class="text-danger"></span>
                         </div>
 
-                        <div class="card mb-3">
+                        <div class="card img">
                             <div class="card-header">
                                 <h5>Фото для поста</h5>
                             </div>
                             <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12 img">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" asp-for="PostInput.UseLocalPhoto" id="useLocalPhoto" value="true" />
                                             <label class="form-check-label" for="useLocalPhoto">Використовувати локальне фото</label>
@@ -62,37 +60,27 @@ ViewData["Title"] = "Редагування поста";
 
                                     <div class="mb-3">
                                         <label asp-for="Photo" class="form-label">@(Model.HasLocalPhoto ? "Замінити локальне фото" : "Завантажити локальне фото")</label>
-                                        <input asp-for="Photo" type="file" class="form-control" accept="image/*" />
+                                        <input asp-for="Photo" type="file" class="form-control" accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/jfif" />
+                                        <small class="text-muted">Дозволені формати: jpg, jpeg, png, gif, bmp, jfif</small><br>
                                         <span asp-validation-for="Photo" class="text-danger"></span>
-                                        <small class="text-muted">Тільки файли зображень (jpg, png, gif, bmp, webp)</small>
                                     </div>
                                 </div>
 
-                                <div class="remote-photo-section">
+                                <div class="remote-photo-section" style="display: none;">
                                     <div class="mb-3">
                                         <label asp-for="PostInput.RemotePhotoUrl" class="form-label">URL фото</label>
-                                        <input asp-for="PostInput.RemotePhotoUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                                        <input asp-for="PostInput.RemotePhotoUrl" id="remotePhotoUrl" class="form-control" placeholder="https://example.com/image.jpg" />
+                                        <small class="text-muted">Введіть URL-адресу зображення</small> <br>
                                         <span asp-validation-for="PostInput.RemotePhotoUrl" class="text-danger"></span>
-                                        <small class="text-muted">Введіть URL-адресу зображення</small>
-                                    </div>
-
-                                    @if (!string.IsNullOrEmpty(Model.PostInput.RemotePhotoUrl))
-                                    {
-                                    <div class="card mb-3">
-                                        <div class="card-header">Поточне віддалене фото (URL)</div>
-                                        <div class="card-body text-center">
-                                            <img src="@Model.PostInput.RemotePhotoUrl" class="img-fluid mb-2" style="max-height: 200px;" alt="Поточне фото (URL)"
-                                                 onerror="this.onerror=null;this.src='';this.alt='Помилка завантаження зображення';this.style.display='none';document.getElementById('imageError').style.display='block';" />
-                                            <div id="imageError" style="display: none;" class="alert alert-warning">
-                                                Неможливо завантажити зображення з вказаного URL. Буде використано зображення за замовчуванням.
-                                            </div>
+                                        
+                                        <div class="preview-container">
+                                            <img id="imagePreview" class="image-preview" alt="Превью зображення" src="@Model.PostInput.RemotePhotoUrl"/>
                                         </div>
                                     </div>
-                                    }
                                 </div>
 
                                 <div class="text-muted small">
-                                    <p>Примітка: Якщо ви не виберете фото або URL, або завантажите файл, який не є зображенням, буде використано стандартне зображення.</p>
+                                    <p> <b>Примітка!</b> Якщо ви не виберете фото або URL, або завантажите файл, який не є зображенням, буде використано стандартне зображення.</p>
                                 </div>
                             </div>
                         </div>
@@ -100,12 +88,12 @@ ViewData["Title"] = "Редагування поста";
                         <div class="mb-3">
                             <label asp-for="PostInput.Content" class="form-label">Зміст</label>
                             <textarea asp-for="PostInput.Content" class="form-control" rows="10" maxlength="5000"></textarea>
-                            <small class="text-muted"><span id="contentCounter">0</span>/5000</small>
+                            <small class="text-muted"><span id="contentCounter">0</span>/5000</small><br>
                             <span asp-validation-for="PostInput.Content" class="text-danger"></span>
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Оновити пост</button>
+                            <button type="submit" class="btn btn-outline-primary">Оновити пост</button>
                         </div>
                     </form>
                 </div>
@@ -132,43 +120,60 @@ ViewData["Title"] = "Редагування поста";
             if ($(this).val() === 'true') {
                 $('.local-photo-section').show();
                 $('.remote-photo-section').hide();
+                $('#imagePreview').hide();
             } else {
                 $('.local-photo-section').hide();
                 $('.remote-photo-section').show();
+                loadImagePreview();
             }
         });
         
-        // Перевірка формату файлу при завантаженні
+        // Функція для завантаження превью зображення
+        function loadImagePreview() {
+            var url = $('#remotePhotoUrl').val();
+            if (url) {
+                $('#imagePreview').attr('src', url).show();
+            }
+        }
+
+        // Обробник зміни URL зображення
+        $('#remotePhotoUrl').on('input', function() {
+            var url = $(this).val();
+            if (url) {
+                $('#imagePreview').attr('src', url).show();
+            } else {
+                $('#imagePreview').hide();
+            }
+        });
+        
+        // Додаємо клієнтську валідацію для файлів
         $('#Photo').change(function() {
             var fileInput = this;
-            var validImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp', 'image/svg+xml', 'image/tiff'];
-            
             if (fileInput.files && fileInput.files[0]) {
-                var fileType = fileInput.files[0].type;
+                var fileName = fileInput.files[0].name;
+                var extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+                var allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.jfif'];
                 
-                // Перевірка на MIME-тип
-                if (validImageTypes.indexOf(fileType) === -1) {
-                    alert('Будь ласка, виберіть файл зображення (jpg, png, gif, bmp, webp)');
-                    $(this).val(''); // Очищаємо поле вводу файлу
+                if (!allowedExtensions.includes(extension)) {
+                    // Видаляємо файл з поля вводу без alert
+                    $(this).val('');
+                    // Використовуємо валідаційне повідомлення
+                    $('span[data-valmsg-for="Photo"]').text('Обраний файл не є зображенням відповідного формату');
                 }
-            }
-        });
-        
-        // Перевірка URL зображення
-        $('#PostInput_RemotePhotoUrl').on('blur', function() {
-            var url = $(this).val();
-            if (url && !url.match(/\.(jpeg|jpg|gif|png|bmp|webp|svg)$/i)) {
-                // Додаємо попередження, якщо URL не містить розширення зображення
-                if(!$('#urlWarning').length) {
-                    $(this).after('<div id="urlWarning" class="text-warning small mt-1">URL може не вказувати на зображення. Якщо це так, буде використано зображення за замовчуванням.</div>');
+                else {
+                    // Очищаємо валідаційне повідомлення, якщо файл відповідає вимогам
+                    $('span[data-valmsg-for="Photo"]').text('');
                 }
-            } else {
-                $('#urlWarning').remove();
             }
         });
 
         // Ініціалізація відображення секцій
         $('input[name="PostInput.UseLocalPhoto"]:checked').change();
+        
+        // Ініціалізація превью якщо є віддалене фото
+        if (!$('input#useLocalPhoto').prop('checked') && $('#remotePhotoUrl').val()) {
+            $('#imagePreview').show();
+        }
     });
 </script>
 }
