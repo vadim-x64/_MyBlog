@@ -78,12 +78,6 @@ C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\t5wkyccsq6-mlv2
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets\msbuild.MyBlog.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets\msbuild.MyBlog.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets\msbuild.build.MyBlog.props
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets\msbuild.buildMultiTargeting.MyBlog.props
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets\msbuild.buildTransitive.MyBlog.props
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets.pack.json
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\MyBlog.dll
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\refint\MyBlog.dll
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\MyBlog.pdb
@@ -206,4 +200,5 @@ C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\91yk34gg9v-kmgy
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\3sl8iukfsm-ljeyracqjm.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\eq8goi7zlo-msa63pkjre.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\xuy0ftlsa9-68xfgpikgw.gz
-C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\2wu9ecuof3-4ag35c7qj3.gz
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\staticwebassets.build.json.cache
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\w8p9q819rp-6at3t5q07b.gz

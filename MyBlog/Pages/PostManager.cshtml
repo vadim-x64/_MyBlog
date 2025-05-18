@@ -4,10 +4,6 @@
     ViewData["Title"] = "Керування постами";
 }
 
-<link rel="stylesheet" href="~/css/manager.css" />
-
-<h2>Керування постами</h2>
-
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,8 +12,8 @@
     </div>
 }
 
-<div class="table-responsive mt-4">
-    <table class="table table-striped table-hover">
+<div class="table-responsive">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Пост</th>
@@ -83,15 +79,14 @@
 
                                         @if (post.UseLocalPhoto && post.LocalPhoto != null)
                                         {
-                                            <div class="text-center mb-3">
-                                                <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
-                                                     class="post-image" alt="Фото поста"/>
+                                            <div class="text-center">
+                                                <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)" class="post-image" alt="..."/>
                                             </div>
                                         }
                                         else if (!string.IsNullOrEmpty(post.RemotePhotoUrl))
                                         {
                                             <div class="text-center mb-3">
-                                                <img src="@post.RemotePhotoUrl" class="post-image" alt="Фото поста"/>
+                                                <img src="@post.RemotePhotoUrl" class="post-image" alt="..."/>
                                             </div>
                                         }
 
@@ -114,18 +109,11 @@
 
 @if (!Model.AllPosts.Any())
 {
-    <div class="alert alert-info mt-3">
+    <div class="alert alert-info">
         Немає постів у системі.
     </div>
 }
 
 @section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
-        });
-    </script>
+    <script src="~/js/manager.js"></script>
 }

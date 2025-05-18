@@ -4,10 +4,6 @@
     ViewData["Title"] = "Керування коментарями";
 }
 
-<link rel="stylesheet" href="~/css/manager.css" />
-
-<h2>Керування коментарями і відповідями</h2>
-
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,8 +12,8 @@
     </div>
 }
 
-<div class="table-responsive mt-4">
-    <table class="table table-striped table-hover">
+<div class="table-responsive">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Зміст</th>
@@ -55,7 +51,7 @@
                         }
                     </td>
                     <td>
-                        <a href="/Details/@comment.Post.Id" class="btn btn-outline-info btn-sm ms-1"
+                        <a href="/Details/@comment.Post.Id" class="btn btn-outline-info btn-sm"
                            data-bs-toggle="tooltip" title="Відкрити пост на сайті">Перейти
                         </a>
                     </td>
@@ -65,7 +61,6 @@
                             Видалити
                         </button>
                         
-                        <!-- Модальне вікно підтвердження видалення -->
                         <div class="modal fade" id="deleteCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -93,7 +88,6 @@
                             </div>
                         </div>
                         
-                        <!-- Модальне вікно перегляду коментаря -->
                         <div class="modal fade" id="viewCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -143,12 +137,11 @@
 
 @if (!Model.AllComments.Any())
 {
-    <div class="alert alert-info mt-3">
+    <div class="alert alert-info">
         Немає коментарів у системі.
     </div>
 }
 
-<!-- Модальні вікна для перегляду постів -->
 @foreach (var comment in Model.AllComments.GroupBy(c => c.PostId).Select(g => g.First()))
 {
     <div class="modal fade" id="viewPostModal@(comment.PostId)" tabindex="-1" aria-hidden="true">
@@ -169,15 +162,14 @@
                     
                     @if (comment.Post.UseLocalPhoto && comment.Post.LocalPhoto != null)
                     {
-                        <div class="text-center mb-3">
-                            <img src="data:image/png;base64,@Convert.ToBase64String(comment.Post.LocalPhoto)" 
-                                 class="post-image" alt="Фото поста" />
+                        <div class="text-center">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(comment.Post.LocalPhoto)" class="post-image" alt="..." />
                         </div>
                     }
                     else if (!string.IsNullOrEmpty(comment.Post.RemotePhotoUrl))
                     {
-                        <div class="text-center mb-3">
-                            <img src="@comment.Post.RemotePhotoUrl" class="post-image" alt="Фото поста" />
+                        <div class="text-center">
+                            <img src="@comment.Post.RemotePhotoUrl" class="post-image" alt="..." />
                         </div>
                     }
                     
@@ -194,13 +186,5 @@
 }
 
 @section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Ініціалізація tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
-        });
-    </script>
+    <script src="~/js/manager.js"></script>
 }
