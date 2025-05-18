@@ -4,6 +4,8 @@
     ViewData["Title"] = "Керування постами";
 }
 
+<link rel="stylesheet" href="~/css/manager.css" />
+
 <h2>Керування постами</h2>
 
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
@@ -27,7 +29,6 @@
             @foreach (var post in Model.AllPosts)
             {
                 <tr>
-                    
                     <td>
                         <a href="#" data-bs-toggle="modal" data-bs-target="#viewPostModal@(post.Id)">@post.Title</a>
                     </td>
@@ -84,17 +85,17 @@
                                         {
                                             <div class="text-center mb-3">
                                                 <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
-                                                     style="max-width: 100%; height: auto;" alt="Фото поста"/>
+                                                     class="post-image" alt="Фото поста"/>
                                             </div>
                                         }
                                         else if (!string.IsNullOrEmpty(post.RemotePhotoUrl))
                                         {
                                             <div class="text-center mb-3">
-                                                <img src="@post.RemotePhotoUrl" style="max-width: 100%; height: auto;" alt="Фото поста"/>
+                                                <img src="@post.RemotePhotoUrl" class="post-image" alt="Фото поста"/>
                                             </div>
                                         }
 
-                                        <div class="post-content" style="white-space: pre-line;">
+                                        <div class="post-content">
                                             @Html.Raw(post.Content)
                                         </div>
                                     </div>

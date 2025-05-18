@@ -1,147 +1,148 @@
 ﻿@page
 @model MyBlog.Pages.UserManagerModel
 @{
-    ViewData["Title"] = "Керування користувачами";
+ViewData["Title"] = "Керування користувачами";
 }
+
+<link rel="stylesheet" href="~/css/manager.css" />
 
 <h2>Керування користувачами</h2>
 
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @Model.StatusMessage
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
-    </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    @Model.StatusMessage
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
+</div>
 }
 
 <div class="table-responsive mt-4">
     <table class="table table-striped table-hover">
         <thead>
-            <tr>
-                <th>Аватар</th>
-                <th>Нікнейм</th>
-                <th>ПІБ</th>
-                <th>Дата народження</th>
-                <th>Email</th>
-                <th>Телефон</th>
-                <th>Статус</th>
-                <th>Дії</th>
-            </tr>
+        <tr>
+            <th>Аватар</th>
+            <th>Нікнейм</th>
+            <th>ПІБ</th>
+            <th>Дата народження</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Статус</th>
+            <th>Дії</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var user in Model.RegularUsers)
-            {
-                <tr>
-                    <td>
-                        @if (user.Avatar != null)
-                        {
-                            <div class="position-relative">
-                                <img src="data:image/png;base64,@Convert.ToBase64String(user.Avatar)" 
-                                     class="rounded-circle" style="width: 50px; height: 50px;" alt="Аватар користувача" />
-                                <form method="post" asp-page-handler="DeleteAvatar" class="position-absolute" style="top: -5px; right: -5px;">
-                                    <input type="hidden" name="userId" value="@user.Id" />
-                                    <button type="submit" class="btn btn-danger btn-sm rounded-circle" style="width: 22px; height: 22px; padding: 0; font-size: 12px;"
-                                            title="Видалити аватар" data-bs-toggle="tooltip" data-bs-placement="top">
-                                        <i class="bi bi-x"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" 
-                                 style="width: 50px; height: 50px;">
-                                <span>@user.NickName[0]</span>
-                            </div>
-                        }
-                    </td>
-                    <td>@user.NickName</td>
-                    <td>@user.Surname @user.Name @user.LastName</td>
-                    <td>
-                        @if(user.BirthDate.HasValue)
-                        {
-                            @user.BirthDate.Value.ToString("dd.MM.yyyy")
-                        }
-                        else
-                        {
-                            <span class="text-muted">Не вказано</span>
-                        }
-                    </td>
-                    <td>@user.Email</td>
-                    <td>@user.PhoneNumber</td>
-                    <td>
+        @foreach (var user in Model.RegularUsers)
+        {
+        <tr>
+            <td>
+                @if (user.Avatar != null)
+                {
+                <div class="avatar-container">
+                    <img src="data:image/png;base64,@Convert.ToBase64String(user.Avatar)"
+                         class="avatar-image" alt="Аватар користувача" />
+                    <form method="post" asp-page-handler="DeleteAvatar" class="position-absolute" style="top: -5px; right: -5px;">
+                        <input type="hidden" name="userId" value="@user.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm avatar-delete-button"
+                                title="Видалити аватар" data-bs-toggle="tooltip" data-bs-placement="top">
+                            <i class="bi bi-x"></i>
+                        </button>
+                    </form>
+                </div>
+                }
+                else
+                {
+                <div class="avatar-placeholder">
+                    <span>@user.NickName[0]</span>
+                </div>
+                }
+            </td>
+            <td>@user.NickName</td>
+            <td>@user.Surname @user.Name @user.LastName</td>
+            <td>
+                @if(user.BirthDate.HasValue)
+                {
+                @user.BirthDate.Value.ToString("dd.MM.yyyy")
+                }
+                else
+                {
+                <span class="text-muted">Не вказано</span>
+                }
+            </td>
+            <td>@user.Email</td>
+            <td>@user.PhoneNumber</td>
+            <td>
+                @if (user.IsBlocked)
+                {
+                <span class="badge bg-danger">Заблоковано</span>
+                }
+                else
+                {
+                <span class="badge bg-success">Активний</span>
+                }
+            </td>
+            <td>
+                <div class="btn-group">
+                    <form method="post" asp-page-handler="ToggleBlock">
+                        <input type="hidden" name="userId" value="@user.Id" />
                         @if (user.IsBlocked)
                         {
-                            <span class="badge bg-danger">Заблоковано</span>
+                        <button type="submit" class="btn btn-success btn-sm me-2">Розблокувати</button>
                         }
                         else
                         {
-                            <span class="badge bg-success">Активний</span>
+                        <button type="submit" class="btn btn-warning btn-sm me-2">Заблокувати</button>
                         }
-                    </td>
-                    <td>
-                        <div class="btn-group">
-                            <form method="post" asp-page-handler="ToggleBlock">
-                                <input type="hidden" name="userId" value="@user.Id" />
-                                @if (user.IsBlocked)
-                                {
-                                    <button type="submit" class="btn btn-success btn-sm me-2">Розблокувати</button>
-                                }
-                                else
-                                {
-                                    <button type="submit" class="btn btn-warning btn-sm me-2">Заблокувати</button>
-                                }
-                            </form>
-                            <button type="button" class="btn btn-danger btn-sm" 
-                                   data-bs-toggle="modal" data-bs-target="#deleteModal@(user.Id)">
-                                Видалити
-                            </button>
-                        </div>
-                        
-                        <!-- Модальне вікно підтвердження видалення -->
-                        <div class="modal fade" id="deleteModal@(user.Id)" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Підтвердження видалення</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Ви дійсно хочете видалити користувача <strong>@user.NickName</strong>?</p>
-                                        <p class="text-danger">Ця дія є незворотною!</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
-                                        <form method="post" asp-page-handler="DeleteUser">
-                                            <input type="hidden" name="userId" value="@user.Id" />
-                                            <button type="submit" class="btn btn-danger">Видалити</button>
-                                        </form>
-                                    </div>
-                                </div>
+                    </form>
+                    <button type="button" class="btn btn-danger btn-sm"
+                            data-bs-toggle="modal" data-bs-target="#deleteModal@(user.Id)">
+                        Видалити
+                    </button>
+                </div>
+
+                <!-- Модальне вікно підтвердження видалення -->
+                <div class="modal fade" id="deleteModal@(user.Id)" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Підтвердження видалення</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Ви дійсно хочете видалити користувача <strong>@user.NickName</strong>?</p>
+                                <p class="text-danger">Ця дія є незворотною!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                                <form method="post" asp-page-handler="DeleteUser">
+                                    <input type="hidden" name="userId" value="@user.Id" />
+                                    <button type="submit" class="btn btn-danger">Видалити</button>
+                                </form>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            }
+                    </div>
+                </div>
+            </td>
+        </tr>
+        }
         </tbody>
     </table>
 </div>
 
 @if (!Model.RegularUsers.Any())
 {
-    <div class="alert alert-info mt-3">
-        Немає звичайних користувачів у системі.
-    </div>
+<div class="alert alert-info mt-3">
+    Немає звичайних користувачів у системі.
+</div>
 }
 
 @section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Ініціалізація tooltips
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl)
-            });
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Ініціалізація tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
         });
-    </script>
+    });
+</script>
 }

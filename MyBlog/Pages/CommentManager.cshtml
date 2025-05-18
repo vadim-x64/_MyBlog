@@ -4,6 +4,8 @@
     ViewData["Title"] = "Керування коментарями";
 }
 
+<link rel="stylesheet" href="~/css/manager.css" />
+
 <h2>Керування коментарями і відповідями</h2>
 
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
@@ -30,7 +32,7 @@
             {
                 <tr>
                     <td>
-                        <div style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        <div class="comment-truncate">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.Id)">@comment.Content</a>
                         </div>
                     </td>
@@ -41,7 +43,7 @@
                     <td>
                         @if (comment.ParentComment != null)
                         {
-                            <div style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            <div class="parent-comment-truncate">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.ParentCommentId)">
                                     @comment.ParentComment.Author.NickName: @comment.ParentComment.Content
                                 </a>
@@ -59,7 +61,7 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-danger btn-sm" 
-                               data-bs-toggle="modal" data-bs-target="#deleteCommentModal@(comment.Id)">
+                                data-bs-toggle="modal" data-bs-target="#deleteCommentModal@(comment.Id)">
                             Видалити
                         </button>
                         
@@ -169,17 +171,17 @@
                     {
                         <div class="text-center mb-3">
                             <img src="data:image/png;base64,@Convert.ToBase64String(comment.Post.LocalPhoto)" 
-                                 style="max-width: 100%; height: auto;" alt="Фото поста" />
+                                 class="post-image" alt="Фото поста" />
                         </div>
                     }
                     else if (!string.IsNullOrEmpty(comment.Post.RemotePhotoUrl))
                     {
                         <div class="text-center mb-3">
-                            <img src="@comment.Post.RemotePhotoUrl" style="max-width: 100%; height: auto;" alt="Фото поста" />
+                            <img src="@comment.Post.RemotePhotoUrl" class="post-image" alt="Фото поста" />
                         </div>
                     }
                     
-                    <div class="post-content" style="white-space: pre-line;">
+                    <div class="post-content">
                         @Html.Raw(comment.Post.Content)
                     </div>
                 </div>

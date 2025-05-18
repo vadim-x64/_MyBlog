@@ -8,15 +8,16 @@ public class AccessDeniedModel : PageModel
     [BindProperty(SupportsGet = true)]
     public bool Blocked { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        // Якщо користувач авторизований і намагається отримати доступ до захищеної сторінки,
-        // сервер перенаправить його сюди автоматично.
-        // Якщо користувач намагається отримати доступ безпосередньо до цієї сторінки,
-        // але він не заблокований - перенаправляємо його на головну.
-        if (!Blocked && User.Identity?.IsAuthenticated != true)
+        // Якщо користувач не заблокований, перенаправляємо його на головну
+        // Це забезпечує, що сторінка доступна тільки заблокованим користувачам
+        if (!Blocked)
         {
-            Response.Redirect("/");
+            return RedirectToPage("/Index");
         }
+        
+        // Сюди потрапляємо тільки якщо користувач заблокований (Blocked = true)
+        return Page();
     }
 }

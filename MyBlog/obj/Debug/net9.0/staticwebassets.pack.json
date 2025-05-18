@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\css\\create.css"
     },
     {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\delete.css",
+      "PackagePath": "staticwebassets\\css\\delete.css"
+    },
+    {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\details.css",
       "PackagePath": "staticwebassets\\css\\details.css"
     },
@@ -19,6 +23,10 @@
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
+      "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\manager.css",
+      "PackagePath": "staticwebassets\\css\\manager.css"
     },
     {
       "Id": "C:\\Users\\CRYSTAL\\source\\repos\\MyBlog\\wwwroot\\css\\myposts.css",
