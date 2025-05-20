@@ -4,6 +4,10 @@
 ViewData["Title"] = "Керування користувачами";
 }
 
+<link rel="stylesheet" href="~/css/usermanager.css">
+
+<h1>Керувати користувачами</h1>
+
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -69,11 +73,11 @@ ViewData["Title"] = "Керування користувачами";
             <td>
                 @if (user.IsBlocked)
                 {
-                <span class="badge bg-danger">Заблоковано</span>
+                <span class="badge">Заблоковано</span>
                 }
                 else
                 {
-                <span class="badge bg-success">Активний</span>
+                <span class="badge">Активний</span>
                 }
             </td>
             <td>

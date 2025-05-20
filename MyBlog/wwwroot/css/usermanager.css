@@ -1,0 +1,202 @@
+﻿h1 {
+    font-size: 60px;
+    color: #333;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 50px auto;
+}
+
+.btn.btn-danger.btn-sm.avatar-delete-button {
+    font-size: 24px;
+}
+
+.alert {
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+    margin: 20px auto;
+    border-radius: 0;
+}
+
+.table-responsive {
+    margin: 20px auto;
+}
+
+.table {
+    color: #333;
+    border-collapse: collapse;
+    vertical-align: middle;
+}
+
+.table th, .table td {
+    border: 1px solid #CCC;
+}
+
+.table th {
+    font-size: 18px;
+    color: #666;
+    border-bottom: 1px solid #CCC;
+}
+
+.avatar-container {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    margin: auto;
+}
+
+.avatar-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    background-color: #666;
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+}
+
+.avatar-placeholder span {
+    font-size: 24px;
+    color: #FFF;
+}
+
+.avatar-delete-button {
+    position: absolute;
+    bottom: 35px;
+    left: 45px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #DC3545;
+    border: none;
+}
+
+.avatar-delete-button:hover {
+    background-color: transparent;
+    color: #DC3545;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-sm {
+    font-size: 16px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 5px;
+}
+
+.badge {
+    font-size: 18px;
+    color: #333;
+    font-weight: normal;
+}
+
+.modal-content {
+    border-radius: 0;
+    border: 1px solid #CCC;
+}
+
+.modal-header {
+    border-bottom: 1px solid #CCC;
+    background-color: #FFF;
+    padding: 15px 20px;
+}
+
+.modal-title {
+    font-size: 24px;
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.modal-body .text-danger {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-footer {
+    border-top: 1px solid #CCC;
+}
+
+.modal-footer .btn {
+    border-radius: 0;
+}
+
+.btn-close {
+    background-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 36px;
+        margin: 20px auto;
+    }
+
+    .alert {
+        font-size: 16px;
+        margin: 15px auto;
+    }
+
+    .table {
+        font-size: 14px;
+    }
+
+    .table th {
+        font-size: 14px;
+        padding: 10px 5px;
+    }
+
+    .table td {
+        padding: 10px 5px;
+    }
+
+    .avatar-container,
+    .avatar-image,
+    .avatar-placeholder {
+        width: 40px;
+        height: 40px;
+    }
+
+    .avatar-placeholder span {
+        font-size: 18px;
+    }
+
+    .badge, .btn-sm {
+        font-size: 14px;
+    }
+    
+    .avatar-delete-button {
+        bottom: 35px;
+        left: 30px;
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+}
