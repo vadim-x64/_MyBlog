@@ -1,10 +1,39 @@
 ﻿@page
 @model MyBlog.Pages.AccessDeniedModel
 @{
-    ViewData["Title"] = "Доступ заборонено";
+    ViewData["Title"] = "Помилка";
 }
 
-<div class="text-center mt-5">
+<style>
+    .display-4 {
+        font-size: 60px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 50px 0 0 0;
+    }
+    
+    .lead {
+        font-size: 24px;
+        color: #333;
+        margin: 20px auto;
+    }
+    
+    @@media screen and (max-width: 768px) {
+        .display-4 {
+            font-size: 36px;
+            margin: 20px 0 0 0;
+        }
+
+        .lead {
+            font-size: 18px;
+        }
+    }
+</style>
+
+<div class="text-center">
     <h1 class="display-4 text-danger">Доступ заборонено</h1>
     
     @if (Model.Blocked)
@@ -15,6 +44,4 @@
     {
         <p class="lead">У вас немає прав для доступу до цієї сторінки.</p>
     }
-    
-    <a href="/" class="btn btn-primary mt-3">Повернутися на головну</a>
 </div>

@@ -4,6 +4,10 @@
     ViewData["Title"] = "Керування коментарями";
 }
 
+<link rel="stylesheet" href="~/css/commentmanager.css">
+
+<h1>Керувати коментарями</h1>
+
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -15,122 +19,122 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Зміст</th>
-                <th>Пост</th>
-                <th>Автор</th>
-                <th>Відповідь на</th>
-                <th>Дії</th>
-            </tr>
+        <tr>
+            <th>Зміст</th>
+            <th>Пост</th>
+            <th>Автор</th>
+            <th>Відповідь на</th>
+            <th>Дії</th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var comment in Model.AllComments)
-            {
-                <tr>
-                    <td>
-                        <div class="comment-truncate">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.Id)">@comment.Content</a>
+        @foreach (var comment in Model.AllComments)
+        {
+            <tr>
+                <td>
+                    <div class="comment-truncate">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.Id)">@comment.Content</a>
+                    </div>
+                </td>
+                <td>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#viewPostModal@(comment.PostId)">@comment.Post.Title</a>
+                </td>
+                <td>@comment.Author.NickName</td>
+                <td>
+                    @if (comment.ParentComment != null)
+                    {
+                        <div class="parent-comment-truncate">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.ParentCommentId)">
+                                @comment.ParentComment.Author.NickName: @comment.ParentComment.Content
+                            </a>
                         </div>
-                    </td>
-                    <td>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#viewPostModal@(comment.PostId)">@comment.Post.Title</a>
-                    </td>
-                    <td>@comment.Author.NickName</td>
-                    <td>
-                        @if (comment.ParentComment != null)
-                        {
-                            <div class="parent-comment-truncate">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#viewCommentModal@(comment.ParentCommentId)">
-                                    @comment.ParentComment.Author.NickName: @comment.ParentComment.Content
-                                </a>
-                            </div>
-                        }
-                        else
-                        {
-                            <span>-</span>
-                        }
-                    </td>
-                    <td>
+                    }
+                    else
+                    {
+                        <span>-</span>
+                    }
+                </td>
+                <td>
+                    <div class="btn-group">
                         <a href="/Details/@comment.Post.Id" class="btn btn-outline-info btn-sm"
                            data-bs-toggle="tooltip" title="Відкрити пост на сайті">Перейти
                         </a>
-                    </td>
-                    <td>
                         <button type="button" class="btn btn-danger btn-sm" 
                                 data-bs-toggle="modal" data-bs-target="#deleteCommentModal@(comment.Id)">
                             Видалити
                         </button>
+                    </div>
                         
-                        <div class="modal fade" id="deleteCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Підтвердження видалення коментаря</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Ви дійсно хочете видалити @(comment.ParentComment != null ? "відповідь" : "коментар")?</p>
-                                        <p class="text-secondary"><em>@comment.Content</em></p>
-                                        <p class="text-danger">Ця дія є незворотною!</p>
-                                        @if (comment.ParentComment == null)
-                                        {
-                                            <p>Всі відповіді на цей коментар також будуть видалені.</p>
-                                        }
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
-                                        <form method="post" asp-page-handler="DeleteComment">
-                                            <input type="hidden" name="commentId" value="@comment.Id" />
-                                            <button type="submit" class="btn btn-danger">Видалити</button>
-                                        </form>
-                                    </div>
+                    <div class="modal fade" id="deleteCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Підтвердження видалення</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Ви дійсно хочете видалити @(comment.ParentComment != null ? "відповідь" : "коментар")?</p>
+                                    <p class="text-secondary"><em>@comment.Content</em></p>
+                                    <p class="text-danger">Ця дія є незворотною!</p>
+                                    @if (comment.ParentComment == null)
+                                    {
+                                        <p>Всі відповіді на цей коментар також будуть видалені.</p>
+                                    }
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+                                    <form method="post" asp-page-handler="DeleteComment">
+                                        <input type="hidden" name="commentId" value="@comment.Id" />
+                                        <button type="submit" class="btn btn-danger">Видалити</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                    </div>
                         
-                        <div class="modal fade" id="viewCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Коментар від @comment.Author.NickName</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <div class="text-muted">
-                                                Створено: <strong>@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong> | 
-                                                Пост: <strong>@comment.Post.Title</strong>
-                                            </div>
+                    <div class="modal fade" id="viewCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Коментар від @comment.Author.NickName</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <div class="text-muted">
+                                            Створено: <strong>@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</strong> | 
+                                            Пост: <strong>@comment.Post.Title</strong>
                                         </div>
+                                    </div>
                                         
-                                        @if (comment.ParentComment != null)
-                                        {
-                                            <div class="card mb-3">
-                                                <div class="card-header">
-                                                    У відповідь на коментар від @comment.ParentComment.Author.NickName
-                                                </div>
-                                                <div class="card-body">
-                                                    <p class="card-text">@comment.ParentComment.Content</p>
-                                                    <p class="card-text"><small class="text-muted">@comment.ParentComment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small></p>
-                                                </div>
+                                    @if (comment.ParentComment != null)
+                                    {
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                У відповідь на коментар від @comment.ParentComment.Author.NickName
                                             </div>
-                                        }
-                                        
-                                        <div class="card">
                                             <div class="card-body">
-                                                <p class="card-text">@comment.Content</p>
+                                                <p class="card-text">@comment.ParentComment.Content</p>
+                                                <p class="card-text"><small class="text-muted">@comment.ParentComment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small></p>
                                             </div>
                                         </div>
+                                    }
+                                        
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <p class="card-text">@comment.Content</p>
+                                        </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
-                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
                                 </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-            }
+                    </div>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>

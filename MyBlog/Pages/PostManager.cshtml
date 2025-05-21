@@ -4,6 +4,10 @@
     ViewData["Title"] = "Керування постами";
 }
 
+<link rel="stylesheet" href="~/css/postmanager.css">
+
+<h1>Керувати постами</h1>
+
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,14 +34,14 @@
                     </td>
                     <td>@post.Author.NickName</td>
                     <td>
-                        <a href="/Details/@post.Id" class="btn btn-info btn-sm me-2">
-                            Переглянути на сайті
-                        </a>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePostModal@(post.Id)">
-                            Видалити
-                        </button>
+                        <div class="action-buttons">
+                            <a href="/Details/@post.Id" class="btn btn-info btn-sm">
+                                Переглянути на сайті
+                            </a>
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deletePostModal@(post.Id)">
+                                Видалити
+                            </button>
+                        </div>
                         <div class="modal fade" id="deletePostModal@(post.Id)" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
