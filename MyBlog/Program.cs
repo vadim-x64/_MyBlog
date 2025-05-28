@@ -19,6 +19,7 @@ public class Program
         builder.Services.AddScoped<PostService>();
         builder.Services.AddScoped<CommentService>();
         builder.Services.AddScoped<AdminService>();
+        builder.Services.AddScoped<LikeService>();
         
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>

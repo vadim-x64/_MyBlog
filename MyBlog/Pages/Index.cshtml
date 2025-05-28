@@ -12,7 +12,6 @@
             <h1 class="display-4 text-center">Вітаємо на сторінці!</h1>
         </div>
     </div>
-
     <div class="row">
         <div class="col-12">
             <div class="welcome-text">
@@ -31,23 +30,21 @@
             </div>
         </div>
     </div>
-
     <div class="view-toggle">
         <div class="view-buttons-container">
             <div class="view-divider"></div>
             <button class="btn btn-sm" onclick="setLayout('grid')">
                 <img
                     src="https://cdn-icons-png.freepik.com/256/18550/18550957.png?uid=R77081381&ga=GA1.1.1431085202.1736767274&semt=ais_hybrid"
-                    alt="Grid View" class="view-icon">
+                    alt="..." class="view-icon">
             </button>
             <button class="btn btn-sm" onclick="setLayout('list')">
                 <img
                     src="https://cdn-icons-png.freepik.com/256/5404/5404118.png?uid=R77081381&ga=GA1.1.1431085202.1736767274"
-                    alt="List View" class="view-icon">
+                    alt="..." class="view-icon">
             </button>
         </div>
     </div>
-
     @if (!Model.Posts.Any())
     {
         <div class="alert alert-info text-center">
@@ -60,50 +57,68 @@
             @foreach (var post in Model.Posts)
             {
                 <div class="col-md-6 col-lg-4 mb-4 post-card post-item" style="display: none">
-                    <a href="/Details/@post.Id" class="text-decoration-none text-dark">
-                        <div class="card h-100">
-                            <div class="card-content">
-                                @if (post.UseLocalPhoto && post.LocalPhoto != null)
-                                {
-                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)" class="card-img-top" alt="@post.Title">
-                                }
-                                else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
-                                {
-                                    <img src="@post.RemotePhotoUrl" class="card-img-top"
-                                         alt="@post.Title"
-                                         onerror="this.onerror=null;this.src='';this.alt='...';this.style.display='none';">
-                                }
-                                <div class="card-text-wrapper">
-                                    <div>
+                    <div class="card h-100">
+                        <div class="card-content">
+                            @if (post.UseLocalPhoto && post.LocalPhoto != null)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)" class="card-img-top" alt="@post.Title">
+                            }
+                            else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
+                            {
+                                <img src="@post.RemotePhotoUrl" class="card-img-top"
+                                     alt="@post.Title"
+                                     onerror="this.onerror=null;this.src='';this.alt='...';this.style.display='none';">
+                            }
+                            <div class="card-text-wrapper">
+                                <div>
+                                    <a href="/Details/@post.Id" class="text-decoration-none text-dark">
                                         <h5 class="card-title">@post.Title</h5>
                                         <p class="card-text">@(post.Content.Length > 100 ? post.Content.Substring(0, 100) + "..." : post.Content)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                @if (post.Author.Avatar != null)
-                                {
-                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
-                                         class="author-avatar"
-                                         alt="@post.Author.NickName">
-                                }
-                                else
-                                {
-                                    <div class="author-placeholder">
-                                        <span>@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
-                                    </div>
-                                }
-                                <div class="author-info">
-                                    <p class="author-name">@post.Author.NickName</p>
-                                    <p class="author-date">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-between align-items-center foot">
+                                <div class="d-flex align-items-center">
+                                    @if (post.Author.Avatar != null)
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
+                                             class="author-avatar"
+                                             alt="@post.Author.NickName">
+                                    }
+                                    else
+                                    {
+                                        <div class="author-placeholder">
+                                            <span>@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
+                                        </div>
+                                    }
+                                    <div class="author-info">
+                                        <p class="author-name">@post.Author.NickName</p>
+                                        <p class="author-date">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+                                    </div>
+                                </div>
+                                <div class="like-section">
+                                    @if (User.Identity?.IsAuthenticated == true)
+                                    {
+                                        <form method="post" asp-page-handler="ToggleLike" class="d-inline">
+                                            <input type="hidden" name="postId" value="@post.Id" />
+                                            <button type="submit" class="like-button @(Model.LikedPosts.GetValueOrDefault(post.Id) ? "liked" : "")">
+                                                @(Model.LikedPosts.GetValueOrDefault(post.Id) ? "❤️" : "🤍") @Model.LikesCount.GetValueOrDefault(post.Id)
+                                            </button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted like-display">🤍 @Model.LikesCount.GetValueOrDefault(post.Id)</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             }
         </div>
-
         <div class="load-more-btn">
             <button id="load-more-button" class="btn btn-outline-secondary" onclick="loadMorePosts()">Завантажити ще
             </button>

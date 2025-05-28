@@ -29,10 +29,8 @@
                 Неможливо завантажити зображення з вказаного URL.
             </div>
         }
-
         <div class="card-body">
             <h1 class="card-title">@Model.Post.Title</h1>
-
             <div class="d-flex align-items-center mb-3">
                 @if (Model.Post.Author.Avatar != null)
                 {
@@ -53,6 +51,22 @@
                         <small class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                     }
                 </div>
+            </div>
+
+            <!-- Кнопка лайків -->
+            <div class="d-flex align-items-center mb-3">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form method="post" asp-page-handler="ToggleLike" class="d-inline me-3">
+                        <button type="submit" class="like-button">
+                            @(Model.IsLiked ? "❤️" : "🤍") @Model.LikesCount
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <span class="text-muted me-3">🤍 @Model.LikesCount</span>
+                }
             </div>
 
             <div class="card-text mt-4">
@@ -77,7 +91,7 @@
                     <div class="alert alert-info mb-4">
                         <a asp-page="/Login" asp-route-returnUrl="@($"/Details/{Model.Post.Id}")">Увійдіть</a> або
                         <a asp-page="/Register" asp-route-returnUrl="@($"/Details/{Model.Post.Id}")">зареєструйтесь</a>,
-                        щоб залишити коментар.
+                        щоб залишити коментар або поставити лайк.
                     </div>
                 }
 

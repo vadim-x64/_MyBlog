@@ -1,0 +1,81 @@
+﻿@page
+@model MyBlog.Pages.LikedPostsModel
+@{
+    ViewData["Title"] = "Улюблені пости";
+}
+
+<link rel="stylesheet" href="~/css/index.css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 text-center mb-4">Улюблені пости</h1>
+        </div>
+    </div>
+    @if (!Model.LikedPosts.Any())
+    {
+        <div class="alert alert-info text-center">
+            У вас поки що немає улюблених постів. 
+            <a href="/" class="alert-link">Перегляньте пости</a> та додайте їх до улюблених!
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var post in Model.LikedPosts)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-content">
+                            @if (post.UseLocalPhoto && post.LocalPhoto != null)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)" class="card-img-top" alt="@post.Title">
+                            }
+                            else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
+                            {
+                                <img src="@post.RemotePhotoUrl" class="card-img-top"
+                                     alt="@post.Title"
+                                     onerror="this.onerror=null;this.src='';this.alt='...';this.style.display='none';">
+                            }
+                            <div class="card-text-wrapper">
+                                <div>
+                                    <h5 class="card-title">@post.Title</h5>
+                                    <p class="card-text">@(post.Content.Length > 100 ? post.Content.Substring(0, 100) + "..." : post.Content)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                @if (post.Author.Avatar != null)
+                                {
+                                    <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
+                                         class="author-avatar"
+                                         alt="@post.Author.NickName">
+                                }
+                                else
+                                {
+                                    <div class="author-placeholder">
+                                        <span>@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
+                                    </div>
+                                }
+                                <div class="author-info">
+                                    <p class="author-name">@post.Author.NickName</p>
+                                    <p class="author-date">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <a href="/Details/@post.Id" class="btn btn-outline-primary btn-sm me-2">Переглянути</a>
+                                <form method="post" asp-page-handler="ToggleLike" class="d-inline">
+                                    <input type="hidden" name="postId" value="@post.Id" />
+                                    <button type="submit" class="btn-sm like-button" title="Прибрати з улюблених">
+                                        ❤️
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

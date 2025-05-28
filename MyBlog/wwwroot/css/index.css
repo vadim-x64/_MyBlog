@@ -167,6 +167,10 @@
     margin-top: auto;
 }
 
+.d-flex.justify-content-between.align-items-center.foot {
+    width: 100%;
+}
+
 .card-horizontal .card-footer {
     padding: 10px;
 }
@@ -217,6 +221,12 @@
 .load-more-btn .btn-outline-secondary {
     border-radius: 0;
     font-size: 18px;
+}
+
+.like-button {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
 }
 
 @media (max-width: 768px) {

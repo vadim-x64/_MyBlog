@@ -12,12 +12,17 @@ public class AppDbContext : DbContext
     
     public DbSet<Users> Users { get; set; }
     public DbSet<Post> Posts { get; set; }
+    public DbSet<Like> Likes { get; set; }
     
     // Додайте до класу AppDbContext
     public DbSet<Comment> Comments { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Like>()
+            .HasIndex(l => new { l.UserId, l.PostId })
+            .IsUnique();
+
         base.OnModelCreating(modelBuilder);
 
         // Налаштування зв'язку між User і Post
