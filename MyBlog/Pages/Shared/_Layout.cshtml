@@ -32,6 +32,11 @@
                 <ul class="navbar-nav ms-auto d-flex align-items-center">
                     @if (User.Identity?.IsAuthenticated == true)
                     {
+                        <li class="nav-item me-2" id="unique">
+                            <a class="liked_posts_here" asp-page="/LikedPosts">
+                                <img src="https://cdn-icons-png.flaticon.com/128/273/273766.png" alt="">
+                            </a>
+                        </li>
                         <li class="nav-item me-2">
                             <a class="btn btn-secondary d-flex align-items-center" asp-page="/Create">Створити новий пост</a>
                         </li>

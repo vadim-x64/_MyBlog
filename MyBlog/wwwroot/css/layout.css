@@ -41,6 +41,15 @@ header {
     justify-content: center;
 }
 
+.navbar-nav #unique {
+    padding: 0 10px;
+}
+
+.navbar-nav .liked_posts_here img {
+    width: 35px;
+    height: 35px;
+}
+
 .navbar-nav .btn {
     border-radius: 0;
 }
