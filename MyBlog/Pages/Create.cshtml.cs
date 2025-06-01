@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Services;
 using System.ComponentModel.DataAnnotations;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Pages;
 
 [Authorize]
 public class CreateModel : PageModel
 {
-    private readonly PostService _postService;
+    private readonly IPostService _postService;
     private readonly string[] _allowedImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".jfif" };
     private readonly string[] _allowedMimeTypes = { 
         "image/jpeg", "image/jpg", "image/png", "image/gif", "image/bmp", "image/jfif" 
@@ -25,7 +26,7 @@ public class CreateModel : PageModel
     [TempData]
     public string? ErrorMessage { get; set; }
 
-    public CreateModel(PostService postService)
+    public CreateModel(IPostService postService)
     {
         _postService = postService;
     }

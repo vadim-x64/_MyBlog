@@ -6,10 +6,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Services;
 
-public class UserService
+public class UserService : IUserService
 {
     private readonly AppDbContext _context;
     private readonly IHttpContextAccessor _httpContextAccessor;
@@ -116,22 +117,19 @@ public class UserService
         {
             return (false, null);
         }
-
-        // Перевіряємо чи email зайнятий
+        
         if (model.Email != user.Email &&
             await _context.Users.AnyAsync(u => u.Id != userId && u.Email == model.Email))
         {
             return (false, "email");
         }
-
-        // Перевіряємо чи телефон зайнятий
+        
         if (model.PhoneNumber != user.PhoneNumber &&
             await _context.Users.AnyAsync(u => u.Id != userId && u.PhoneNumber == model.PhoneNumber))
         {
             return (false, "phone");
         }
-
-        // Перевіряємо чи нікнейм зайнятий
+        
         if (!string.IsNullOrEmpty(model.NickName) && model.NickName != user.NickName &&
             await _context.Users.AnyAsync(u => u.Id != userId && u.NickName == model.NickName))
         {
@@ -240,8 +238,7 @@ public class UserService
         {
             return (false, "Файл не вибрано");
         }
-
-        // Перевіряємо розширення файлу
+        
         string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".jfif" };
         string fileExtension = Path.GetExtension(avatar.FileName).ToLowerInvariant();
 
@@ -305,7 +302,7 @@ public class UserService
     public async Task<bool> ToggleUserBlockStatusAsync(Guid userId)
     {
         var user = await _context.Users.FindAsync(userId);
-        if (user == null || user.Role == 2) // Не дозволяємо блокувати адміністраторів
+        if (user == null || user.Role == 2)
         {
             return false;
         }
@@ -318,7 +315,7 @@ public class UserService
     public async Task<bool> DeleteUserByAdminAsync(Guid userId)
     {
         var user = await _context.Users.FindAsync(userId);
-        if (user == null || user.Role == 2) // Не дозволяємо видаляти адміністраторів
+        if (user == null || user.Role == 2)
         {
             return false;
         }

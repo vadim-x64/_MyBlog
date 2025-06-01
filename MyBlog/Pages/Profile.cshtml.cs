@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
 public class ProfileModel : PageModel
 {
-    private readonly UserService _userService;
+    private readonly IUserService  _userService;
 
-    public ProfileModel(UserService userService)
+    public ProfileModel(IUserService userService)
     {
         _userService = userService;
     }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
@@ -9,11 +10,11 @@ namespace MyBlog.Pages;
 [Authorize]
 public class LikedPostsModel : PageModel
 {
-    private readonly LikeService _likeService;
+    private readonly ILikeService _likeService;
 
     public List<Post> LikedPosts { get; set; } = new List<Post>();
 
-    public LikedPostsModel(LikeService likeService)
+    public LikedPostsModel(ILikeService likeService)
     {
         _likeService = likeService;
     }

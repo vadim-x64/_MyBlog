@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Services;
 
-public class AdminService
+public class AdminService : IAdminService
 {
     private readonly AppDbContext _context;
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public AdminService(AppDbContext context, UserService userService)
+    public AdminService(AppDbContext context, IUserService userService)
     {
         _context = context;
         _userService = userService;
     }
-
-    // Отримання всіх постів для модерації з повним вмістом
+    
     public async Task<List<Post>> GetAllPostsForModerationAsync()
     {
         return await _context.Posts
@@ -23,16 +23,14 @@ public class AdminService
             .OrderByDescending(p => p.UpdatedAt)
             .ToListAsync();
     }
-
-    // Отримання поста за ідентифікатором
+    
     public async Task<Post?> GetPostByIdAsync(Guid postId)
     {
         return await _context.Posts
             .Include(p => p.Author)
             .FirstOrDefaultAsync(p => p.Id == postId);
     }
-
-    // Видалення поста адміністратором
+    
     public async Task<bool> DeletePostByAdminAsync(Guid postId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
@@ -46,8 +44,7 @@ public class AdminService
         {
             return false;
         }
-
-        // Видалення всіх коментарів до поста
+        
         var comments = await _context.Comments.Where(c => c.PostId == postId).ToListAsync();
         _context.Comments.RemoveRange(comments);
 
@@ -55,8 +52,7 @@ public class AdminService
         await _context.SaveChangesAsync();
         return true;
     }
-
-    // Отримання всіх коментарів для модерації з повним вмістом
+    
     public async Task<List<Comment>> GetAllCommentsForModerationAsync()
     {
         return await _context.Comments
@@ -67,8 +63,7 @@ public class AdminService
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
-
-    // Отримання коментаря за ідентифікатором
+    
     public async Task<Comment?> GetCommentByIdAsync(Guid commentId)
     {
         return await _context.Comments
@@ -78,8 +73,7 @@ public class AdminService
                 .ThenInclude(p => p != null ? p.Author : null)
             .FirstOrDefaultAsync(c => c.Id == commentId);
     }
-
-    // Видалення коментаря адміністратором
+    
     public async Task<bool> DeleteCommentByAdminAsync(Guid commentId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
@@ -93,16 +87,13 @@ public class AdminService
         {
             return false;
         }
-
-        // Видалити всі дочірні коментарі (рекурсивно)
+        
         await DeleteChildCommentsAsync(commentId);
-
         _context.Comments.Remove(comment);
         await _context.SaveChangesAsync();
         return true;
     }
-
-    // Приватний метод для рекурсивного видалення дочірніх коментарів
+    
     private async Task DeleteChildCommentsAsync(Guid parentCommentId)
     {
         var childComments = await _context.Comments
@@ -115,4 +106,4 @@ public class AdminService
             _context.Comments.Remove(child);
         }
     }
-}   
+}

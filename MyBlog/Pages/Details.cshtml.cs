@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
 public class DetailsModel : PageModel
 {
-    private readonly PostService _postService;
-    private readonly CommentService _commentService;
-    private readonly LikeService _likeService;
+    private readonly IPostService _postService;
+    private readonly ICommentService _commentService;
+    private readonly ILikeService _likeService;
     
     public List<Comment> Comments { get; set; } = new List<Comment>();
     public Post? Post { get; set; }
@@ -19,7 +20,7 @@ public class DetailsModel : PageModel
     [BindProperty]
     public string CommentContent { get; set; } = string.Empty;
 
-    public DetailsModel(PostService postService, CommentService commentService, LikeService likeService)
+    public DetailsModel(IPostService postService, ICommentService commentService, ILikeService likeService)
     {
         _postService = postService;
         _commentService = commentService;

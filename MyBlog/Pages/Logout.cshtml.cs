@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
 public class LogoutModel : PageModel
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public LogoutModel(UserService userService)
+    public LogoutModel(IUserService userService)
     {
         _userService = userService;
     }

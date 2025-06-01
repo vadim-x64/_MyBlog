@@ -2,15 +2,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
 public class RegisterModel : PageModel
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public RegisterModel(UserService userService)
+    public RegisterModel(IUserService userService)
     {
         _userService = userService;
     }

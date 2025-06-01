@@ -4,14 +4,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Services;
 using System.ComponentModel.DataAnnotations;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Pages;
 
 [Authorize]
 public class EditModel : PageModel
 {
-    private readonly PostService _postService;
-    private readonly UserService _userService;
+    private readonly IPostService _postService;
+    private readonly IUserService _userService;
     private readonly string[] _allowedImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".svg", ".tiff", ".tif" };
 
     [BindProperty]
@@ -26,7 +27,7 @@ public class EditModel : PageModel
     [TempData]
     public string? ErrorMessage { get; set; }
 
-    public EditModel(PostService postService, UserService userService)
+    public EditModel(IPostService postService, IUserService userService)
     {
         _postService = postService;
         _userService = userService;

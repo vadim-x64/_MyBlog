@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Services;
 
-public class LikeService
+public class LikeService : ILikeService
 {
     private readonly AppDbContext _context;
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public LikeService(AppDbContext context, UserService userService)
+    public LikeService(AppDbContext context, IUserService userService)
     {
         _context = context;
         _userService = userService;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
@@ -9,13 +10,13 @@ namespace MyBlog.Pages;
 [Authorize]
 public class DeleteModel : PageModel
 {
-    private readonly PostService _postService;
-    private readonly UserService _userService;
+    private readonly IPostService _postService;
+    private readonly IUserService _userService;
 
     [BindProperty]
     public Post? Post { get; set; }
 
-    public DeleteModel(PostService postService, UserService userService)
+    public DeleteModel(IPostService postService, IUserService userService)
     {
         _postService = postService;
         _userService = userService;

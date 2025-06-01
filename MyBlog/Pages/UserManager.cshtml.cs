@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
@@ -8,9 +9,9 @@ namespace MyBlog.Pages;
 [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOnly")]
 public class UserManagerModel : PageModel
 {
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public UserManagerModel(UserService userService)
+    public UserManagerModel(IUserService userService)
     {
         _userService = userService;
     }

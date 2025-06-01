@@ -1,5 +1,6 @@
-﻿@using MyBlog.Services
-@inject UserService UserService
+﻿@using MyBlog.Repository.Interfaces
+@using MyBlog.Services
+@inject IUserService UserService
 @{
     var currentUser = await UserService.GetCurrentUserAsync();
 }

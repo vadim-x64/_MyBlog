@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
+using MyBlog.Repository.Interfaces;
 using MyBlog.Services;
 
 namespace MyBlog.Pages;
 [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOnly")]
 public class CommentManagerModel : PageModel
 {
-    private readonly AdminService _adminService;
-    private readonly UserService _userService;
+    private readonly IAdminService _adminService;
+    private readonly IUserService _userService;
     private readonly AppDbContext _context;
 
-    public CommentManagerModel(AdminService adminService, UserService userService, AppDbContext context)
+    public CommentManagerModel(IAdminService adminService, IUserService userService, AppDbContext context)
     {
         _adminService = adminService;
         _userService = userService;

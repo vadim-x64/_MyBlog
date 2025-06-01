@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Services;
 
-public class CommentService
+public class CommentService : ICommentService
 {
     private readonly AppDbContext _context;
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
 
-    public CommentService(AppDbContext context, UserService userService)
+    public CommentService(AppDbContext context, IUserService userService)
     {
         _context = context;
         _userService = userService;

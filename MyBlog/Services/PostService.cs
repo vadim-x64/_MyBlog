@@ -3,22 +3,22 @@ using MyBlog.Models;
 using MyBlog.Repository.Context;
 using System.Net;
 using System.Net.Http.Headers;
+using MyBlog.Repository.Interfaces;
 
 namespace MyBlog.Services;
 
-public class PostService
+public class PostService : IPostService
 {
     private readonly AppDbContext _context;
-    private readonly UserService _userService;
+    private readonly IUserService _userService;
     private readonly IHttpClientFactory _httpClientFactory;
     private const string DEFAULT_PHOTO_URL = "https://img.freepik.com/premium-vector/collage-pictures-grid-photo-mood-board-vintage-portfolio-background-album-brandboard_171739-3448.jpg?semt=ais_hybrid&w=740";
-
-    // Дозволені типи зображень
+    
     private readonly string[] _allowedImageMimeTypes = { 
         "image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp", "image/svg+xml", "image/tiff" 
     };
 
-    public PostService(AppDbContext context, UserService userService, IHttpClientFactory httpClientFactory)
+    public PostService(AppDbContext context, IUserService userService, IHttpClientFactory httpClientFactory)
     {
         _context = context;
         _userService = userService;
@@ -53,7 +53,6 @@ public class PostService
         post.CreatedAt = DateTime.UtcNow.AddHours(+3);
         post.UpdatedAt = DateTime.UtcNow.AddHours(+3);
         
-        // Обробка фото відповідно до вибраного типу
         if (post.UseLocalPhoto)
         {
             if (photo != null && photo.Length > 0 && IsValidImageFile(photo))
@@ -64,17 +63,15 @@ public class PostService
             }
             else
             {
-                // Якщо локальне фото не завантажено або не є зображенням, використовуємо дефолтне
                 post.UseLocalPhoto = false;
                 post.RemotePhotoUrl = DEFAULT_PHOTO_URL;
             }
         }
         else
         {
-            // Для віддаленого фото - перевіряємо валідність URL
             if (!string.IsNullOrEmpty(post.RemotePhotoUrl) && await IsValidImageUrlAsync(post.RemotePhotoUrl))
             {
-                // URL є дійсним і посилається на зображення
+                
             }
             else
             {
@@ -106,35 +103,28 @@ public class PostService
         post.UpdatedAt = DateTime.UtcNow.AddHours(+3);
         post.UseLocalPhoto = updatedPost.UseLocalPhoto;
         
-        // Обробка фото відповідно до вибраного типу
         if (post.UseLocalPhoto)
         {
-            // Якщо вибрано локальне фото
             if (photo != null && photo.Length > 0 && IsValidImageFile(photo))
             {
-                // Завантажено нове локальне фото
                 using var memoryStream = new MemoryStream();
                 await photo.CopyToAsync(memoryStream);
                 post.LocalPhoto = memoryStream.ToArray();
             }
             else if (post.LocalPhoto == null || post.LocalPhoto.Length == 0)
             {
-                // Якщо обрано локальне фото, але немає ні старого, ні нового
                 post.UseLocalPhoto = false;
                 post.RemotePhotoUrl = DEFAULT_PHOTO_URL;
             }
-            // Інакше залишаємо існуюче локальне фото
         }
         else
         {
-            // Вибрано віддалене фото
             if (!string.IsNullOrEmpty(updatedPost.RemotePhotoUrl) && await IsValidImageUrlAsync(updatedPost.RemotePhotoUrl))
             {
                 post.RemotePhotoUrl = updatedPost.RemotePhotoUrl;
             }
             else
             {
-                // Якщо URL порожній або невірний, встановлюємо дефолтне фото
                 post.RemotePhotoUrl = DEFAULT_PHOTO_URL;
             }
         }
@@ -171,7 +161,6 @@ public class PostService
             .ToListAsync();
     }
     
-    // Перевірка, чи файл є зображенням
     private bool IsValidImageFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
@@ -179,11 +168,9 @@ public class PostService
             
         try 
         {
-            // Перевіряємо MIME-тип файлу
             if (_allowedImageMimeTypes.Contains(file.ContentType))
                 return true;
-                
-            // Додаткова перевірка шляхом читання заголовків файлу для визначення типу
+            
             using var stream = file.OpenReadStream();
             var buffer = new byte[Math.Min(file.Length, 512)];
             stream.Read(buffer, 0, buffer.Length);
@@ -196,40 +183,33 @@ public class PostService
         }
     }
     
-    // Метод для визначення типу файлу за заголовком
     private string GetFileTypeFromHeader(byte[] header)
     {
         if (header == null || header.Length < 12)
             return "application/octet-stream";
-
-        // JPEG/JFIF: FF D8 FF
+        
         if (header[0] == 0xFF && header[1] == 0xD8 && header[2] == 0xFF)
         {
-            // JFIF: FF D8 FF E0 ?? ?? 4A 46 49 46 00
             if (header.Length > 10 && header[3] == 0xE0 && 
                 header[6] == 0x4A && header[7] == 0x46 && header[8] == 0x49 && header[9] == 0x46 && header[10] == 0x00)
                 return "image/jfif";
             
-            return "image/jpeg"; // Звичайний JPEG
+            return "image/jpeg";
         }
         
-        // PNG: 89 50 4E 47 0D 0A 1A 0A
         if (header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 
             && header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A)
             return "image/png";
         
-        // GIF: 47 49 46 38
         if (header[0] == 0x47 && header[1] == 0x49 && header[2] == 0x46 && header[3] == 0x38)
             return "image/gif";
         
-        // BMP: 42 4D
         if (header[0] == 0x42 && header[1] == 0x4D)
             return "image/bmp";
         
-        return "application/octet-stream"; // За замовчуванням - невідомий тип
+        return "application/octet-stream";
     }
     
-    // Перевірка URL на валідність і перевірка, що це URL зображення
     private async Task<bool> IsValidImageUrlAsync(string url)
     {
         if (string.IsNullOrEmpty(url))
@@ -240,15 +220,13 @@ public class PostService
             var httpClient = _httpClientFactory.CreateClient();
             httpClient.DefaultRequestHeaders.UserAgent.Add(
                 new ProductInfoHeaderValue("BlogApp", "1.0"));
-                
-            // Надсилаємо HEAD-запит для перевірки доступності та типу ресурсу
+            
             var request = new HttpRequestMessage(HttpMethod.Head, url);
             var response = await httpClient.SendAsync(request);
             
             if (!response.IsSuccessStatusCode)
                 return false;
-                
-            // Перевіряємо, чи Content-Type це зображення
+            
             if (response.Content.Headers.ContentType != null && 
                 response.Content.Headers.ContentType.MediaType != null &&
                 response.Content.Headers.ContentType.MediaType.StartsWith("image/"))
