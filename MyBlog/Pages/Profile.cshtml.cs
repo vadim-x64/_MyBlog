@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
@@ -22,6 +21,7 @@ public class ProfileModel : PageModel
     public async Task<IActionResult> OnGetAsync()
     {
         CurrentUser = await _userService.GetCurrentUserAsync();
+        
         if (CurrentUser == null)
         {
             return RedirectToPage("/Login");
@@ -45,12 +45,12 @@ public class ProfileModel : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         CurrentUser = await _userService.GetCurrentUserAsync();
+        
         if (CurrentUser == null)
         {
             return RedirectToPage("/Login");
         }
-
-        // Перевірка формату телефону (тільки цифри)
+        
         if (!string.IsNullOrEmpty(UpdateModel.PhoneNumber) && !UpdateModel.PhoneNumber.All(char.IsDigit))
         {
             ModelState.AddModelError("UpdateModel.PhoneNumber", "Номер телефону має містити тільки цифри.");
@@ -111,6 +111,7 @@ public class ProfileModel : PageModel
     public async Task<IActionResult> OnPostUploadAvatarAsync(IFormFile avatar)
     {
         CurrentUser = await _userService.GetCurrentUserAsync();
+        
         if (CurrentUser == null)
         {
             return RedirectToPage("/Login");
@@ -125,10 +126,7 @@ public class ProfileModel : PageModel
             }
             else
             {
-                // Додаємо повідомлення про успішне завантаження аватара
-                TempData["SuccessMessage"] = CurrentUser.Avatar == null
-                    ? "Аватар успішно встановлено"
-                    : "Аватар успішно оновлено";
+                TempData["SuccessMessage"] = CurrentUser.Avatar == null ? "Аватар успішно встановлено" : "Аватар успішно оновлено";
             }
         }
 
@@ -138,19 +136,20 @@ public class ProfileModel : PageModel
     public async Task<IActionResult> OnPostDeleteAvatarAsync()
     {
         CurrentUser = await _userService.GetCurrentUserAsync();
+        
         if (CurrentUser == null)
         {
             return RedirectToPage("/Login");
         }
 
         var success = await _userService.DeleteAvatarAsync(CurrentUser);
+        
         if (!success)
         {
             TempData["ErrorMessage"] = "Не вдалося видалити аватар";
         }
         else
         {
-            // Додаємо повідомлення про успішне видалення аватара
             TempData["SuccessMessage"] = "Аватар успішно видалено";
         }
 
@@ -160,13 +159,14 @@ public class ProfileModel : PageModel
     public async Task<IActionResult> OnPostDeleteAccountAsync(string confirmPassword)
     {
         CurrentUser = await _userService.GetCurrentUserAsync();
+        
         if (CurrentUser == null)
         {
             return RedirectToPage("/Login");
         }
-
-        // Перевіряємо пароль перед видаленням акаунту
+        
         var authResult = await _userService.AuthenticateAsync(CurrentUser.Email, confirmPassword);
+        
         if (!authResult.IsSuccess || authResult.User?.Id != CurrentUser.Id)
         {
             TempData["ErrorMessage"] = "Невірний пароль. Акаунт не було видалено.";
@@ -174,13 +174,13 @@ public class ProfileModel : PageModel
         }
 
         var success = await _userService.DeleteUserAccountAsync(CurrentUser.Id);
+        
         if (!success)
         {
             TempData["ErrorMessage"] = "Не вдалося видалити акаунт";
             return RedirectToPage();
         }
-
-        // Тут не потрібно додавати повідомлення про успіх, оскільки користувач буде перенаправлений на головну сторінку
+        
         return RedirectToPage("/Index");
     }
 }

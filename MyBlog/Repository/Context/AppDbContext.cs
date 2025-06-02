@@ -5,16 +5,14 @@ namespace MyBlog.Repository.Context;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
+        
     }
     
     public DbSet<Users> Users { get; set; }
     public DbSet<Post> Posts { get; set; }
     public DbSet<Like> Likes { get; set; }
-    
-    // Додайте до класу AppDbContext
     public DbSet<Comment> Comments { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,8 +22,7 @@ public class AppDbContext : DbContext
             .IsUnique();
 
         base.OnModelCreating(modelBuilder);
-
-        // Налаштування зв'язку між User і Post
+        
         modelBuilder.Entity<Post>()
             .HasOne(p => p.Author)
             .WithMany()

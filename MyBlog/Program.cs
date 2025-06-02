@@ -40,7 +40,6 @@ public class Program
         });
 
         builder.Services.AddRazorPages();
-        
         builder.Services.AddHttpClient();
         
         var app = builder.Build();
@@ -52,19 +51,12 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-        
         app.UseStaticFiles();
-
         app.UseRouting();
-        
         app.UseAuthentication();
-        
         app.UseAuthorization();
-
         app.MapStaticAssets();
-        
         app.MapRazorPages().WithStaticAssets();
-
         app.Run();
     }
 }

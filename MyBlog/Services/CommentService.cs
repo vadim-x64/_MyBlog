@@ -21,7 +21,7 @@ public class CommentService : ICommentService
         return await _context.Comments
             .Include(c => c.Author)
             .Include(c => c.ParentComment)
-                .ThenInclude(p => p != null ? p.Author : null)
+            .ThenInclude(p => p != null ? p.Author : null)
             .Where(c => c.PostId == postId)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
@@ -30,12 +30,14 @@ public class CommentService : ICommentService
     public async Task<bool> AddCommentAsync(string content, Guid postId, Guid? parentCommentId = null)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
         }
 
         var post = await _context.Posts.FindAsync(postId);
+        
         if (post == null)
         {
             return false;
@@ -49,6 +51,7 @@ public class CommentService : ICommentService
         if (parentCommentId != null)
         {
             var parentComment = await _context.Comments.FindAsync(parentCommentId);
+            
             if (parentComment == null)
             {
                 return false;
@@ -73,12 +76,14 @@ public class CommentService : ICommentService
     public async Task<bool> DeleteCommentAsync(Guid commentId)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
         }
 
         var comment = await _context.Comments.FindAsync(commentId);
+        
         if (comment == null || comment.AuthorId != currentUser.Id)
         {
             return false;

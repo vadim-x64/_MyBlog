@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
-using System.Net;
 using System.Net.Http.Headers;
 using MyBlog.Repository.Interfaces;
 
@@ -43,6 +42,7 @@ public class PostService : IPostService
     public async Task<bool> CreatePostAsync(Post post, IFormFile? photo)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
@@ -87,12 +87,14 @@ public class PostService : IPostService
     public async Task<bool> UpdatePostAsync(Post updatedPost, IFormFile? photo)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
         }
 
         var post = await _context.Posts.FindAsync(updatedPost.Id);
+        
         if (post == null || post.AuthorId != currentUser.Id)
         {
             return false;
@@ -136,12 +138,14 @@ public class PostService : IPostService
     public async Task<bool> DeletePostAsync(Guid id)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
         }
 
         var post = await _context.Posts.FindAsync(id);
+        
         if (post == null || post.AuthorId != currentUser.Id)
         {
             return false;
@@ -164,12 +168,16 @@ public class PostService : IPostService
     private bool IsValidImageFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
+        {
             return false;
-            
+        }
+        
         try 
         {
             if (_allowedImageMimeTypes.Contains(file.ContentType))
+            {
                 return true;
+            }
             
             using var stream = file.OpenReadStream();
             var buffer = new byte[Math.Min(file.Length, 512)];
@@ -186,26 +194,34 @@ public class PostService : IPostService
     private string GetFileTypeFromHeader(byte[] header)
     {
         if (header == null || header.Length < 12)
+        {
             return "application/octet-stream";
+        }
         
         if (header[0] == 0xFF && header[1] == 0xD8 && header[2] == 0xFF)
         {
-            if (header.Length > 10 && header[3] == 0xE0 && 
-                header[6] == 0x4A && header[7] == 0x46 && header[8] == 0x49 && header[9] == 0x46 && header[10] == 0x00)
+            if (header.Length > 10 && header[3] == 0xE0 && header[6] == 0x4A && header[7] == 0x46 && header[8] == 0x49 && header[9] == 0x46 && header[10] == 0x00)
+            {
                 return "image/jfif";
+            }
             
             return "image/jpeg";
         }
-        
-        if (header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 
-            && header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A)
+
+        if (header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 && header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A)
+        {
             return "image/png";
-        
+        }
+
         if (header[0] == 0x47 && header[1] == 0x49 && header[2] == 0x46 && header[3] == 0x38)
+        {
             return "image/gif";
-        
+        }
+
         if (header[0] == 0x42 && header[1] == 0x4D)
+        {
             return "image/bmp";
+        }
         
         return "application/octet-stream";
     }
@@ -213,23 +229,24 @@ public class PostService : IPostService
     private async Task<bool> IsValidImageUrlAsync(string url)
     {
         if (string.IsNullOrEmpty(url))
+        {
             return false;
+        }
             
         try
         {
-            var httpClient = _httpClientFactory.CreateClient();
-            httpClient.DefaultRequestHeaders.UserAgent.Add(
-                new ProductInfoHeaderValue("BlogApp", "1.0"));
+            var httpClient = _httpClientFactory.CreateClient(); 
+            httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("BlogApp", "1.0"));
             
             var request = new HttpRequestMessage(HttpMethod.Head, url);
             var response = await httpClient.SendAsync(request);
-            
+
             if (!response.IsSuccessStatusCode)
+            {
                 return false;
+            }
             
-            if (response.Content.Headers.ContentType != null && 
-                response.Content.Headers.ContentType.MediaType != null &&
-                response.Content.Headers.ContentType.MediaType.StartsWith("image/"))
+            if (response.Content.Headers.ContentType != null && response.Content.Headers.ContentType.MediaType != null && response.Content.Headers.ContentType.MediaType.StartsWith("image/"))
             {
                 return true;
             }

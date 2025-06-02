@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
@@ -24,6 +23,7 @@ public class UserManagerModel : PageModel
     public async Task<IActionResult> OnGetAsync()
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");
@@ -36,6 +36,7 @@ public class UserManagerModel : PageModel
     public async Task<IActionResult> OnPostToggleBlockAsync(Guid userId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");
@@ -48,6 +49,7 @@ public class UserManagerModel : PageModel
     public async Task<IActionResult> OnPostDeleteUserAsync(Guid userId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");
@@ -60,12 +62,14 @@ public class UserManagerModel : PageModel
     public async Task<IActionResult> OnPostDeleteAvatarAsync(Guid userId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");
         }
 
         var success = await _userService.DeleteUserAvatarByAdminAsync(userId);
+        
         if (success)
         {
             StatusMessage = "Аватар користувача успішно видалено";

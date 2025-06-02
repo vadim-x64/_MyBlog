@@ -19,13 +19,13 @@ public class LikeService : ILikeService
     public async Task<bool> ToggleLikeAsync(Guid postId)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
         }
 
-        var existingLike = await _context.Likes
-            .FirstOrDefaultAsync(l => l.UserId == currentUser.Id && l.PostId == postId);
+        var existingLike = await _context.Likes.FirstOrDefaultAsync(l => l.UserId == currentUser.Id && l.PostId == postId);
 
         if (existingLike != null)
         {
@@ -50,13 +50,13 @@ public class LikeService : ILikeService
     public async Task<bool> IsPostLikedByCurrentUserAsync(Guid postId)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return false;
         }
 
-        return await _context.Likes
-            .AnyAsync(l => l.UserId == currentUser.Id && l.PostId == postId);
+        return await _context.Likes.AnyAsync(l => l.UserId == currentUser.Id && l.PostId == postId);
     }
 
     public async Task<int> GetLikesCountAsync(Guid postId)
@@ -67,6 +67,7 @@ public class LikeService : ILikeService
     public async Task<List<Post>> GetLikedPostsByCurrentUserAsync()
     {
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null)
         {
             return new List<Post>();

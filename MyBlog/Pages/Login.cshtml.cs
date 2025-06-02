@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
@@ -51,7 +50,6 @@ public class LoginModel : PageModel
         {
             if (authResult.IsBlocked)
             {
-                // Якщо користувач заблокований, перенаправляємо на AccessDenied
                 IsUserBlocked = true;
                 return RedirectToPage("/AccessDenied", new { blocked = true });
             }

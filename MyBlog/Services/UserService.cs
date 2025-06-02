@@ -29,6 +29,7 @@ public class UserService : IUserService
         }
 
         var userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+        
         if (userId == null)
         {
             return null;
@@ -107,31 +108,28 @@ public class UserService : IUserService
     public async Task<(bool Success, string? ErrorType)> UpdateUserAsync(Guid userId, UpdateProfileModel model)
     {
         var user = await _context.Users.FindAsync(userId);
+        
         if (user == null)
         {
             return (false, null);
         }
 
-        if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Surname) ||
-            string.IsNullOrWhiteSpace(model.PhoneNumber) || string.IsNullOrWhiteSpace(model.Email))
+        if (string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Surname) || string.IsNullOrWhiteSpace(model.PhoneNumber) || string.IsNullOrWhiteSpace(model.Email))
         {
             return (false, null);
         }
         
-        if (model.Email != user.Email &&
-            await _context.Users.AnyAsync(u => u.Id != userId && u.Email == model.Email))
+        if (model.Email != user.Email && await _context.Users.AnyAsync(u => u.Id != userId && u.Email == model.Email))
         {
             return (false, "email");
         }
         
-        if (model.PhoneNumber != user.PhoneNumber &&
-            await _context.Users.AnyAsync(u => u.Id != userId && u.PhoneNumber == model.PhoneNumber))
+        if (model.PhoneNumber != user.PhoneNumber && await _context.Users.AnyAsync(u => u.Id != userId && u.PhoneNumber == model.PhoneNumber))
         {
             return (false, "phone");
         }
         
-        if (!string.IsNullOrEmpty(model.NickName) && model.NickName != user.NickName &&
-            await _context.Users.AnyAsync(u => u.Id != userId && u.NickName == model.NickName))
+        if (!string.IsNullOrEmpty(model.NickName) && model.NickName != user.NickName && await _context.Users.AnyAsync(u => u.Id != userId && u.NickName == model.NickName))
         {
             return (false, "nickname");
         }
@@ -159,9 +157,7 @@ public class UserService : IUserService
             user.NickName = model.NickName;
         }
 
-        user.BirthDate = model.BirthDate.HasValue
-            ? DateTime.SpecifyKind(model.BirthDate.Value, DateTimeKind.Utc)
-            : null;
+        user.BirthDate = model.BirthDate.HasValue ? DateTime.SpecifyKind(model.BirthDate.Value, DateTimeKind.Utc) : null;
         user.PhoneNumber = model.PhoneNumber;
         user.Email = model.Email;
         user.About = model.About;
@@ -192,8 +188,8 @@ public class UserService : IUserService
         using (SHA256 sha256 = SHA256.Create())
         {
             byte[] bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-
             StringBuilder builder = new StringBuilder();
+            
             for (int i = 0; i < bytes.Length; i++)
             {
                 builder.Append(bytes[i].ToString("x2"));
@@ -264,6 +260,7 @@ public class UserService : IUserService
         }
 
         var dbUser = await _context.Users.FindAsync(user.Id);
+        
         if (dbUser == null)
         {
             return false;
@@ -271,7 +268,6 @@ public class UserService : IUserService
 
         dbUser.Avatar = null;
         await _context.SaveChangesAsync();
-
         user.Avatar = null;
         return true;
     }
@@ -279,6 +275,7 @@ public class UserService : IUserService
     public async Task<bool> DeleteUserAccountAsync(Guid userId)
     {
         var user = await _context.Users.FindAsync(userId);
+        
         if (user == null)
         {
             return false;
@@ -287,7 +284,6 @@ public class UserService : IUserService
         _context.Users.Remove(user);
         await _context.SaveChangesAsync();
         await SignOutAsync();
-
         return true;
     }
 
@@ -302,6 +298,7 @@ public class UserService : IUserService
     public async Task<bool> ToggleUserBlockStatusAsync(Guid userId)
     {
         var user = await _context.Users.FindAsync(userId);
+        
         if (user == null || user.Role == 2)
         {
             return false;
@@ -315,6 +312,7 @@ public class UserService : IUserService
     public async Task<bool> DeleteUserByAdminAsync(Guid userId)
     {
         var user = await _context.Users.FindAsync(userId);
+        
         if (user == null || user.Role == 2)
         {
             return false;
@@ -328,6 +326,7 @@ public class UserService : IUserService
     public async Task<bool> DeleteUserAvatarByAdminAsync(Guid userId)
     {
         var user = await _context.Users.FindAsync(userId);
+        
         if (user == null)
         {
             return false;

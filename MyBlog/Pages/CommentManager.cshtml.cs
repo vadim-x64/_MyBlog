@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using MyBlog.Models;
 using MyBlog.Repository.Context;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
+
 [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOnly")]
 public class CommentManagerModel : PageModel
 {
@@ -29,12 +29,12 @@ public class CommentManagerModel : PageModel
     public async Task<IActionResult> OnGetAsync()
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");
         }
-
-        // Завантажуємо коментарі з додатковою інформацією для модальних вікон
+        
         AllComments = await _context.Comments
             .Include(c => c.Author)
             .Include(c => c.Post)
@@ -43,13 +43,14 @@ public class CommentManagerModel : PageModel
             .ThenInclude(p => p != null ? p.Author : null)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
-            
+        
         return Page();
     }
 
     public async Task<IActionResult> OnPostDeleteCommentAsync(Guid commentId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");

@@ -34,20 +34,22 @@ public class AdminService : IAdminService
     public async Task<bool> DeletePostByAdminAsync(Guid postId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return false;
         }
 
         var post = await _context.Posts.FindAsync(postId);
+        
         if (post == null)
         {
             return false;
         }
         
         var comments = await _context.Comments.Where(c => c.PostId == postId).ToListAsync();
+        
         _context.Comments.RemoveRange(comments);
-
         _context.Posts.Remove(post);
         await _context.SaveChangesAsync();
         return true;
@@ -59,7 +61,7 @@ public class AdminService : IAdminService
             .Include(c => c.Author)
             .Include(c => c.Post)
             .Include(c => c.ParentComment)
-                .ThenInclude(p => p != null ? p.Author : null)
+            .ThenInclude(p => p != null ? p.Author : null)
             .OrderByDescending(c => c.CreatedAt)
             .ToListAsync();
     }
@@ -70,19 +72,21 @@ public class AdminService : IAdminService
             .Include(c => c.Author)
             .Include(c => c.Post)
             .Include(c => c.ParentComment)
-                .ThenInclude(p => p != null ? p.Author : null)
+            .ThenInclude(p => p != null ? p.Author : null)
             .FirstOrDefaultAsync(c => c.Id == commentId);
     }
     
     public async Task<bool> DeleteCommentByAdminAsync(Guid commentId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return false;
         }
 
         var comment = await _context.Comments.FindAsync(commentId);
+        
         if (comment == null)
         {
             return false;

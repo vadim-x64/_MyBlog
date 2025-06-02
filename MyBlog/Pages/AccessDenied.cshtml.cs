@@ -10,14 +10,11 @@ public class AccessDeniedModel : PageModel
 
     public IActionResult OnGet()
     {
-        // Якщо користувач не заблокований, перенаправляємо його на головну
-        // Це забезпечує, що сторінка доступна тільки заблокованим користувачам
         if (!Blocked)
         {
             return RedirectToPage("/Index");
         }
         
-        // Сюди потрапляємо тільки якщо користувач заблокований (Blocked = true)
         return Page();
     }
 }

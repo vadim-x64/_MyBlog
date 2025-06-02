@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
@@ -60,6 +59,7 @@ public class DetailsModel : PageModel
         {
             await _commentService.AddCommentAsync(replyContent, id, parentCommentId);
         }
+        
         return RedirectToPage(new { id });
     }
 

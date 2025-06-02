@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
@@ -26,6 +25,7 @@ public class PostManagerModel : PageModel
     public async Task<IActionResult> OnGetAsync()
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");
@@ -38,6 +38,7 @@ public class PostManagerModel : PageModel
     public async Task<IActionResult> OnPostDeletePostAsync(Guid postId)
     {
         var isAdmin = await _userService.IsCurrentUserAdminAsync();
+        
         if (!isAdmin)
         {
             return RedirectToPage("/AccessDenied");

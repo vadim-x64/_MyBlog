@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
-using MyBlog.Services;
 using System.ComponentModel.DataAnnotations;
 using MyBlog.Repository.Interfaces;
 
@@ -36,12 +35,14 @@ public class EditModel : PageModel
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
         var post = await _postService.GetPostByIdAsync(id);
+        
         if (post == null)
         {
             return NotFound();
         }
 
         var currentUser = await _userService.GetCurrentUserAsync();
+        
         if (currentUser == null || post.AuthorId != currentUser.Id)
         {
             return Forbid();
@@ -67,17 +68,16 @@ public class EditModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        // Додаткова валідація для файлу, якщо вибрано локальне фото і завантажено новий файл
         if (PostInput.UseLocalPhoto && Photo != null)
         {
             var extension = Path.GetExtension(Photo.FileName).ToLowerInvariant();
+            
             if (!_allowedImageExtensions.Contains(extension))
             {
                 ModelState.AddModelError("Photo", "Файл має бути зображенням (jpg, png, gif, bmp, webp)");
                 return Page();
             }
             
-            // Перевірка MIME-типу
             var allowedMimeTypes = new[] {
                 "image/jpeg", "image/png", "image/gif", "image/bmp", 
                 "image/webp", "image/svg+xml", "image/tiff"
@@ -87,8 +87,8 @@ public class EditModel : PageModel
             {
                 ModelState.AddModelError("Photo", "Завантажений файл не є зображенням");
                 
-                // Отримуємо знову інформацію про локальне фото для відображення на сторінці
                 var existingPost = await _postService.GetPostByIdAsync(PostInput.Id);
+                
                 if (existingPost != null && existingPost.LocalPhoto != null && existingPost.LocalPhoto.Length > 0)
                 {
                     HasLocalPhoto = true;
@@ -99,11 +99,9 @@ public class EditModel : PageModel
             }
         }
         
-        // Перевірка URL для віддаленого фото
         if (!PostInput.UseLocalPhoto && !string.IsNullOrEmpty(PostInput.RemotePhotoUrl))
         {
-            if (!Uri.TryCreate(PostInput.RemotePhotoUrl, UriKind.Absolute, out var uriResult) || 
-                (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
+            if (!Uri.TryCreate(PostInput.RemotePhotoUrl, UriKind.Absolute, out var uriResult) || (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
             {
                 ModelState.AddModelError("PostInput.RemotePhotoUrl", "Введений URL є недійсним. Буде використано стандартне зображення.");
             }
@@ -111,8 +109,8 @@ public class EditModel : PageModel
 
         if (!ModelState.IsValid)
         {
-            // Повторно отримуємо інформацію про локальне фото для відображення на сторінці
             var existingPost = await _postService.GetPostByIdAsync(PostInput.Id);
+            
             if (existingPost != null && existingPost.LocalPhoto != null && existingPost.LocalPhoto.Length > 0)
             {
                 HasLocalPhoto = true;
@@ -141,8 +139,8 @@ public class EditModel : PageModel
         {
             ModelState.AddModelError(string.Empty, "Не вдалося оновити пост. Перевірте, чи ви є автором.");
             
-            // Повторно отримуємо інформацію про локальне фото для відображення на сторінці
             var existingPost = await _postService.GetPostByIdAsync(PostInput.Id);
+            
             if (existingPost != null && existingPost.LocalPhoto != null && existingPost.LocalPhoto.Length > 0)
             {
                 HasLocalPhoto = true;

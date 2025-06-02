@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
-using MyBlog.Services;
 using System.ComponentModel.DataAnnotations;
 using MyBlog.Repository.Interfaces;
 
@@ -33,21 +32,21 @@ public class CreateModel : PageModel
 
     public void OnGet()
     {
+        
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        // Додаткова валідація для файлу, якщо вибрано локальне фото
         if (PostInput.UseLocalPhoto && Photo != null)
         {
             var extension = Path.GetExtension(Photo.FileName).ToLowerInvariant();
+            
             if (!_allowedImageExtensions.Contains(extension))
             {
                 ModelState.AddModelError("Photo", $"Файл має бути зображенням одного з форматів: {string.Join(", ", _allowedImageExtensions)}");
                 return Page();
             }
             
-            // Перевірка MIME-типу
             if (!_allowedMimeTypes.Contains(Photo.ContentType.ToLowerInvariant()))
             {
                 ModelState.AddModelError("Photo", $"Завантажений файл не є зображенням дозволеного формату. Дозволено: {string.Join(", ", _allowedImageExtensions)}");
@@ -55,11 +54,9 @@ public class CreateModel : PageModel
             }
         }
         
-        // Перевірка URL для віддаленого фото
         if (!PostInput.UseLocalPhoto && !string.IsNullOrEmpty(PostInput.RemotePhotoUrl))
         {
-            if (!Uri.TryCreate(PostInput.RemotePhotoUrl, UriKind.Absolute, out var uriResult) || 
-                (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
+            if (!Uri.TryCreate(PostInput.RemotePhotoUrl, UriKind.Absolute, out var uriResult) || (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
             {
                 ModelState.AddModelError("PostInput.RemotePhotoUrl", "Введений URL є недійсним. Буде використано стандартне зображення.");
             }
@@ -83,7 +80,7 @@ public class CreateModel : PageModel
         if (result)
         {
             return RedirectToPage("/Index");
-        }
+        } 
         else
         {
             ModelState.AddModelError(string.Empty, "Не вдалося створити пост. Спробуйте ще раз.");

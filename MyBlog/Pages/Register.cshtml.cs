@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBlog.Models;
 using MyBlog.Repository.Interfaces;
-using MyBlog.Services;
 
 namespace MyBlog.Pages;
 
@@ -16,9 +15,11 @@ public class RegisterModel : PageModel
         _userService = userService;
     }
 
-    [BindProperty] public RegisterFormModel RegisterForm { get; set; } = new();
+    [BindProperty]
+    public RegisterFormModel RegisterForm { get; set; } = new();
 
-    [TempData] public string ErrorMessage { get; set; }
+    [TempData]
+    public string ErrorMessage { get; set; }
 
     public IActionResult OnGet()
     {
@@ -57,6 +58,7 @@ public class RegisterModel : PageModel
         }
         
         string nickname = RegisterForm.NickName;
+        
         if (string.IsNullOrWhiteSpace(nickname))
         {
             nickname = GenerateUniqueNickname();
@@ -85,6 +87,7 @@ public class RegisterModel : PageModel
         if (RegisterForm.Avatar != null)
         {
             var (success, errorMessage) = await _userService.SaveAvatarAsync(user, RegisterForm.Avatar);
+            
             if (!success)
             {
                 await _userService.DeleteUserAccountAsync(user.Id);
@@ -112,7 +115,8 @@ public class RegisterModel : PageModel
 
     public class RegisterFormModel
     {
-        [Display(Name = "Аватар")] public IFormFile? Avatar { get; set; }
+        [Display(Name = "Аватар")] 
+        public IFormFile? Avatar { get; set; }
 
         [Required(ErrorMessage = "Ім'я обов'язкове")]
         [Display(Name = "Ім'я")]
@@ -149,7 +153,7 @@ public class RegisterModel : PageModel
         public string Email { get; set; } = null!;
 
         [Display(Name = "Про себе")]
-        [StringLength(150, ErrorMessage = "Інформація про себе не повинна перевищувати 150 символів.")]
+        [StringLength(150, ErrorMessage = "Інформація про себе не повинна перевищувати 150 символів")]
         public string? About { get; set; }
 
         [Required(ErrorMessage = "Пароль обов'язковий")]

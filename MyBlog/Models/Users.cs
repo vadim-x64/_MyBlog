@@ -24,7 +24,7 @@ public class Users
     public string? NickName { get; set; }
 
     [DataType(DataType.Date)]
-    [Range(typeof(DateTime), "1900-01-01", "9999-12-31", ErrorMessage = "Дата народження повинна бути в межах від 01.01.1900 до поточної дати.")]
+    [Range(typeof(DateTime), "1900-01-01", "9999-12-31", ErrorMessage = "Дата народження повинна бути в межах від 01.01.1900 до поточної дати")]
     public DateTime? BirthDate { get; set; }
 
     [Required(ErrorMessage = "Номер телефону обов'язковий")]
@@ -41,7 +41,7 @@ public class Users
     [MaxLength(256)]
     public string PasswordHash { get; set; } = null!;
     
-    [StringLength(150, ErrorMessage = "Інформація про себе не повинна перевищувати 150 символів.")]
+    [StringLength(150, ErrorMessage = "Інформація про себе не повинна перевищувати 150 символів")]
     public string? About { get; set; }
     
     public int Role { get; set; } = 1;
