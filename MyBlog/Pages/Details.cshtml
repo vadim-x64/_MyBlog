@@ -31,26 +31,30 @@
         }
         <div class="card-body">
             <h1 class="card-title">@Model.Post.Title</h1>
+            <!-- Замінити блок з автором в Details.cshtml (приблизно рядки 25-40): -->
+
             <div class="d-flex align-items-center mb-3">
-                @if (Model.Post.Author.Avatar != null)
-                {
-                    <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.Author.Avatar)"
-                         class="rounded-circle me-2" alt="@Model.Post.Author.NickName">
-                }
-                else
-                {
-                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
-                        <span>@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
-                    </div>
-                }
-                <div>
-                    <div>@Model.Post.Author.NickName</div>
-                    <small class="text-muted">Створено: @Model.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
-                    @if (Model.Post.CreatedAt != Model.Post.UpdatedAt)
+                <a href="/UserProfile/@Model.Post.Author.Id" class="text-decoration-none d-flex align-items-center">
+                    @if (Model.Post.Author.Avatar != null)
                     {
-                        <small class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.Author.Avatar)"
+                             class="rounded-circle me-2" alt="@Model.Post.Author.NickName">
                     }
-                </div>
+                    else
+                    {
+                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                            <span>@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
+                        </div>
+                    }
+                    <div>
+                        <div class="text-dark">@Model.Post.Author.NickName</div>
+                        <small class="text-muted">Створено: @Model.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        @if (Model.Post.CreatedAt != Model.Post.UpdatedAt)
+                        {
+                            <small class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                        }
+                    </div>
+                </a>
             </div>
             
             <div class="d-flex align-items-center mb-3">

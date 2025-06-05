@@ -258,4 +258,15 @@ public class PostService : IPostService
             return false;
         }
     }
+    
+    // Додати в PostService клас:
+
+    public async Task<List<Post>> GetPostsByUserIdAsync(Guid userId)
+    {
+        return await _context.Posts
+            .Include(p => p.Author)
+            .Where(p => p.AuthorId == userId)
+            .OrderByDescending(p => p.UpdatedAt)
+            .ToListAsync();
+    }
 }

@@ -336,4 +336,9 @@ public class UserService : IUserService
         await _context.SaveChangesAsync();
         return true;
     }
+    
+    public async Task<Users?> GetUserByIdAsync(Guid userId)
+    {
+        return await _context.Users.FindAsync(userId);
+    }
 }

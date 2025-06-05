@@ -19,4 +19,5 @@ public interface IUserService
     Task<bool> ToggleUserBlockStatusAsync(Guid userId);
     Task<bool> DeleteUserByAdminAsync(Guid userId);
     Task<bool> DeleteUserAvatarByAdminAsync(Guid userId);
+    Task<Users?> GetUserByIdAsync(Guid userId);
 }

@@ -206,3 +206,4 @@ C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\gayfxhuk1x-pvfi
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\eq8goi7zlo-vfg33slu5s.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\0enpgq0yse-nxz6i8917l.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\9oq8tze2lx-2rp7nhj73a.gz
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\jrub4hk256-91m1cjuxnl.gz

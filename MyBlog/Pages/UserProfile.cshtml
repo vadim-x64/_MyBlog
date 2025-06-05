@@ -1,0 +1,100 @@
+﻿@page "{id:guid}"
+@model MyBlog.Pages.UserProfileModel
+@{
+    ViewData["Title"] = $"Профіль {Model.ProfileUser?.NickName}";
+}
+
+<link rel="stylesheet" href="~/css/userprofile.css">
+
+@if (Model.ProfileUser == null)
+{
+    <div class="alert alert-danger">
+        Користувача не знайдено.
+    </div>
+    return;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="user-profile-header">
+                <div class="d-flex align-items-center mb-4">
+                    @if (Model.ProfileUser.Avatar != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(Model.ProfileUser.Avatar)"
+                             class="profile-avatar me-4"
+                             alt="@Model.ProfileUser.NickName">
+                    }
+                    else
+                    {
+                        <div class="profile-avatar-placeholder me-4">
+                            <span>@Model.ProfileUser.NickName[0]</span>
+                        </div>
+                    }
+                    <div class="user-info">
+                        <h2 class="mb-1">@Model.ProfileUser.NickName</h2>
+                        <h5 class="text-muted mb-2">@Model.ProfileUser.Surname @Model.ProfileUser.Name @Model.ProfileUser.LastName</h5>
+                        @if (Model.ProfileUser.BirthDate.HasValue)
+                        {
+                            <p class="mb-1"><strong>Дата
+                                    народження:</strong> @Model.ProfileUser.BirthDate.Value.ToString("dd.MM.yyyy")</p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.ProfileUser.About))
+                        {
+                            <p class="mb-0"><strong>Про себе:</strong> @Model.ProfileUser.About</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+        <div class="col-12">
+            <h4 class="mb-4">Пости користувача (@Model.UserPosts.Count)</h4>
+
+            @if (!Model.UserPosts.Any())
+            {
+                <div class="alert alert-info text-center">
+                    Користувач ще не створив жодного поста.
+                </div>
+            }
+            else
+            {
+                <div class="user-posts-grid">
+                    @foreach (var post in Model.UserPosts)
+                    {
+                        <div class="user-post-item">
+                            <a href="/Details/@post.Id" class="text-decoration-none">
+                                <div class="post-image-container">
+                                    @if (post.UseLocalPhoto && post.LocalPhoto != null)
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(post.LocalPhoto)"
+                                             class="post-image"
+                                             alt="@post.Title">
+                                    }
+                                    else if (!post.UseLocalPhoto && !string.IsNullOrEmpty(post.RemotePhotoUrl))
+                                    {
+                                        <img src="@post.RemotePhotoUrl"
+                                             class="post-image"
+                                             alt="@post.Title"
+                                             onerror="this.onerror=null;this.src='';this.parentElement.classList.add('no-image');">
+                                    }
+                                    else
+                                    {
+                                        <div class="no-image-placeholder">
+                                            <span>📝</span>
+                                        </div>
+                                    }
+                                    
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

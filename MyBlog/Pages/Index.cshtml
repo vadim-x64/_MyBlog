@@ -80,23 +80,26 @@
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-between align-items-center foot">
+                                
                                 <div class="d-flex align-items-center">
-                                    @if (post.Author.Avatar != null)
-                                    {
-                                        <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
-                                             class="author-avatar"
-                                             alt="@post.Author.NickName">
-                                    }
-                                    else
-                                    {
-                                        <div class="author-placeholder">
-                                            <span>@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
+                                    <a href="/UserProfile/@post.Author.Id" class="text-decoration-none d-flex align-items-center">
+                                        @if (post.Author.Avatar != null)
+                                        {
+                                            <img src="data:image/png;base64,@Convert.ToBase64String(post.Author.Avatar)"
+                                                 class="author-avatar"
+                                                 alt="@post.Author.NickName">
+                                        }
+                                        else
+                                        {
+                                            <div class="author-placeholder">
+                                                <span>@(!string.IsNullOrEmpty(post.Author.NickName) ? post.Author.NickName[0].ToString() : "U")</span>
+                                            </div>
+                                        }
+                                        <div class="author-info">
+                                            <p class="author-name">@post.Author.NickName</p>
+                                            <p class="author-date">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</p>
                                         </div>
-                                    }
-                                    <div class="author-info">
-                                        <p class="author-name">@post.Author.NickName</p>
-                                        <p class="author-date">@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</p>
-                                    </div>
+                                    </a>
                                 </div>
                                 <div class="like-section">
                                     @if (User.Identity?.IsAuthenticated == true)

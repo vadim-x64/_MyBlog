@@ -10,4 +10,5 @@ public interface IPostService
     Task<bool> UpdatePostAsync(Post updatedPost, IFormFile? photo);
     Task<bool> DeletePostAsync(Guid id);
     Task<List<Post>> GetUserPostsAsync(Guid userId);
+    Task<List<Post>> GetPostsByUserIdAsync(Guid userId);
 }
