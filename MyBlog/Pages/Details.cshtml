@@ -15,70 +15,82 @@
 }
 
 <div class="container1">
-
     <div class="card mb-4">
-        @if (Model.Post.UseLocalPhoto && Model.Post.LocalPhoto != null)
-        {
-            <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.LocalPhoto)" class="card-img-top" alt="@Model.Post.Title">
-        }
-        else if (!string.IsNullOrEmpty(Model.Post.RemotePhotoUrl))
-        {
-            <img src="@Model.Post.RemotePhotoUrl" class="card-img-top" alt="@Model.Post.Title"
-                 onerror="this.onerror=null;this.style.display='none';document.getElementById('imageError').style.display='block';">
-            <div id="imageError" class="alert alert-warning m-3" style="display:none;">
-                Неможливо завантажити зображення з вказаного URL.
+        <div class="post-layout">
+            <!-- Фото зліва -->
+            <div class="post-image-container">
+                @if (Model.Post.UseLocalPhoto && Model.Post.LocalPhoto != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.LocalPhoto)" class="post-image" alt="@Model.Post.Title">
+                }
+                else if (!string.IsNullOrEmpty(Model.Post.RemotePhotoUrl))
+                {
+                    <img src="@Model.Post.RemotePhotoUrl" class="post-image" alt="@Model.Post.Title"
+                         onerror="this.onerror=null;this.style.display='none';document.getElementById('imageError').style.display='block';">
+                    <div id="imageError" class="alert alert-warning" style="display:none;">
+                        Неможливо завантажити зображення з вказаного URL.
+                    </div>
+                }
             </div>
-        }
-        <div class="card-body">
-            <h1 class="card-title">@Model.Post.Title</h1>
-            <!-- Замінити блок з автором в Details.cshtml (приблизно рядки 25-40): -->
 
-            <div class="d-flex align-items-center mb-3">
-                <a href="/UserProfile/@Model.Post.Author.Id" class="text-decoration-none d-flex align-items-center">
-                    @if (Model.Post.Author.Avatar != null)
-                    {
-                        <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.Author.Avatar)"
-                             class="rounded-circle me-2" alt="@Model.Post.Author.NickName">
-                    }
-                    else
-                    {
-                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
-                            <span>@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
-                        </div>
-                    }
-                    <div>
-                        <div class="text-dark">@Model.Post.Author.NickName</div>
-                        <small class="text-muted">Створено: @Model.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
-                        @if (Model.Post.CreatedAt != Model.Post.UpdatedAt)
+            <!-- Інформація справа -->
+            <div class="post-content-container">
+                <div class="card-body">
+                    <h1 class="card-title">@Model.Post.Title</h1>
+                    
+                    <!-- Автор -->
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="/UserProfile/@Model.Post.Author.Id" class="text-decoration-none d-flex align-items-center">
+                            @if (Model.Post.Author.Avatar != null)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(Model.Post.Author.Avatar)"
+                                     class="rounded-circle me-2" alt="@Model.Post.Author.NickName">
+                            }
+                            else
+                            {
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                                    <span>@(!string.IsNullOrEmpty(Model.Post.Author.NickName) ? Model.Post.Author.NickName[0].ToString() : "U")</span>
+                                </div>
+                            }
+                            <div>
+                                <div class="text-dark">@Model.Post.Author.NickName</div>
+                                <small class="text-muted">Створено: @Model.Post.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                @if (Model.Post.CreatedAt != Model.Post.UpdatedAt)
+                                {
+                                    <small class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                }
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- Лайки -->
+                    <div class="d-flex align-items-center mb-3">
+                        @if (User.Identity?.IsAuthenticated == true)
                         {
-                            <small class="text-muted d-block">Оновлено: @Model.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                            <form method="post" asp-page-handler="ToggleLike" class="d-inline me-3">
+                                <button type="submit" class="like-button">
+                                    @(Model.IsLiked ? "❤️" : "🤍") @Model.LikesCount
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="text-muted me-3">🤍 @Model.LikesCount</span>
                         }
                     </div>
-                </a>
-            </div>
-            
-            <div class="d-flex align-items-center mb-3">
-                @if (User.Identity?.IsAuthenticated == true)
-                {
-                    <form method="post" asp-page-handler="ToggleLike" class="d-inline me-3">
-                        <button type="submit" class="like-button">
-                            @(Model.IsLiked ? "❤️" : "🤍") @Model.LikesCount
-                        </button>
-                    </form>
-                }
-                else
-                {
-                    <span class="text-muted me-3">🤍 @Model.LikesCount</span>
-                }
-            </div>
 
-            <div class="card-text mt-4">
-                @Html.Raw(Model.Post.Content.Replace("\n", "<br>"))
+                    <!-- Опис -->
+                    <div class="card-text mt-4">
+                        @Html.Raw(Model.Post.Content.Replace("\n", "<br>"))
+                    </div>
+                </div>
             </div>
+        </div>
 
+        <!-- Коментарі залишаються як були -->
+        <div class="card-body">
             <hr class="my-4">
             <div class="comments-section">
-
                 @if (User.Identity?.IsAuthenticated == true)
                 {
                     <form method="post" class="mb-4" id="mainCommentForm">
@@ -132,7 +144,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -1,1 +1,271 @@
-﻿
+﻿/* User Profile Styles */
+.user-profile-header {
+    margin: 30px auto;
+}
+
+.user-profile-header .d-flex {
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.profile-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.profile-avatar-placeholder {
+    width: 200px;
+    height: 200px;
+    background-color: #666;
+    color: #FFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.profile-avatar-placeholder span {
+    font-size: 60px;
+    color: #FFF;
+}
+
+.user-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-info h2 {
+    font-size: 48px;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.user-info h5 {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.user-info p {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.user-info p strong {
+    color: #333;
+}
+
+/* Posts Section */
+.user-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.user-post-item {
+    aspect-ratio: 1;
+
+    border-radius: 0;
+}
+
+.post-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+}
+
+.post-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.no-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ddd;
+}
+
+.no-image-placeholder span {
+    font-size: 48px;
+    color: #999;
+}
+
+.post-image-container.no-image .post-image {
+    display: none;
+}
+
+.post-image-container.no-image::after {
+    content: "📝";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: #999;
+}
+
+/* Alert Styles */
+.alert {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+    color: #0c5460;
+}
+
+/* Section Headers */
+h4 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Divider */
+hr.my-4 {
+    border: none;
+    height: 1px;
+    background-color: #ddd;
+    margin: 40px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    .user-profile-header {
+        margin: 20px 0;
+    }
+
+    .user-profile-header .d-flex {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+        margin: 0 0 15px 0;
+    }
+
+    .profile-avatar-placeholder {
+        width: 120px;
+        height: 120px;
+        margin: 0 0 15px 0;
+    }
+
+    .profile-avatar-placeholder span {
+        font-size: 36px;
+    }
+
+    .user-info {
+        width: 100%;
+    }
+
+    .user-info h2 {
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+
+    .user-info h5 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .user-info p {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    /* Mobile Posts Grid */
+    .user-posts-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        margin: 20px -15px 40px -15px;
+        width: calc(100% + 30px);
+    }
+
+    .user-post-item {
+        aspect-ratio: 1;
+        border: none;
+        border-radius: 0;
+    }
+
+    .post-image-container {
+        width: 100%;
+        height: 100%;
+        border: 1px solid #fff;
+        box-sizing: border-box;
+    }
+
+    .no-image-placeholder span {
+        font-size: 24px;
+    }
+
+    .post-image-container.no-image::after {
+        font-size: 24px;
+    }
+
+    /* Mobile Alert Styles */
+    .alert {
+        font-size: 16px;
+        margin: 15px 0;
+        padding: 15px;
+    }
+
+    /* Mobile Section Headers */
+    h4 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Mobile Divider */
+    hr.my-4 {
+        margin: 30px 0;
+    }
+
+    /* Remove Bootstrap margins on mobile */
+    .me-4 {
+        margin-right: 0 !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem !important;
+    }
+}

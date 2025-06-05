@@ -34,14 +34,9 @@
                     <div class="user-info">
                         <h2 class="mb-1">@Model.ProfileUser.NickName</h2>
                         <h5 class="text-muted mb-2">@Model.ProfileUser.Surname @Model.ProfileUser.Name @Model.ProfileUser.LastName</h5>
-                        @if (Model.ProfileUser.BirthDate.HasValue)
-                        {
-                            <p class="mb-1"><strong>Дата
-                                    народження:</strong> @Model.ProfileUser.BirthDate.Value.ToString("dd.MM.yyyy")</p>
-                        }
                         @if (!string.IsNullOrEmpty(Model.ProfileUser.About))
                         {
-                            <p class="mb-0"><strong>Про себе:</strong> @Model.ProfileUser.About</p>
+                            <p class="mb-0">@Model.ProfileUser.About</p>
                         }
                     </div>
                 </div>
@@ -53,7 +48,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h4 class="mb-4">Пости користувача (@Model.UserPosts.Count)</h4>
+            
 
             @if (!Model.UserPosts.Any())
             {

@@ -6,6 +6,32 @@
     border: none;
 }
 
+/* Новий макет для поста */
+.post-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.post-image-container {
+    flex: 0 0 50%;
+    width: 100%;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 0;
+}
+
+.post-content-container {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Старі стилі для зображення (залишити для сумісності) */
 .card-img-top {
     width: 100%;
     height: auto;
@@ -14,7 +40,7 @@
 }
 
 .card-body {
-    padding: 20px;
+    padding: 0;
 }
 
 h1.card-title {
@@ -225,10 +251,26 @@ textarea.form-control {
     padding: 0;
 }
 
+/* Мобільна версія */
 @media screen and (max-width: 768px) {
     .container1 {
         margin: 10px;
         padding: 0;
+    }
+
+    /* Перехід на вертикальний макет на мобільних */
+    .post-layout {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .post-image-container {
+        flex: none;
+        max-width: 100%;
+    }
+
+    .post-image {
+        max-height: 300px;
     }
 
     .card-body {
@@ -236,12 +278,12 @@ textarea.form-control {
     }
 
     h1.card-title {
-        font-size: 22px; /* Зменшений розмір заголовка поста */
+        font-size: 22px;
         margin-bottom: 15px;
     }
 
     .rounded-circle {
-        width: 40px; /* Зменшений аватар автора */
+        width: 40px;
         height: 40px;
     }
 
@@ -255,12 +297,12 @@ textarea.form-control {
     }
 
     .card-text {
-        font-size: 16px; /* Зменшений розмір основного тексту поста */
+        font-size: 16px;
     }
 
     textarea.form-control,
     .btn {
-        font-size: 16px; /* Зменшений розмір тексту для полів вводу та кнопок */
+        font-size: 16px;
     }
 
     .btn {
@@ -273,35 +315,35 @@ textarea.form-control {
     }
 
     .comments-scrollable {
-        max-height: 350px; /* Зменшена максимальна висота для прокрутки коментарів */
+        max-height: 350px;
         padding-right: 5px;
     }
 
     .comment-thread .card-body,
     .reply-item .card-body {
-        padding: 8px; /* Зменшені відступи в коментарях */
+        padding: 8px;
     }
 
     .comment-actions {
-        flex-wrap: wrap; /* Дозволити перенесення кнопок на новий рядок */
+        flex-wrap: wrap;
     }
 
     .comment-actions .btn-link {
-        margin-bottom: 5px; /* Невеликий відступ знизу для кнопок при перенесенні */
+        margin-bottom: 5px;
     }
 
     .reply-form {
-        padding-left: 10px; /* Зменшений відступ для форми відповіді */
-        margin-left: 45px; /* Скоригований відступ для форми відповіді */
+        padding-left: 10px;
+        margin-left: 45px;
     }
 
     .replies-container,
     .nested-replies {
-        margin-left: 15px; /* Зменшений відступ для вкладених відповідей */
+        margin-left: 15px;
     }
 
     .reply-item .rounded-circle {
-        width: 30px; /* Зменшений аватар у відповідях */
+        width: 30px;
         height: 30px;
     }
 
@@ -314,25 +356,25 @@ textarea.form-control {
         font-size: 16px;
     }
 
-    .d-flex.align-items-center.mb-3 > div:not(:first-child) { /* Для тексту автора та дати */
-        font-size: 0.85rem; /* Трохи зменшити шрифт */
+    .d-flex.align-items-center.mb-3 > div:not(:first-child) {
+        font-size: 0.85rem;
     }
 
     .d-flex.align-items-center.mb-3 small.text-muted {
-        font-size: 0.75rem; /* Зменшити шрифт дати */
+        font-size: 0.75rem;
     }
 
     .alert {
-        padding: 15px; /* Зменшені відступи для повідомлень */
+        padding: 15px;
         font-size: 15px;
     }
 
     .modal-title {
-        font-size: 20px; /* Зменшений заголовок модального вікна */
+        font-size: 20px;
     }
 
     .modal-body {
-        font-size: 16px; /* Зменшений текст тіла модального вікна */
+        font-size: 16px;
         padding: 15px;
     }
 
@@ -342,10 +384,10 @@ textarea.form-control {
     }
 
     .card-img-top {
-        max-height: 300px; /* Зменшена максимальна висота зображення поста */
+        max-height: 300px;
     }
 
     .replies-count {
-        margin-left: 45px; /* Скоригований відступ для кнопки "Показати відповіді" */
+        margin-left: 45px;
     }
 }
