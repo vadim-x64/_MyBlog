@@ -207,3 +207,8 @@ C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\0enpgq0yse-nxz6
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\9oq8tze2lx-2rp7nhj73a.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\eq8goi7zlo-qnqawii6zw.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\jrub4hk256-drx3m4w08j.gz
+C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\Microsoft.OpenApi.dll
+C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\CRYSTAL\source\repos\MyBlog\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\MyBlog.MvcApplicationPartsAssemblyInfo.cs
