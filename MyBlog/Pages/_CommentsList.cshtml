@@ -3,8 +3,8 @@
 
 @{
     var rootComments = Model.Where(c => c.ParentCommentId == null).OrderByDescending(c => c.CreatedAt).ToList();
-    Func<Guid, List<MyBlog.Models.Comment>> GetReplies = null;
-    GetReplies = (commentId) => Model.Where(c => c.ParentCommentId == commentId).OrderBy(c => c.CreatedAt).ToList();
+    Func<Guid, List<MyBlog.Models.Comment>> GetAllReplies = null;
+    GetAllReplies = (commentId) => Model.Where(c => c.ParentCommentId == commentId).OrderBy(c => c.CreatedAt).ToList();
 }
 
 <link rel="stylesheet" href="~/css/details.css">
@@ -76,22 +76,99 @@
         </div>
 
         @{
-            var replies = GetReplies(comment.Id);
+            // Отримуємо всі відповіді для цього коментаря (включаючи відповіді на відповіді)
+            var allReplies = GetAllRepliesFlat(comment.Id, Model);
         }
-        @if (replies.Any())
+        @if (allReplies.Any())
         {
             <div class="replies-count mt-1 mb-2">
                 <button class="btn btn-sm btn-link toggle-replies-btn p-0"
                         data-comment-id="@comment.Id"
-                        data-replies-count="@replies.Count">
-                    <span class="show-text">Показати відповіді (@replies.Count)</span>
+                        data-replies-count="@allReplies.Count">
+                    <span class="show-text">Показати відповіді (@allReplies.Count)</span>
                     <span class="hide-text d-none">Приховати відповіді</span>
                 </button>
             </div>
             <div class="replies-container mt-2 d-none" id="replies-@comment.Id">
-                @foreach (var reply in replies)
+                @foreach (var reply in allReplies)
                 {
-                    await DisplayCommentWithReplies(reply, GetReplies);
+                    <div class="reply-item mb-2" id="comment-@reply.Id">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex align-items-start">
+                                    @if (reply.Author.Avatar != null)
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(reply.Author.Avatar)"
+                                             class="rounded-circle me-2" alt="@reply.Author.NickName">
+                                    }
+                                    else
+                                    {
+                                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
+                                            <span>@(!string.IsNullOrEmpty(reply.Author.NickName) ? reply.Author.NickName[0].ToString() : "U")</span>
+                                        </div>
+                                    }
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">@reply.Author.NickName</h6>
+                                            <small class="text-muted">@reply.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
+                                        </div>
+
+                                        <div class="reply-indicator mt-1 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <div class="reply-arrow me-2">↪</div>
+                                                <a href="#comment-@reply.ParentCommentId" class="text-muted text-decoration-none">
+                                                    @{
+                                                        var parentComment = Model.FirstOrDefault(c => c.Id == reply.ParentCommentId);
+                                                        var parentAuthorName = parentComment?.Author.NickName ?? "Невідомий";
+                                                    }
+                                                    Відповідь до @parentAuthorName
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <p class="my-2">
+                                            @{
+                                                var replyContent = reply.Content;
+                                                replyContent = Regex.Replace(replyContent, @"@(\w+)", "<span class='user-mention'>@$1</span>");
+                                                replyContent = replyContent.Replace("\n", "<br>");
+                                            }
+                                            @Html.Raw(replyContent)
+                                        </p>
+
+                                        <div class="comment-actions">
+                                            @if (User.Identity?.IsAuthenticated == true)
+                                            {
+                                                <button class="btn btn-sm btn-link p-0 reply-button me-3"
+                                                        data-comment-id="@reply.Id"
+                                                        data-author-name="@reply.Author.NickName">Відповісти</button>
+                                            }
+                                            @if (User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == reply.AuthorId.ToString())
+                                            {
+                                                <button type="button" class="btn btn-sm btn-link text-danger p-0 delete-comment-btn"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteCommentModal"
+                                                        data-comment-id="@reply.Id">
+                                                    Видалити
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reply-form d-none mt-2 mb-2" id="reply-form-@reply.Id">
+                            <form method="post" asp-page-handler="AddReply" asp-route-parentCommentId="@reply.Id">
+                                <div class="form-group">
+                                    <textarea name="replyContent" class="form-control" rows="2" placeholder="Ваша відповідь..." maxlength="2000"></textarea>
+                                </div>
+                                <div class="mt-2">
+                                    <button type="submit" class="btn btn-sm btn-primary">Відправити</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary ms-2 cancel-reply" data-comment-id="@reply.Id">Скасувати</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 }
             </div>
         }
@@ -99,102 +176,24 @@
 }
 
 @functions {
-
-    private async Task DisplayCommentWithReplies(Models.Comment comment, Func<Guid, List<Models.Comment>> getRepliesFunc)
+    private List<MyBlog.Models.Comment> GetAllRepliesFlat(Guid rootCommentId, List<MyBlog.Models.Comment> allComments)
     {
-        <div class="reply-item mb-2" id="comment-@comment.Id">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-start">
-                        @if (comment.Author.Avatar != null)
-                        {
-                            <img src="data:image/png;base64,@Convert.ToBase64String(comment.Author.Avatar)"
-                                 class="rounded-circle me-2" alt="@comment.Author.NickName">
-                        }
-                        else
-                        {
-                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2">
-                                <span>@(!string.IsNullOrEmpty(comment.Author.NickName) ? comment.Author.NickName[0].ToString() : "U")</span>
-                            </div>
-                        }
-                        <div class="flex-grow-1">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="mb-0">@comment.Author.NickName</h6>
-                                <small class="text-muted">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
-                            </div>
-
-                            <div class="reply-indicator mt-1 mb-2">
-                                <div class="d-flex align-items-center">
-                                    <div class="reply-arrow me-2">↪</div>
-                                    <a href="#comment-@comment.ParentCommentId" class="text-muted text-decoration-none">
-                                        Відповідь до @comment.ParentComment?.Author.NickName
-                                    </a>
-                                </div>
-                            </div>
-
-                            <p class="my-2">
-                                @{
-                                    var content = comment.Content;
-                                    content = Regex.Replace(content, @"@(\w+)", "<span class='user-mention'>@$1</span>");
-                                    content = content.Replace("\n", "<br>");
-                                }
-                                @Html.Raw(content)
-                            </p>
-
-                            <div class="comment-actions">
-                                @if (User.Identity?.IsAuthenticated == true)
-                                {
-                                    <button class="btn btn-sm btn-link p-0 reply-button me-3"
-                                            data-comment-id="@comment.Id"
-                                            data-author-name="@comment.Author.NickName">Відповісти</button>
-                                }
-                                @if (User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value == comment.AuthorId.ToString())
-                                {
-                                    <button type="button" class="btn btn-sm btn-link text-danger p-0 delete-comment-btn"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#deleteCommentModal"
-                                            data-comment-id="@comment.Id">
-                                        Видалити
-                                    </button>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="reply-form d-none mt-2 mb-2" id="reply-form-@comment.Id">
-                <form method="post" asp-page-handler="AddReply" asp-route-parentCommentId="@comment.Id">
-                    <div class="form-group">
-                        <textarea name="replyContent" class="form-control" rows="2" placeholder="Ваша відповідь..." maxlength="2000"></textarea>
-                    </div>
-                    <div class="mt-2">
-                        <button type="submit" class="btn btn-sm btn-primary">Відправити</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary ms-2 cancel-reply" data-comment-id="@comment.Id">Скасувати</button>
-                    </div>
-                </form>
-            </div>
-
-            @{
-                var childReplies = getRepliesFunc(comment.Id);
-            }
-            @if (childReplies.Any())
+        var result = new List<MyBlog.Models.Comment>();
+        var toProcess = new Queue<Guid>();
+        toProcess.Enqueue(rootCommentId);
+        
+        while (toProcess.Count > 0)
+        {
+            var currentId = toProcess.Dequeue();
+            var directReplies = allComments.Where(c => c.ParentCommentId == currentId).OrderBy(c => c.CreatedAt).ToList();
+            
+            foreach (var reply in directReplies)
             {
-                <div class="replies-count mt-1 mb-2">
-                    <button class="btn btn-sm btn-link toggle-replies-btn p-0"
-                            data-comment-id="@comment.Id"
-                            data-replies-count="@childReplies.Count">
-                        <span class="show-text">Показати відповіді (@childReplies.Count)</span>
-                        <span class="hide-text d-none">Приховати відповіді</span>
-                    </button>
-                </div>
-                <div class="nested-replies mt-2 mb-2 d-none" id="replies-@comment.Id">
-                    @foreach (var childReply in childReplies)
-                    {
-                        await DisplayCommentWithReplies(childReply, getRepliesFunc);
-                    }
-                </div>
+                result.Add(reply);
+                toProcess.Enqueue(reply.Id);
             }
-        </div>
+        }
+        
+        return result;
     }
 }
