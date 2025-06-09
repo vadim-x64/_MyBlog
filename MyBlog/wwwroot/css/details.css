@@ -249,6 +249,76 @@ textarea.form-control {
     border: none;
     font-size: 18px;
     padding: 0;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.1s ease;
+}
+
+.like-button.animating {
+    transform: scale(1.1);
+}
+
+.like-explosion {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.heart-particle {
+    position: absolute;
+    font-size: 12px;
+    color: #ff4757;
+    animation: heartFloat 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.sparkle-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, #ffd700, #ffff00);
+    border-radius: 50%;
+    animation: sparkleFloat 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes heartFloat {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(var(--dx), var(--dy)) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(calc(var(--dx) * 1.5), calc(var(--dy) * 1.5)) scale(0.3);
+    }
+}
+
+@keyframes sparkleFloat {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0);
+    }
+}
+
+.like-button.liked {
+    animation: likeScale 0.3s ease-in-out;
+}
+
+@keyframes likeScale {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
 /* Мобільна версія */

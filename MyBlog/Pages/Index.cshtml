@@ -104,16 +104,18 @@
                                 <div class="like-section">
                                     @if (User.Identity?.IsAuthenticated == true)
                                     {
-                                        <form method="post" asp-page-handler="ToggleLike" class="d-inline">
-                                            <input type="hidden" name="postId" value="@post.Id" />
-                                            <button type="submit" class="like-button @(Model.LikedPosts.GetValueOrDefault(post.Id) ? "liked" : "")">
-                                                @(Model.LikedPosts.GetValueOrDefault(post.Id) ? "❤️" : "🤍") @Model.LikesCount.GetValueOrDefault(post.Id)
-                                            </button>
-                                        </form>
+                                        <button type="button" 
+                                                class="like-button @(Model.LikedPosts.GetValueOrDefault(post.Id) ? "liked" : "")"
+                                                onclick="toggleLike('@post.Id', this)">
+                                            <span class="like-icon">@(Model.LikedPosts.GetValueOrDefault(post.Id) ? "❤️" : "🤍")</span>
+                                            <span class="like-count">@Model.LikesCount.GetValueOrDefault(post.Id)</span>
+                                        </button>
                                     }
                                     else
                                     {
-                                        <span class="text-muted like-display">🤍 @Model.LikesCount.GetValueOrDefault(post.Id)</span>
+                                        <span class="text-muted like-display">
+                                            🤍 <span class="like-count">@Model.LikesCount.GetValueOrDefault(post.Id)</span>
+                                        </span>
                                     }
                                 </div>
                             </div>
@@ -127,8 +129,101 @@
             </button>
         </div>
     }
+    @Html.AntiForgeryToken()
 </div>
 
 @section Scripts {
     <script src="~/js/index.js"></script>
+
+    <script>
+        function createLikeExplosion(button) {
+            const explosion = document.createElement('div');
+            explosion.className = 'like-explosion';
+            button.appendChild(explosion);
+
+            // Створюємо сердечка
+            for (let i = 0; i < 6; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart-particle';
+                heart.textContent = '❤️';
+
+                const angle = (360 / 6) * i + Math.random() * 30;
+                const distance = 30 + Math.random() * 20;
+                const dx = Math.cos(angle * Math.PI / 180) * distance;
+                const dy = Math.sin(angle * Math.PI / 180) * distance;
+
+                heart.style.setProperty('--dx', dx + 'px');
+                heart.style.setProperty('--dy', dy + 'px');
+                heart.style.animationDelay = (i * 0.05) + 's';
+
+                explosion.appendChild(heart);
+            }
+
+            // Створюємо блискавки
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle-particle';
+
+                const angle = (360 / 8) * i + Math.random() * 45;
+                const distance = 20 + Math.random() * 25;
+                const dx = Math.cos(angle * Math.PI / 180) * distance;
+                const dy = Math.sin(angle * Math.PI / 180) * distance;
+
+                sparkle.style.setProperty('--dx', dx + 'px');
+                sparkle.style.setProperty('--dy', dy + 'px');
+                sparkle.style.animationDelay = (i * 0.03) + 's';
+
+                explosion.appendChild(sparkle);
+            }
+
+            setTimeout(() => {
+                if (explosion.parentNode) {
+                    explosion.parentNode.removeChild(explosion);
+                }
+            }, 1000);
+        }
+
+        function toggleLike(postId, button) {
+            const formData = new FormData();
+            formData.append('postId', postId);
+            formData.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
+
+            // Додаємо анімацію перед відправкою запиту
+            const likeIcon = button.querySelector('.like-icon');
+            const wasLiked = likeIcon.textContent === '❤️';
+
+            if (!wasLiked) {
+                button.classList.add('animating');
+                createLikeExplosion(button);
+            }
+
+            fetch('/?handler=ToggleLike', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const likeCount = button.querySelector('.like-count');
+
+                    setTimeout(() => {
+                        likeIcon.textContent = data.isLiked ? '❤️' : '🤍';
+                        likeCount.textContent = data.likesCount;
+
+                        if (data.isLiked) {
+                            button.classList.add('liked');
+                        } else {
+                            button.classList.remove('liked');
+                        }
+                        button.classList.remove('animating');
+                    }, 100);
+                })
+                .catch(error => {
+                    console.error('Помилка:', error);
+                    button.classList.remove('animating');
+                });
+        }
+    </script>
 }

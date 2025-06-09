@@ -69,9 +69,19 @@ public class DetailsModel : PageModel
         return RedirectToPage(new { id });
     }
 
-    public async Task<IActionResult> OnPostToggleLikeAsync(Guid id)
+    public async Task<IActionResult> OnPostToggleLikeAsync(Guid id, Guid postId)
     {
-        await _likeService.ToggleLikeAsync(id);
+        await _likeService.ToggleLikeAsync(postId);
+        
+        // Перевіряємо чи це AJAX запит
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            var isLiked = await _likeService.IsPostLikedByCurrentUserAsync(postId);
+            var likesCount = await _likeService.GetLikesCountAsync(postId);
+        
+            return new JsonResult(new { isLiked, likesCount });
+        }
+        
         return RedirectToPage(new { id });
     }
 }

@@ -36,6 +36,13 @@ public class IndexModel : PageModel
     public async Task<IActionResult> OnPostToggleLikeAsync(Guid postId)
     {
         await _likeService.ToggleLikeAsync(postId);
+        if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+        {
+            var isLiked = await _likeService.IsPostLikedByCurrentUserAsync(postId);
+            var likesCount = await _likeService.GetLikesCountAsync(postId);
+        
+            return new JsonResult(new { isLiked, likesCount });
+        }
         return RedirectToPage();
     }
 }
