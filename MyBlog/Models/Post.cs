@@ -33,4 +33,6 @@ public class Post
     public DateTime UpdatedAt { get; set; }
     
     public bool IsPrivate { get; set; } = false;
+    
+    public bool CommentsDisabled { get; set; } = false;
 }

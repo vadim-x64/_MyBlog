@@ -98,7 +98,13 @@
         <div class="card-body">
             <hr class="my-4">
             <div class="comments-section">
-                @if (User.Identity?.IsAuthenticated == true)
+                @if (Model.Post.CommentsDisabled)
+                {
+                    <div class="alert alert-secondary mb-4">
+                        <i class="fas fa-comment-slash"></i> Автор заборонив коментарі до цього поста.
+                    </div>
+                }
+                else if (User.Identity?.IsAuthenticated == true)
                 {
                     <form method="post" class="mb-4" id="mainCommentForm">
                         <div class="form-group">
@@ -117,18 +123,21 @@
                     </div>
                 }
 
-                <div id="comments-container" class="comments-scrollable">
-                    @if (Model.Comments.Count == 0)
-                    {
-                        <div class="text-center py-4">
-                            <p class="text-muted">Ще немає коментарів. Будьте першим!</p>
-                        </div>
-                    }
-                    else
-                    {
-                        <partial name="_CommentsList" model="Model.Comments" />
-                    }
-                </div>
+                @if (!Model.Post.CommentsDisabled)
+                {
+                    <div id="comments-container" class="comments-scrollable">
+                        @if (Model.Comments.Count == 0)
+                        {
+                            <div class="text-center py-4">
+                                <p class="text-muted">Ще немає коментарів. Будьте першим!</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <partial name="_CommentsList" model="Model.Comments" />
+                        }
+                    </div>
+                }
             </div>
 
             <div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel" aria-hidden="true">

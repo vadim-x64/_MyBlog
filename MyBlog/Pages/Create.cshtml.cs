@@ -73,7 +73,9 @@ public class CreateModel : PageModel
             Content = PostInput.Content,
             RemotePhotoUrl = PostInput.RemotePhotoUrl,
             UseLocalPhoto = PostInput.UseLocalPhoto,
-            IsPrivate = PostInput.IsPrivate  // Додати цю строку
+            IsPrivate = PostInput.IsPrivate,
+            CommentsDisabled = PostInput.CommentsDisabled
+            
         };
         
         var result = await _postService.CreatePostAsync(post, Photo);
@@ -104,5 +106,7 @@ public class CreateModel : PageModel
     
         public bool UseLocalPhoto { get; set; } = true;
         public bool IsPrivate { get; set; } = false;  // Додати цю строку
+        
+        public bool CommentsDisabled { get; set; } = false;
     }
 }
