@@ -72,9 +72,10 @@ public class CreateModel : PageModel
             Title = PostInput.Title,
             Content = PostInput.Content,
             RemotePhotoUrl = PostInput.RemotePhotoUrl,
-            UseLocalPhoto = PostInput.UseLocalPhoto
+            UseLocalPhoto = PostInput.UseLocalPhoto,
+            IsPrivate = PostInput.IsPrivate  // Додати цю строку
         };
-
+        
         var result = await _postService.CreatePostAsync(post, Photo);
 
         if (result)
@@ -93,14 +94,15 @@ public class CreateModel : PageModel
         [Required(ErrorMessage = "Заголовок обов'язковий")]
         [StringLength(50, ErrorMessage = "Заголовок не може перевищувати 50 символів")]
         public string Title { get; set; } = null!;
-    
+
         [Url(ErrorMessage = "Введіть коректний URL")]
         public string? RemotePhotoUrl { get; set; }
 
         [Required(ErrorMessage = "Вміст обов'язковий")]
         [StringLength(5000, ErrorMessage = "Вміст не може перевищувати 5000 символів")]
         public string Content { get; set; } = null!;
-        
+    
         public bool UseLocalPhoto { get; set; } = true;
+        public bool IsPrivate { get; set; } = false;  // Додати цю строку
     }
 }

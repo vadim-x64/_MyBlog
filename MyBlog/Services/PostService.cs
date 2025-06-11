@@ -28,6 +28,7 @@ public class PostService : IPostService
     {
         return await _context.Posts
             .Include(p => p.Author)
+            .Where(p => !p.IsPrivate)
             .OrderByDescending(p => p.UpdatedAt)
             .ToListAsync();
     }
@@ -104,6 +105,7 @@ public class PostService : IPostService
         post.Content = updatedPost.Content;
         post.UpdatedAt = DateTime.UtcNow.AddHours(+3);
         post.UseLocalPhoto = updatedPost.UseLocalPhoto;
+        post.IsPrivate = updatedPost.IsPrivate; 
         
         if (post.UseLocalPhoto)
         {

@@ -54,7 +54,8 @@ public class EditModel : PageModel
             Title = post.Title,
             Content = post.Content,
             RemotePhotoUrl = post.RemotePhotoUrl,
-            UseLocalPhoto = post.UseLocalPhoto
+            UseLocalPhoto = post.UseLocalPhoto,
+            IsPrivate = post.IsPrivate  // Додати цю строку
         };
         
         if (post.LocalPhoto != null && post.LocalPhoto.Length > 0)
@@ -126,7 +127,8 @@ public class EditModel : PageModel
             Title = PostInput.Title,
             Content = PostInput.Content,
             RemotePhotoUrl = PostInput.RemotePhotoUrl,
-            UseLocalPhoto = PostInput.UseLocalPhoto
+            UseLocalPhoto = PostInput.UseLocalPhoto,
+            IsPrivate = PostInput.IsPrivate  // Додати цю строку
         };
 
         var result = await _postService.UpdatePostAsync(post, Photo);
@@ -158,14 +160,15 @@ public class EditModel : PageModel
         [Required(ErrorMessage = "Заголовок обов'язковий")]
         [StringLength(50, ErrorMessage = "Заголовок не може перевищувати 50 символів")]
         public string Title { get; set; } = null!;
-        
+    
         [Url(ErrorMessage = "Введіть коректний URL")]
         public string? RemotePhotoUrl { get; set; }
 
         [Required(ErrorMessage = "Вміст обов'язковий")]
         [StringLength(5000, ErrorMessage = "Вміст не може перевищувати 5000 символів")]
         public string Content { get; set; } = null!;
-        
+    
         public bool UseLocalPhoto { get; set; } = true;
+        public bool IsPrivate { get; set; } = false;  // Додати цю строку
     }
 }

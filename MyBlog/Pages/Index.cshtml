@@ -113,9 +113,13 @@
                                     }
                                     else
                                     {
-                                        <span class="text-muted like-display">
-                                            🤍 <span class="like-count">@Model.LikesCount.GetValueOrDefault(post.Id)</span>
-                                        </span>
+                                        <button type="button" 
+                                                class="like-button"
+                                                onclick="toggleLike('@post.Id', this)"
+                                                title="Увійдіть, щоб поставити лайк">
+                                            <span class="like-icon">🤍</span>
+                                            <span class="like-count">@Model.LikesCount.GetValueOrDefault(post.Id)</span>
+                                        </button>
                                     }
                                 </div>
                             </div>
@@ -184,6 +188,14 @@
         }
 
         function toggleLike(postId, button) {
+            const isAuthenticated = @(User.Identity?.IsAuthenticated == true ? "true" : "false");
+
+            if (!isAuthenticated) {
+                // Перенаправляємо на сторінку входу з поверненням на поточну сторінку
+                window.location.href = '/Login?returnUrl=' + encodeURIComponent(window.location.pathname);
+                return;
+            }
+            
             const formData = new FormData();
             formData.append('postId', postId);
             formData.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);

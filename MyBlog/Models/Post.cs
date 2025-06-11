@@ -31,4 +31,6 @@ public class Post
     public DateTime CreatedAt { get; set; }
     
     public DateTime UpdatedAt { get; set; }
+    
+    public bool IsPrivate { get; set; } = false;
 }
