@@ -29,7 +29,7 @@ public class PostService : IPostService
         return await _context.Posts
             .Include(p => p.Author)
             .Where(p => !p.IsPrivate)
-            .OrderByDescending(p => p.UpdatedAt)
+            .OrderBy(p => p.CreatedAt)
             .ToListAsync();
     }
 

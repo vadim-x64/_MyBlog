@@ -19,24 +19,16 @@
 }
 
 .post-image {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
+    width: 700px;
+    height: 500px;
     object-fit: cover;
+    object-position: center;
     border-radius: 0;
 }
 
 .post-content-container {
     flex: 1;
     min-width: 0;
-}
-
-/* Старі стилі для зображення (залишити для сумісності) */
-.card-img-top {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-    object-fit: contain;
 }
 
 .card-body {
@@ -340,7 +332,8 @@ textarea.form-control {
     }
 
     .post-image {
-        max-height: 300px;
+        max-width: 100%;
+        height: auto;
     }
 
     .card-body {
