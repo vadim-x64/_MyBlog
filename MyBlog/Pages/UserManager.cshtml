@@ -56,7 +56,11 @@ ViewData["Title"] = "Керування користувачами";
                 </div>
                 }
             </td>
-            <td>@user.NickName</td>
+            <td>
+                <a href="/UserProfile/@user.Id" class="text-decoration-none">
+                    @user.NickName
+                </a>
+            </td>
             <td>@user.Surname @user.Name @user.LastName</td>
             <td>
                 @if(user.BirthDate.HasValue)
