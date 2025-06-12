@@ -4,8 +4,11 @@
     ViewData["Title"] = "Профіль";
     var user = Model.CurrentUser!;
 }
+
 <link rel="stylesheet" href="~/css/profile.css">
+
 <h2>Профіль користувача</h2>
+
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -13,6 +16,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -20,6 +24,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
 <div class="row">
     <div class="col-md-4">
         @if (user.Avatar != null)
@@ -172,6 +177,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script src="~/js/profile.js"></script>
 }

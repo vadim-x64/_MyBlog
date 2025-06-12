@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyBlog.Models;
 using System.ComponentModel.DataAnnotations;
 using MyBlog.Repository.Interfaces;
 
@@ -12,18 +11,19 @@ public class EditModel : PageModel
 {
     private readonly IPostService _postService;
     private readonly IUserService _userService;
+    private readonly string[] _allowedImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".svg", ".tiff", ".tif" };
 
-    private readonly string[] _allowedImageExtensions =
-        { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".svg", ".tiff", ".tif" };
+    [BindProperty] 
+    public PostInputModel PostInput { get; set; } = new();
 
-    [BindProperty] public PostInputModel PostInput { get; set; } = new();
-
-    [BindProperty] public IFormFile? Photo { get; set; }
+    [BindProperty] 
+    public IFormFile? Photo { get; set; }
 
     public bool HasLocalPhoto { get; set; }
     public string? LocalPhotoBase64 { get; set; }
 
-    [TempData] public string? ErrorMessage { get; set; }
+    [TempData] 
+    public string? ErrorMessage { get; set; }
 
     public EditModel(IPostService postService, IUserService userService)
     {
@@ -55,7 +55,7 @@ public class EditModel : PageModel
             RemotePhotoUrl = post.RemotePhotoUrl,
             UseLocalPhoto = post.UseLocalPhoto,
             IsPrivate = post.IsPrivate,
-            CommentsDisabled = post.CommentsDisabled // Додайте цю строку
+            CommentsDisabled = post.CommentsDisabled
         };
 
         if (post.LocalPhoto != null && post.LocalPhoto.Length > 0)
@@ -124,14 +124,12 @@ public class EditModel : PageModel
             return Page();
         }
 
-        // Отримуємо існуючий пост для збереження всіх полів
         var existingPostForUpdate = await _postService.GetPostByIdAsync(PostInput.Id);
         if (existingPostForUpdate == null)
         {
             return NotFound();
         }
-
-        // Оновлюємо тільки ті поля, які можна редагувати
+        
         existingPostForUpdate.Title = PostInput.Title;
         existingPostForUpdate.Content = PostInput.Content;
         existingPostForUpdate.RemotePhotoUrl = PostInput.RemotePhotoUrl;
@@ -175,7 +173,7 @@ public class EditModel : PageModel
         public string Content { get; set; } = null!;
 
         public bool UseLocalPhoto { get; set; } = true;
-        public bool IsPrivate { get; set; } = false; // Додати цю строку
+        public bool IsPrivate { get; set; } = false;
 
         public bool CommentsDisabled { get; set; } = false;
     }

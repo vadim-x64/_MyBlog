@@ -24,7 +24,6 @@
         <span asp-validation-for="RegisterForm.Avatar" class="text-danger"></span>
         <small class="text-muted">Дозволені формати: .jpg, .jpeg, .png, .gif, .bmp, .jfif</small>
     </div>
-    
     <div class="mb-4">
         <label asp-for="RegisterForm.Surname" class="form-label"></label>
         <input asp-for="RegisterForm.Surname" class="form-control"/>
@@ -40,32 +39,27 @@
         <input asp-for="RegisterForm.LastName" class="form-control"/>
         <span asp-validation-for="RegisterForm.LastName" class="text-danger"></span>
     </div>
-    
     <div class="mb-4">
         <label asp-for="RegisterForm.NickName" class="form-label"></label>
         <input asp-for="RegisterForm.NickName" class="form-control"/>
         <span asp-validation-for="RegisterForm.NickName" class="text-danger"></span>
     </div>
-
     <div class="mb-4">
         <label asp-for="RegisterForm.BirthDate" class="form-label"></label>
         <input asp-for="RegisterForm.BirthDate" class="form-control" type="date"
                max="@DateTime.Today.ToString("yyyy-MM-dd")"/>
         <span asp-validation-for="RegisterForm.BirthDate" class="text-danger"></span>
     </div>
-
     <div class="mb-4">
         <label asp-for="RegisterForm.PhoneNumber" class="form-label"></label>
         <input asp-for="RegisterForm.PhoneNumber" class="form-control"/>
         <span asp-validation-for="RegisterForm.PhoneNumber" class="text-danger"></span>
     </div>
-
     <div class="mb-4">
         <label asp-for="RegisterForm.Email" class="form-label"></label>
         <input asp-for="RegisterForm.Email" class="form-control"/>
         <span asp-validation-for="RegisterForm.Email" class="text-danger"></span>
     </div>
-
     <div class="mb-4">
         <label asp-for="RegisterForm.About" class="form-label"></label>
         <textarea asp-for="RegisterForm.About" class="form-control" rows="3" maxlength="150"
@@ -76,7 +70,6 @@
         <small class="text-danger d-none" id="pasteWarning">Вставка тексту заборонена! Будь ласка, введіть текст вручну.</small>
         <span asp-validation-for="RegisterForm.About" class="text-danger"></span>
     </div>
-
     <div class="mb-4">
         <label asp-for="RegisterForm.Password" class="form-label"></label>
         <input asp-for="RegisterForm.Password" class="form-control" type="password" id="passwordInput"/>
@@ -88,7 +81,6 @@
             </label>
         </div>
     </div>
-
     <div class="mb-4">
         <label asp-for="RegisterForm.ConfirmPassword" class="form-label"></label>
         <input asp-for="RegisterForm.ConfirmPassword" class="form-control" type="password" id="confirmPasswordInput"/>
@@ -100,12 +92,9 @@
             </label>
         </div>
     </div>
-
     <button type="submit" class="btn btn-outline-success">Зареєструватися</button>
 </form>
 
 @section Scripts {
-    <script src="~/js/register.js">
-        
-    </script>
+    <script src="~/js/register.js"></script>
 }

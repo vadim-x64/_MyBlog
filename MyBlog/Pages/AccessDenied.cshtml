@@ -4,38 +4,10 @@
     ViewData["Title"] = "Помилка";
 }
 
-<style>
-    .display-4 {
-        font-size: 60px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin: 50px 0 0 0;
-    }
-    
-    .lead {
-        font-size: 24px;
-        color: #333;
-        margin: 20px auto;
-    }
-    
-    @@media screen and (max-width: 768px) {
-        .display-4 {
-            font-size: 36px;
-            margin: 20px 0 0 0;
-        }
-
-        .lead {
-            font-size: 18px;
-        }
-    }
-</style>
+<link rel="stylesheet" href="~/css/accessdenied.css">
 
 <div class="text-center">
     <h1 class="display-4 text-danger">Доступ заборонено</h1>
-    
     @if (Model.Blocked)
     {
         <p class="lead">Ваш обліковий запис заблоковано адміністратором.</p>

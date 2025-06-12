@@ -19,15 +19,9 @@ public class Users
 
     [StringLength(50, ErrorMessage = "По батькові не повинно перевищувати 50 символів")]
     public string? LastName { get; set; }
-
-    private string? _nickName;
     
     [StringLength(50, ErrorMessage = "Нікнейм не повинен перевищувати 50 символів")]
-    public string? NickName 
-    { 
-        get => Role == 2 ? $"{_nickName} ✔️" : _nickName;
-        set => _nickName = value;
-    }
+    public string? NickName { get; set; }
 
     [DataType(DataType.Date)]
     [Range(typeof(DateTime), "1900-01-01", "9999-12-31", ErrorMessage = "Дата народження повинна бути в межах від 01.01.1900 до поточної дати")]

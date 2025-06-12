@@ -1,7 +1,7 @@
 ﻿@page
 @model MyBlog.Pages.UserManagerModel
 @{
-ViewData["Title"] = "Керування користувачами";
+    ViewData["Title"] = "Керування користувачами";
 }
 
 <link rel="stylesheet" href="~/css/usermanager.css">
@@ -10,10 +10,10 @@ ViewData["Title"] = "Керування користувачами";
 
 @if (!string.IsNullOrEmpty(Model.StatusMessage))
 {
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    @Model.StatusMessage
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
-</div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @Model.StatusMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
+    </div>
 }
 
 <div class="table-responsive">
@@ -65,11 +65,11 @@ ViewData["Title"] = "Керування користувачами";
             <td>
                 @if(user.BirthDate.HasValue)
                 {
-                @user.BirthDate.Value.ToString("dd.MM.yyyy")
+                    @user.BirthDate.Value.ToString("dd.MM.yyyy")
                 }
                 else
                 {
-                <span class="text-muted">Не вказано</span>
+                    <span class="text-muted">Не вказано</span>
                 }
             </td>
             <td>@user.Email</td>
@@ -77,11 +77,11 @@ ViewData["Title"] = "Керування користувачами";
             <td>
                 @if (user.IsBlocked)
                 {
-                <span class="badge">Заблоковано</span>
+                    <span class="badge">Заблоковано</span>
                 }
                 else
                 {
-                <span class="badge">Активний</span>
+                    <span class="badge">Активний</span>
                 }
             </td>
             <td>
@@ -90,18 +90,17 @@ ViewData["Title"] = "Керування користувачами";
                         <input type="hidden" name="userId" value="@user.Id" />
                         @if (user.IsBlocked)
                         {
-                        <button type="submit" class="btn btn-success btn-sm">Розблокувати</button>
+                            <button type="submit" class="btn btn-success btn-sm">Розблокувати</button>
                         }
                         else
                         {
-                        <button type="submit" class="btn btn-warning btn-sm">Заблокувати</button>
+                            <button type="submit" class="btn btn-warning btn-sm">Заблокувати</button>
                         }
                     </form>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal@(user.Id)">
                         Видалити
                     </button>
                 </div>
-                
                 <div class="modal fade" id="deleteModal@(user.Id)" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -132,9 +131,9 @@ ViewData["Title"] = "Керування користувачами";
 
 @if (!Model.RegularUsers.Any())
 {
-<div class="alert alert-info">
-    Немає звичайних користувачів у системі.
-</div>
+    <div class="alert alert-info">
+        Немає звичайних користувачів у системі.
+    </div>
 }
 
 @section Scripts {

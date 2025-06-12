@@ -23,8 +23,7 @@ public class UserProfileModel : PageModel
     public async Task<IActionResult> OnGetAsync(Guid id)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
-        
-        // Якщо це наш власний профіль, перенаправляємо на сторінку Profile
+
         if (currentUser != null && currentUser.Id == id)
         {
             return RedirectToPage("/Profile");

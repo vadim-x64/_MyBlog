@@ -80,7 +80,6 @@
                         </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-between align-items-center foot">
-                                
                                 <div class="d-flex align-items-center">
                                     <a href="/UserProfile/@post.Author.Id" class="text-decoration-none d-flex align-items-center">
                                         @if (post.Author.Avatar != null)
@@ -144,8 +143,7 @@
             const explosion = document.createElement('div');
             explosion.className = 'like-explosion';
             button.appendChild(explosion);
-
-            // Створюємо сердечка
+            
             for (let i = 0; i < 6; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart-particle';
@@ -162,8 +160,7 @@
 
                 explosion.appendChild(heart);
             }
-
-            // Створюємо блискавки
+            
             for (let i = 0; i < 8; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.className = 'sparkle-particle';
@@ -191,7 +188,6 @@
             const isAuthenticated = @(User.Identity?.IsAuthenticated == true ? "true" : "false");
 
             if (!isAuthenticated) {
-                // Перенаправляємо на сторінку входу з поверненням на поточну сторінку
                 window.location.href = '/Login?returnUrl=' + encodeURIComponent(window.location.pathname);
                 return;
             }
@@ -199,8 +195,7 @@
             const formData = new FormData();
             formData.append('postId', postId);
             formData.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
-
-            // Додаємо анімацію перед відправкою запиту
+            
             const likeIcon = button.querySelector('.like-icon');
             const wasLiked = likeIcon.textContent === '❤️';
 

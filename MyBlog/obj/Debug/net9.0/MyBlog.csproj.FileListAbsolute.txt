@@ -212,3 +212,4 @@ C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\MyBlog.MvcApplicationParts
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\tvtl0rkip6-gwuy86ecve.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\gayfxhuk1x-3uahnjgw3g.gz
 C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\eq8goi7zlo-n7st59o2yn.gz
+C:\Users\CRYSTAL\source\repos\MyBlog\obj\Debug\net9.0\compressed\0flfc9o45e-iem7c9om6r.gz

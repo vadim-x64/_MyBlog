@@ -1,13 +1,13 @@
 ﻿@using System.Text.RegularExpressions
 @model List<MyBlog.Models.Comment>
 
+<link rel="stylesheet" href="~/css/details.css">
+
 @{
     var rootComments = Model.Where(c => c.ParentCommentId == null).OrderByDescending(c => c.CreatedAt).ToList();
     Func<Guid, List<MyBlog.Models.Comment>> GetAllReplies = null;
     GetAllReplies = (commentId) => Model.Where(c => c.ParentCommentId == commentId).OrderBy(c => c.CreatedAt).ToList();
 }
-
-<link rel="stylesheet" href="~/css/details.css">
 
 @foreach (var comment in rootComments)
 {
@@ -31,7 +31,6 @@
                             <h6 class="mb-0">@comment.Author.NickName</h6>
                             <small class="text-muted">@comment.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                         </div>
-
                         <p class="my-2">
                             @{
                                 var content = comment.Content;
@@ -40,7 +39,6 @@
                             }
                             @Html.Raw(content)
                         </p>
-
                         <div class="comment-actions">
                             @if (User.Identity?.IsAuthenticated == true)
                             {
@@ -62,7 +60,6 @@
                 </div>
             </div>
         </div>
-
         <div class="reply-form d-none mt-2 mb-3" id="reply-form-@comment.Id">
             <form method="post" asp-page-handler="AddReply" asp-route-parentCommentId="@comment.Id">
                 <div class="form-group">
@@ -74,9 +71,7 @@
                 </div>
             </form>
         </div>
-
         @{
-            // Отримуємо всі відповіді для цього коментаря (включаючи відповіді на відповіді)
             var allReplies = GetAllRepliesFlat(comment.Id, Model);
         }
         @if (allReplies.Any())
@@ -112,7 +107,6 @@
                                             <h6 class="mb-0">@reply.Author.NickName</h6>
                                             <small class="text-muted">@reply.CreatedAt.ToString("dd.MM.yyyy HH:mm")</small>
                                         </div>
-
                                         <div class="reply-indicator mt-1 mb-2">
                                             <div class="d-flex align-items-center">
                                                 <div class="reply-arrow me-2">↪</div>
@@ -125,7 +119,6 @@
                                                 </a>
                                             </div>
                                         </div>
-
                                         <p class="my-2">
                                             @{
                                                 var replyContent = reply.Content;
@@ -134,7 +127,6 @@
                                             }
                                             @Html.Raw(replyContent)
                                         </p>
-
                                         <div class="comment-actions">
                                             @if (User.Identity?.IsAuthenticated == true)
                                             {
@@ -156,7 +148,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="reply-form d-none mt-2 mb-2" id="reply-form-@reply.Id">
                             <form method="post" asp-page-handler="AddReply" asp-route-parentCommentId="@reply.Id">
                                 <div class="form-group">

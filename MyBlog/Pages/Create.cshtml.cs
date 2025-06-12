@@ -105,7 +105,7 @@ public class CreateModel : PageModel
         public string Content { get; set; } = null!;
     
         public bool UseLocalPhoto { get; set; } = true;
-        public bool IsPrivate { get; set; } = false;  // Додати цю строку
+        public bool IsPrivate { get; set; } = false;
         
         public bool CommentsDisabled { get; set; } = false;
     }

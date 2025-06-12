@@ -103,7 +103,6 @@ public class ProfileModel : PageModel
         }
 
         TempData["SuccessMessage"] = "Профіль успішно оновлено";
-
         CurrentUser = await _userService.GetCurrentUserAsync();
         return RedirectToPage();
     }
@@ -120,6 +119,7 @@ public class ProfileModel : PageModel
         if (avatar != null && avatar.Length > 0)
         {
             var (success, errorMessage) = await _userService.SaveAvatarAsync(CurrentUser, avatar);
+            
             if (!success)
             {
                 TempData["ErrorMessage"] = errorMessage;

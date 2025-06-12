@@ -11,8 +11,11 @@ public class AppDbContext : DbContext
     }
     
     public DbSet<Users> Users { get; set; }
+    
     public DbSet<Post> Posts { get; set; }
+    
     public DbSet<Like> Likes { get; set; }
+    
     public DbSet<Comment> Comments { get; set; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -20,7 +23,6 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Like>()
             .HasIndex(l => new { l.UserId, l.PostId })
             .IsUnique();
-
         base.OnModelCreating(modelBuilder);
         
         modelBuilder.Entity<Post>()

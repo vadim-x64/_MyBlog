@@ -57,14 +57,13 @@
                 <td>
                     <div class="btn-group">
                         <a href="/Details/@comment.Post.Id" class="btn btn-outline-info btn-sm"
-                           data-bs-toggle="tooltip" title="Відкрити пост на сайті">Перейти
+                           data-bs-toggle="tooltip">Перейти
                         </a>
                         <button type="button" class="btn btn-danger btn-sm" 
                                 data-bs-toggle="modal" data-bs-target="#deleteCommentModal@(comment.Id)">
                             Видалити
                         </button>
                     </div>
-                        
                     <div class="modal fade" id="deleteCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -91,7 +90,6 @@
                             </div>
                         </div>
                     </div>
-                        
                     <div class="modal fade" id="viewCommentModal@(comment.Id)" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -106,7 +104,6 @@
                                             Пост: <strong>@comment.Post.Title</strong>
                                         </div>
                                     </div>
-                                        
                                     @if (comment.ParentComment != null)
                                     {
                                         <div class="card mb-3">
@@ -119,7 +116,6 @@
                                             </div>
                                         </div>
                                     }
-                                        
                                     <div class="card">
                                         <div class="card-body">
                                             <p class="card-text">@comment.Content</p>
@@ -163,7 +159,6 @@
                             Оновлено: <strong>@comment.Post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</strong>
                         </div>
                     </div>
-                    
                     @if (comment.Post.UseLocalPhoto && comment.Post.LocalPhoto != null)
                     {
                         <div class="text-center">
@@ -176,7 +171,6 @@
                             <img src="@comment.Post.RemotePhotoUrl" class="post-image" alt="..." />
                         </div>
                     }
-                    
                     <div class="post-content">
                         @Html.Raw(comment.Post.Content)
                     </div>

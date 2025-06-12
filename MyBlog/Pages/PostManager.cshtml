@@ -64,7 +64,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div class="modal fade" id="viewPostModal@(post.Id)" tabindex="-1" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -80,7 +79,6 @@
                                                 Оновлено: <strong>@post.UpdatedAt.ToString("dd.MM.yyyy HH:mm")</strong>
                                             </div>
                                         </div>
-
                                         @if (post.UseLocalPhoto && post.LocalPhoto != null)
                                         {
                                             <div class="text-center">
@@ -93,7 +91,6 @@
                                                 <img src="@post.RemotePhotoUrl" class="post-image" alt="..."/>
                                             </div>
                                         }
-
                                         <div class="post-content">
                                             @Html.Raw(post.Content)
                                         </div>

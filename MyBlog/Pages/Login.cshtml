@@ -1,7 +1,7 @@
 ﻿@page
 @model MyBlog.Pages.LoginModel
 @{
-ViewData["Title"] = "Увійти";
+    ViewData["Title"] = "Увійти";
 }
 
 <link rel="stylesheet" href="~/css/login.css">
@@ -10,18 +10,18 @@ ViewData["Title"] = "Увійти";
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    @Model.ErrorMessage
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @Model.ErrorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 @if (!string.IsNullOrEmpty(TempData["PasswordChanged"] as string))
 {
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    @TempData["PasswordChanged"]
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["PasswordChanged"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 <form method="post">
@@ -30,7 +30,6 @@ ViewData["Title"] = "Увійти";
         <input asp-for="LoginForm.Identifier" class="form-control" />
         <span asp-validation-for="LoginForm.Identifier" class="text-danger"></span>
     </div>
-
     <div class="mb-4">
         <label asp-for="LoginForm.Password" class="form-label"></label>
         <input asp-for="LoginForm.Password" class="form-control" type="password" id="passwordInput" />
@@ -42,16 +41,12 @@ ViewData["Title"] = "Увійти";
             </label>
         </div>
     </div>
-
     <button type="submit" class="btn btn-outline-primary">Увійти</button>
-
     <div class="register-block">
         <p class="register-text">Ще не маєте акаунту?</p><a asp-page="/Register" class="btn btn-link">Зареєструватися</a>
     </div>
 </form>
 
 @section Scripts {
-<script src="~/js/login.js">
-    
-</script>
+    <script src="~/js/login.js"></script>
 }

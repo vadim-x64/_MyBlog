@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="~/css/delete.css">
 
 <div class="container delete-page">
-
     @if (Model.Post == null)
     {
         <div class="alert alert-danger">
@@ -26,7 +25,6 @@
                         <div class="alert alert-warning">
                             <strong>Увага!</strong> Ви впевнені, що хочете видалити "@Model.Post.Title"? Ця дія не може бути скасована.
                         </div>
-
                         <form method="post">
                             <input type="hidden" asp-for="Post.Id"/>
                             <div class="d-flex justify-content-center">

@@ -1,7 +1,7 @@
 ﻿@page
 @model MyBlog.Pages.CreateModel
 @{
-ViewData["Title"] = "Створення поста";
+    ViewData["Title"] = "Створення поста";
 }
 
 <link rel="stylesheet" href="~/css/create.css">
@@ -16,13 +16,11 @@ ViewData["Title"] = "Створення поста";
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                         <div class="mb-3">
                             <label asp-for="PostInput.Title" class="form-label">Заголовок</label>
                             <input asp-for="PostInput.Title" class="form-control" />
                             <span asp-validation-for="PostInput.Title" class="text-danger"></span>
                         </div>
-
                         <div class="card img">
                             <div class="card-header">
                                 <h5>Фото для поста</h5>
@@ -40,43 +38,36 @@ ViewData["Title"] = "Створення поста";
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="local-photo-section">
                                     <div class="mb-3">
                                         <label asp-for="Photo" class="form-label">Завантажити фото з комп'ютера</label>
                                         <input asp-for="Photo" type="file" class="form-control" accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp" />
                                         <small class="text-muted">Дозволені формати: jpg, jpeg, png, gif, bmp, jfif</small><br>
                                         <span asp-validation-for="Photo" class="text-danger"></span>
-                                        
                                     </div>
                                 </div>
-
                                 <div class="remote-photo-section" style="display: none;">
                                     <div class="mb-3">
                                         <label asp-for="PostInput.RemotePhotoUrl" class="form-label">URL фото</label>
                                         <input asp-for="PostInput.RemotePhotoUrl" id="remotePhotoUrl" class="form-control" placeholder="https://example.com/image.jpg" />
-                                        <small class="text-muted">Введіть URL-адресу зображення</small> <br>
+                                        <small class="text-muted">Введіть URL-адресу зображення</small><br>
                                         <span asp-validation-for="PostInput.RemotePhotoUrl" class="text-danger"></span>
-                                        
                                         <div class="preview-container">
-                                            <img id="imagePreview" class="image-preview" alt="Превью зображення" src=""/>
+                                            <img id="imagePreview" class="image-preview" alt="..." src=""/>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="text-muted small">
                                     <p> <b>Примітка!</b> Якщо ви не виберете фото або URL, або завантажите файл, який не є зображенням, буде використано стандартне зображення.</p>
                                 </div>
                             </div>
                         </div>
-
                         <div class="mb-3">
                             <label asp-for="PostInput.Content" class="form-label">Зміст</label>
                             <textarea asp-for="PostInput.Content" class="form-control" rows="10" maxlength="5000" placeholder="Розкажіть, що у вас на думці?"></textarea>
                             <small class="text-muted"><span id="contentCounter">0</span>/5000</small><br>
                             <span asp-validation-for="PostInput.Content" class="text-danger"></span>
                         </div>
-                        
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" asp-for="PostInput.IsPrivate" id="isPrivate" />
@@ -86,7 +77,6 @@ ViewData["Title"] = "Створення поста";
                             </div>
                             <small class="text-muted">Приватні пости будуть доступні тільки через ваш профіль</small>
                         </div>
-                        
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" asp-for="PostInput.CommentsDisabled" id="commentsDisabled" />
@@ -96,7 +86,6 @@ ViewData["Title"] = "Створення поста";
                             </div>
                             <small class="text-muted">Користувачі не зможуть залишати коментарі до цього поста</small>
                         </div>
-
                         <div class="text-center">
                             <button type="submit" class="btn btn-outline-primary">Створити пост</button>
                         </div>
@@ -108,9 +97,8 @@ ViewData["Title"] = "Створення поста";
 </div>
 
 @section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-<script src="~/js/create.js">
-    
-</script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/create.js"></script>
 }

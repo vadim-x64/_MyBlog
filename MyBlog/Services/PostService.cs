@@ -11,10 +11,13 @@ public class PostService : IPostService
     private readonly AppDbContext _context;
     private readonly IUserService _userService;
     private readonly IHttpClientFactory _httpClientFactory;
-    private const string DEFAULT_PHOTO_URL = "https://img.freepik.com/premium-vector/collage-pictures-grid-photo-mood-board-vintage-portfolio-background-album-brandboard_171739-3448.jpg?semt=ais_hybrid&w=740";
-    
-    private readonly string[] _allowedImageMimeTypes = { 
-        "image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp", "image/svg+xml", "image/tiff" 
+
+    private const string DEFAULT_PHOTO_URL =
+        "https://img.freepik.com/premium-vector/collage-pictures-grid-photo-mood-board-vintage-portfolio-background-album-brandboard_171739-3448.jpg?semt=ais_hybrid&w=740";
+
+    private readonly string[] _allowedImageMimeTypes =
+    {
+        "image/jpeg", "image/png", "image/gif", "image/bmp", "image/webp", "image/svg+xml", "image/tiff"
     };
 
     public PostService(AppDbContext context, IUserService userService, IHttpClientFactory httpClientFactory)
@@ -29,7 +32,7 @@ public class PostService : IPostService
         return await _context.Posts
             .Include(p => p.Author)
             .Where(p => !p.IsPrivate)
-            .OrderBy(p => p.CreatedAt)
+            .OrderByDescending(p => p.CreatedAt)
             .ToListAsync();
     }
 
@@ -43,7 +46,7 @@ public class PostService : IPostService
     public async Task<bool> CreatePostAsync(Post post, IFormFile? photo)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
-        
+
         if (currentUser == null)
         {
             return false;
@@ -53,7 +56,7 @@ public class PostService : IPostService
         post.AuthorId = currentUser.Id;
         post.CreatedAt = DateTime.UtcNow.AddHours(+3);
         post.UpdatedAt = DateTime.UtcNow.AddHours(+3);
-        
+
         if (post.UseLocalPhoto)
         {
             if (photo != null && photo.Length > 0 && IsValidImageFile(photo))
@@ -72,7 +75,6 @@ public class PostService : IPostService
         {
             if (!string.IsNullOrEmpty(post.RemotePhotoUrl) && await IsValidImageUrlAsync(post.RemotePhotoUrl))
             {
-                
             }
             else
             {
@@ -88,14 +90,14 @@ public class PostService : IPostService
     public async Task<bool> UpdatePostAsync(Post updatedPost, IFormFile? photo)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
-        
+
         if (currentUser == null)
         {
             return false;
         }
 
         var post = await _context.Posts.FindAsync(updatedPost.Id);
-        
+
         if (post == null || post.AuthorId != currentUser.Id)
         {
             return false;
@@ -105,8 +107,9 @@ public class PostService : IPostService
         post.Content = updatedPost.Content;
         post.UpdatedAt = DateTime.UtcNow.AddHours(+3);
         post.UseLocalPhoto = updatedPost.UseLocalPhoto;
-        post.IsPrivate = updatedPost.IsPrivate; 
-        
+        post.IsPrivate = updatedPost.IsPrivate;
+        post.CommentsDisabled = updatedPost.CommentsDisabled;
+
         if (post.UseLocalPhoto)
         {
             if (photo != null && photo.Length > 0 && IsValidImageFile(photo))
@@ -123,9 +126,18 @@ public class PostService : IPostService
         }
         else
         {
-            if (!string.IsNullOrEmpty(updatedPost.RemotePhotoUrl) && await IsValidImageUrlAsync(updatedPost.RemotePhotoUrl))
+            if (!string.IsNullOrEmpty(updatedPost.RemotePhotoUrl))
             {
-                post.RemotePhotoUrl = updatedPost.RemotePhotoUrl;
+                var isValid = await IsValidImageUrlAsync(updatedPost.RemotePhotoUrl);
+
+                if (isValid)
+                {
+                    post.RemotePhotoUrl = updatedPost.RemotePhotoUrl;
+                }
+                else
+                {
+                    post.RemotePhotoUrl = DEFAULT_PHOTO_URL;
+                }
             }
             else
             {
@@ -140,14 +152,14 @@ public class PostService : IPostService
     public async Task<bool> DeletePostAsync(Guid id)
     {
         var currentUser = await _userService.GetCurrentUserAsync();
-        
+
         if (currentUser == null)
         {
             return false;
         }
 
         var post = await _context.Posts.FindAsync(id);
-        
+
         if (post == null || post.AuthorId != currentUser.Id)
         {
             return false;
@@ -157,7 +169,7 @@ public class PostService : IPostService
         await _context.SaveChangesAsync();
         return true;
     }
-    
+
     public async Task<List<Post>> GetUserPostsAsync(Guid userId)
     {
         return await _context.Posts
@@ -166,51 +178,53 @@ public class PostService : IPostService
             .OrderByDescending(p => p.UpdatedAt)
             .ToListAsync();
     }
-    
+
     private bool IsValidImageFile(IFormFile file)
     {
         if (file == null || file.Length == 0)
         {
             return false;
         }
-        
-        try 
+
+        try
         {
             if (_allowedImageMimeTypes.Contains(file.ContentType))
             {
                 return true;
             }
-            
+
             using var stream = file.OpenReadStream();
             var buffer = new byte[Math.Min(file.Length, 512)];
             stream.Read(buffer, 0, buffer.Length);
             var fileType = GetFileTypeFromHeader(buffer);
             return fileType.StartsWith("image/");
         }
-        catch 
+        catch
         {
             return false;
         }
     }
-    
+
     private string GetFileTypeFromHeader(byte[] header)
     {
         if (header == null || header.Length < 12)
         {
             return "application/octet-stream";
         }
-        
+
         if (header[0] == 0xFF && header[1] == 0xD8 && header[2] == 0xFF)
         {
-            if (header.Length > 10 && header[3] == 0xE0 && header[6] == 0x4A && header[7] == 0x46 && header[8] == 0x49 && header[9] == 0x46 && header[10] == 0x00)
+            if (header.Length > 10 && header[3] == 0xE0 && header[6] == 0x4A && header[7] == 0x46 &&
+                header[8] == 0x49 && header[9] == 0x46 && header[10] == 0x00)
             {
                 return "image/jfif";
             }
-            
+
             return "image/jpeg";
         }
 
-        if (header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 && header[4] == 0x0D && header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A)
+        if (header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47 && header[4] == 0x0D &&
+            header[5] == 0x0A && header[6] == 0x1A && header[7] == 0x0A)
         {
             return "image/png";
         }
@@ -224,22 +238,22 @@ public class PostService : IPostService
         {
             return "image/bmp";
         }
-        
+
         return "application/octet-stream";
     }
-    
+
     private async Task<bool> IsValidImageUrlAsync(string url)
     {
         if (string.IsNullOrEmpty(url))
         {
             return false;
         }
-            
+
         try
         {
-            var httpClient = _httpClientFactory.CreateClient(); 
+            var httpClient = _httpClientFactory.CreateClient();
             httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("BlogApp", "1.0"));
-            
+
             var request = new HttpRequestMessage(HttpMethod.Head, url);
             var response = await httpClient.SendAsync(request);
 
@@ -247,12 +261,14 @@ public class PostService : IPostService
             {
                 return false;
             }
-            
-            if (response.Content.Headers.ContentType != null && response.Content.Headers.ContentType.MediaType != null && response.Content.Headers.ContentType.MediaType.StartsWith("image/"))
+
+            if (response.Content.Headers.ContentType != null &&
+                response.Content.Headers.ContentType.MediaType != null &&
+                response.Content.Headers.ContentType.MediaType.StartsWith("image/"))
             {
                 return true;
             }
-            
+
             return false;
         }
         catch
@@ -260,8 +276,6 @@ public class PostService : IPostService
             return false;
         }
     }
-    
-    // Додати в PostService клас:
 
     public async Task<List<Post>> GetPostsByUserIdAsync(Guid userId)
     {
