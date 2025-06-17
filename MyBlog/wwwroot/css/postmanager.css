@@ -37,12 +37,10 @@
     border-bottom: 1px solid #CCC;
 }
 
-/* Виправляємо відступи в комірці з кнопками дій */
 .table td .btn {
     margin-right: 5px;
 }
 
-/* Забезпечуємо, що кнопки дій знаходяться в одній комірці */
 .action-buttons {
     display: flex;
     gap: 5px;

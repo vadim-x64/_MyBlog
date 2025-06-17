@@ -6,7 +6,6 @@ const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
 
 document.addEventListener('DOMContentLoaded', function () {
     const alerts = document.querySelectorAll('.alert');
-
     alerts.forEach(alert => {
         setTimeout(() => {
             const closeEvent = new Event('click');
@@ -20,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const avatarImages = document.querySelectorAll('img[alt="Аватар користувача"]');
-
     avatarImages.forEach(img => {
         img.addEventListener('copy', e => e.preventDefault());
         img.addEventListener('cut', e => e.preventDefault());
@@ -47,7 +45,6 @@ editBtn.addEventListener('click', () => {
             input.dataset.initialValue = input.value;
         }
     });
-
     showPasswordCheckbox.disabled = false;
 });
 
@@ -70,7 +67,6 @@ const pasteWarning = document.getElementById('pasteWarning');
 
 if (aboutField && charCount) {
     charCount.textContent = `${aboutField.value.length}/150`;
-
     aboutField.addEventListener('input', function () {
         charCount.textContent = `${this.value.length}/150`;
     });
@@ -79,7 +75,6 @@ if (aboutField && charCount) {
 function blockPaste(e) {
     e.preventDefault();
     pasteWarning.classList.remove('d-none');
-
     setTimeout(() => {
         pasteWarning.classList.add('d-none');
     }, 3000);

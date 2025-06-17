@@ -1,5 +1,4 @@
-﻿/* User Profile Styles */
-.user-profile-header {
+﻿.user-profile-header {
     margin: 30px auto;
 }
 
@@ -64,7 +63,6 @@
     color: #333;
 }
 
-/* Posts Section */
 .user-posts-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -75,7 +73,6 @@
 
 .user-post-item {
     aspect-ratio: 1;
-
     border-radius: 0;
 }
 
@@ -83,7 +80,6 @@
     width: 100%;
     height: 100%;
     position: relative;
-
 }
 
 .post-image {
@@ -122,7 +118,6 @@
     color: #999;
 }
 
-/* Alert Styles */
 .alert {
     font-size: 18px;
     color: #333;
@@ -144,7 +139,6 @@
     color: #0c5460;
 }
 
-/* Section Headers */
 h4 {
     font-size: 32px;
     color: #333;
@@ -152,7 +146,6 @@ h4 {
     font-weight: 600;
 }
 
-/* Divider */
 hr.my-4 {
     border: none;
     height: 1px;
@@ -211,8 +204,7 @@ hr.my-4 {
         font-size: 14px;
         margin-bottom: 5px;
     }
-
-    /* Mobile Posts Grid */
+    
     .user-posts-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -241,26 +233,22 @@ hr.my-4 {
     .post-image-container.no-image::after {
         font-size: 24px;
     }
-
-    /* Mobile Alert Styles */
+    
     .alert {
         font-size: 16px;
         margin: 15px 0;
         padding: 15px;
     }
-
-    /* Mobile Section Headers */
+    
     h4 {
         font-size: 24px;
         margin-bottom: 15px;
     }
-
-    /* Mobile Divider */
+    
     hr.my-4 {
         margin: 30px 0;
     }
-
-    /* Remove Bootstrap margins on mobile */
+    
     .me-4 {
         margin-right: 0 !important;
     }

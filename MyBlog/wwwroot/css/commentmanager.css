@@ -89,7 +89,6 @@
     background-size: 16px;
 }
 
-/* Специфічні стилі для CommentManager */
 .comment-truncate,
 .parent-comment-truncate {
     max-width: 200px;

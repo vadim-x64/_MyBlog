@@ -1,4 +1,5 @@
 ﻿document.addEventListener('DOMContentLoaded', function() {
+    
     function handleFormSubmit(form, textarea) {
         const textareaValue = textarea.value.trim();
         if (textareaValue === '') {
@@ -70,7 +71,6 @@
             const commentId = replyButton.dataset.commentId;
             const authorName = replyButton.dataset.authorName;
             const replyForm = document.getElementById(`reply-form-${commentId}`);
-
             if (replyForm) {
                 document.querySelectorAll('.reply-form').forEach(form => {
                     if (form.id !== `reply-form-${commentId}`) {
@@ -78,7 +78,6 @@
                         form.querySelector('textarea').value = '';
                     }
                 });
-
                 replyForm.classList.toggle('d-none');
                 const textarea = replyForm.querySelector('textarea');
                 if (!replyForm.classList.contains('d-none')) {
@@ -98,7 +97,6 @@
         if (cancelReplyButton) {
             const commentId = cancelReplyButton.dataset.commentId;
             const replyForm = document.getElementById(`reply-form-${commentId}`);
-
             if (replyForm) {
                 replyForm.classList.add('d-none');
                 replyForm.querySelector('textarea').value = '';
@@ -113,18 +111,14 @@
 
     function highlightAndScroll(targetElement) {
         if (!targetElement) return;
-
         const commentCard = targetElement.querySelector('.card') || targetElement.closest('.card');
         if (commentCard) {
             commentCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
             document.querySelectorAll('.highlight-comment').forEach(el => {
                 el.classList.remove('highlight-comment');
                 el.style.padding = '';
             });
-
             commentCard.classList.add('highlight-comment');
-
             setTimeout(() => {
                 commentCard.classList.remove('highlight-comment');
                 commentCard.style.padding = '';
@@ -138,9 +132,7 @@
             event.preventDefault();
             const targetId = replyLink.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-
             if (!targetElement) return;
-
             let current = targetElement;
             while(current && current.parentElement && current.parentElement !== document.body) {
                 if (current.parentElement.classList.contains('replies-container') || current.parentElement.classList.contains('nested-replies')) {
@@ -165,7 +157,6 @@
         if (toggleButton) {
             const commentId = toggleButton.dataset.commentId;
             const repliesContainer = document.getElementById(`replies-${commentId}`);
-
             if (repliesContainer) {
                 repliesContainer.classList.toggle('d-none');
                 const showText = toggleButton.querySelector('.show-text');
@@ -183,10 +174,8 @@
             document.getElementById('commentIdToDelete').value = commentId;
         }
     });
-
     const urlParams = new URLSearchParams(window.location.search);
     const scrollToCommentId = urlParams.get('scrollToComment');
-
     if (scrollToCommentId) {
         const commentElement = document.getElementById(`comment-${scrollToCommentId}`);
         if (commentElement) {
@@ -216,7 +205,6 @@
         deleteModal.addEventListener('shown.bs.modal', function () {
             var firstFocusableElement = deleteModal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
             if (firstFocusableElement) {
-                // No specific focus needed here, default Bootstrap behavior is fine.
             }
         });
     }

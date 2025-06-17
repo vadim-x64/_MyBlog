@@ -16,17 +16,14 @@ function toggleDropdown(button) {
             menu.classList.remove('show');
         }
     });
-    
     const dropdown = button.nextElementSibling;
     dropdown.classList.toggle('show');
-    
     document.addEventListener('click', function closeDropdown(e) {
         if (!button.contains(e.target) && !dropdown.contains(e.target)) {
             dropdown.classList.remove('show');
             document.removeEventListener('click', closeDropdown);
         }
     });
-    
     event.stopPropagation();
 }
 
@@ -44,13 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTopBtn.id = 'backToTopBtn';
         backToTopBtn.className = 'back-to-top-btn';
         backToTopBtn.title = 'Повернутися вгору';
-
         const img = document.createElement('img');
         img.src = 'URL_ДО_ВАШОЇ_ІКОНКИ';
         img.alt = 'Вгору';
         img.width = 50;
         img.height = 50;
-
         backToTopBtn.appendChild(img);
         document.body.appendChild(backToTopBtn);
     }

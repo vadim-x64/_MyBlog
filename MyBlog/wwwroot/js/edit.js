@@ -39,7 +39,6 @@
             var fileName = fileInput.files[0].name;
             var extension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
             var allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.jfif'];
-
             if (!allowedExtensions.includes(extension)) {
                 $(this).val('');
                 $('span[data-valmsg-for="Photo"]').text('Обраний файл не є зображенням відповідного формату');
@@ -49,9 +48,7 @@
             }
         }
     });
-
     $('input[name="PostInput.UseLocalPhoto"]:checked').change();
-
     if (!$('input#useLocalPhoto').prop('checked') && $('#remotePhotoUrl').val()) {
         $('#imagePreview').show();
     }
