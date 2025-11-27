@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repository\\Проєкти\\C#\\MyBlog\\MyBlog.csproj": {}
+    "D:\\Documents\\Проєкти\\C#\\MyBlog\\MyBlog.csproj": {}
   },
   "projects": {
-    "D:\\Repository\\Проєкти\\C#\\MyBlog\\MyBlog.csproj": {
+    "D:\\Documents\\Проєкти\\C#\\MyBlog\\MyBlog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repository\\Проєкти\\C#\\MyBlog\\MyBlog.csproj",
+        "projectUniqueName": "D:\\Documents\\Проєкти\\C#\\MyBlog\\MyBlog.csproj",
         "projectName": "MyBlog",
-        "projectPath": "D:\\Repository\\Проєкти\\C#\\MyBlog\\MyBlog.csproj",
+        "projectPath": "D:\\Documents\\Проєкти\\C#\\MyBlog\\MyBlog.csproj",
         "packagesPath": "C:\\Users\\CRYSTAL\\.nuget\\packages\\",
-        "outputPath": "D:\\Repository\\Проєкти\\C#\\MyBlog\\obj\\",
+        "outputPath": "D:\\Documents\\Проєкти\\C#\\MyBlog\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -92,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100-rc.1.25451.107/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

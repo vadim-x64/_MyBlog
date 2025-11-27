@@ -19,101 +19,101 @@ build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v9.0
 build_property.RootNamespace = MyBlog
 build_property.RootNamespace = MyBlog
-build_property.ProjectDir = D:\Repository\Проєкти\C#\MyBlog\
+build_property.ProjectDir = D:\Documents\Проєкти\C#\MyBlog\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Repository\Проєкти\C#\MyBlog
+build_property.MSBuildProjectDirectory = D:\Documents\Проєкти\C#\MyBlog
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/AccessDenied.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjZXNzRGVuaWVkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/CommentManager.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/CommentManager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29tbWVudE1hbmFnZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Create.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Delete.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Details.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Edit.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Index.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/LikedPosts.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/LikedPosts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGlrZWRQb3N0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Login.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Logout.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9nb3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/MyPosts.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/MyPosts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlQb3N0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/PostManager.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/PostManager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9zdE1hbmFnZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Profile.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZmlsZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Register.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Shared/Error.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Shared/_Layout.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/UserManager.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/UserManager.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlck1hbmFnZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/UserProfile.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/UserProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclByb2ZpbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/_CommentsList.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/_CommentsList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0NvbW1lbnRzTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/_ViewImports.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Repository/Проєкти/C\#/MyBlog/Pages/_ViewStart.cshtml]
+[D:/Documents/Проєкти/C\#/MyBlog/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
