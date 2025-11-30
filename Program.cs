@@ -73,21 +73,6 @@ public class Program
         app.MapStaticAssets();
         app.MapRazorPages().WithStaticAssets();
         
-        using (var scope = app.Services.CreateScope())
-        {
-            try
-            {
-                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                db.Database.Migrate();
-            }
-            catch (Exception ex)
-            {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "An error occurred while migrating the database.");
-                throw;
-            }
-        }
-        
         app.Run();
     }
 }
