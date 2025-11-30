@@ -12,8 +12,17 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") 
-                               ?? builder.Configuration.GetConnectionString("DefaultConnection");
+        var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+        
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+        }
+        
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new InvalidOperationException("Connection string is not configured!");
+        }
         
         builder.Services.AddDbContext<AppDbContext>(options =>
             options.UseNpgsql(connectionString));
@@ -66,8 +75,17 @@ public class Program
         
         using (var scope = app.Services.CreateScope())
         {
-            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-            db.Database.Migrate();
+            try
+            {
+                var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                db.Database.Migrate();
+            }
+            catch (Exception ex)
+            {
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occurred while migrating the database.");
+                throw;
+            }
         }
         
         app.Run();
