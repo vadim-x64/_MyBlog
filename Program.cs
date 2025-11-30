@@ -12,26 +12,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
-        var dbPort = Environment.GetEnvironmentVariable("DB_PORT") ?? "5432";
-        var dbName = Environment.GetEnvironmentVariable("DB_NAME");
-        var dbUser = Environment.GetEnvironmentVariable("DB_USER");
-        var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
-        
-        string connectionString;
-        
-        if (!string.IsNullOrEmpty(dbHost) && !string.IsNullOrEmpty(dbUser))
-        {
-            connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPassword};SSL Mode=Require;Trust Server Certificate=true";
-        }
-        else
-        {
-            connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-                               ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-        }
-        
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(connectionString));
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
         
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<IUserService, UserService>();
@@ -62,9 +44,6 @@ public class Program
         
         var app = builder.Build();
         
-        var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
-        app.Urls.Add($"http://0.0.0.0:{port}");
-        
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
@@ -78,7 +57,6 @@ public class Program
         app.UseAuthorization();
         app.MapStaticAssets();
         app.MapRazorPages().WithStaticAssets();
-        
         app.Run();
     }
 }
