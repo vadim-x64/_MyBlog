@@ -12,8 +12,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL") 
+                               ?? builder.Configuration.GetConnectionString("DefaultConnection");
+        
         builder.Services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(connectionString));
         
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<IUserService, UserService>();
@@ -44,6 +47,9 @@ public class Program
         
         var app = builder.Build();
         
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "8081";
+        app.Urls.Add($"http://0.0.0.0:{port}");
+        
         if (!app.Environment.IsDevelopment())
         {
             app.UseExceptionHandler("/Error");
@@ -57,6 +63,13 @@ public class Program
         app.UseAuthorization();
         app.MapStaticAssets();
         app.MapRazorPages().WithStaticAssets();
+        
+        using (var scope = app.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            db.Database.Migrate();
+        }
+        
         app.Run();
     }
 }
