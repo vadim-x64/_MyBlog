@@ -12,16 +12,22 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        var connectionString = Environment.GetEnvironmentVariable("DATABASE_URL");
+        var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+        var dbPort = Environment.GetEnvironmentVariable("DB_PORT") ?? "5432";
+        var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+        var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+        var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
         
-        if (string.IsNullOrEmpty(connectionString))
+        string connectionString;
+        
+        if (!string.IsNullOrEmpty(dbHost) && !string.IsNullOrEmpty(dbUser))
         {
-            connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            connectionString = $"Host={dbHost};Port={dbPort};Database={dbName};Username={dbUser};Password={dbPassword};SSL Mode=Require;Trust Server Certificate=true";
         }
-        
-        if (string.IsNullOrEmpty(connectionString))
+        else
         {
-            throw new InvalidOperationException("Connection string is not configured!");
+            connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+                               ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
         }
         
         builder.Services.AddDbContext<AppDbContext>(options =>
